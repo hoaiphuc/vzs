@@ -7,7 +7,6 @@ import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
 import UploadFileImage from "./pages/UploadFileImage";
 
-
 function App() {
   return (
     <div>

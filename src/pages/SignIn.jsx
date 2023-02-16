@@ -1,3 +1,4 @@
+import axios from 'axios'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
@@ -7,7 +8,7 @@ const SignIn = () => {
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
     const navigate = useNavigate();
-    const {signIn} = UserAuth();
+    const { signIn } = UserAuth();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
