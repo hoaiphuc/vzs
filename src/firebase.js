@@ -1,6 +1,10 @@
 import { initializeApp } from "firebase/app";
 import { getAuth } from "firebase/auth";
+
 import { getMessaging, getToken } from "firebase/messaging";
+
+import { getStorage } from "firebase/storage";
+
 
 const firebaseConfig = {
   apiKey: "AIzaSyDE9PJl3jNGQEbfFrezEzr7uzLUBVSV_pA",
@@ -15,6 +19,7 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 export const auth = getAuth(app);
+
 export default app;
 
 function requestPermission() {
@@ -38,3 +43,7 @@ function requestPermission() {
 }
 
 requestPermission();
+
+export const storage = getStorage(app);
+export default app;
+

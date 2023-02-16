@@ -5,6 +5,7 @@ import Account from "./pages/Account";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
+import UploadFileImage from "./pages/UploadFileImage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Routes>
           <Route path='/' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
+          <Route path='/uploadfileimage' element={<UploadFileImage />} />
           <Route path='/account' element={<ProtectedRoutes><Account /> </ProtectedRoutes>} />
           {/* <Route path='*' element={<ProtectedRoutes><Account /> </ProtectedRoutes>} /> */}
         </Routes>
