@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import { AuthContextProvider } from "./context/AuthContext";
 import Account from "./pages/Account";
+import Page404 from "./pages/404page";
 import ProtectedRoutes from "./pages/ProtectedRoutes";
 import SignIn from "./pages/SignIn";
 import SignUp from "./pages/SignUp";
@@ -32,16 +33,13 @@ function App() {
 
   return (
     <div>
-      <h1 className="text-center text-3xl font-bold">
-        Firebase
-      </h1>
       <AuthContextProvider>
         <Routes>
           <Route path='/' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/uploadfileimage' element={<UploadFileImage />} />
           <Route path='/account' element={<ProtectedRoutes><Account /> </ProtectedRoutes>} />
-          {/* <Route path='*' element={<ProtectedRoutes><Account /> </ProtectedRoutes>} /> */}
+          <Route path='*' element={<Page404 />} />
         </Routes>
       </AuthContextProvider>
     </div>
