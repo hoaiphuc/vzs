@@ -1,10 +1,11 @@
-// import axios from 'axios'
 import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
 import { auth } from '../firebase'
 import React, { useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../context/AuthContext'
 import googleLogo from '../assets/img/google.svg';
+import axios from '../api/axios'
+const LOGIN_URL = '/'
 
 const SignIn = () => {
     const googleAuth = new GoogleAuthProvider();
@@ -23,8 +24,19 @@ const SignIn = () => {
         e.preventDefault();
         setError('')
         try {
-            await signIn(email, password)
-            navigate('/account')
+            const response = await axios.post(LOGIN_URL, { email, password })
+
+            const accessToken = response.data.accessToken
+            localStorage.setItem('accessToken', accessToken)
+
+            // await signIn(email, password)
+            // navigate('/account')
+            await signIn(accessToken)
+            if (response.data.isAdmin) {
+                navigate('/admin')
+              } else {
+                navigate('/account')
+              }
         } catch (e) {
             setError(e.message)
             console.log(e.message)
@@ -54,7 +66,7 @@ const SignIn = () => {
             </form>
 
             <button className="bg-white active:bg-blueGray-50 text-blueGray-700 font-normal py-2 px-4 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150" onClick={loginGG} >
-            <img src={googleLogo} alt="Google logo" className="w-5 h-5 mr-2 inline-block" />
+                <img src={googleLogo} alt="Google logo" className="w-5 h-5 mr-2 inline-block" />
                 Login with Google
             </button>
         </div>
