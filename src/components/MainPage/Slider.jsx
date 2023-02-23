@@ -6,7 +6,7 @@ const SliderHome = () => {
     <>
       <section className='homeSlide contentWidth'>
         <div className='container'>
-          <SlideCard />
+          {/* <SlideCard /> */}
         </div>
       </section>
     </>

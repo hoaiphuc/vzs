@@ -15,7 +15,7 @@ import Account from "./components/MainPage/Account"
 import ProtectedRoutes from "./components/MainPage/ProtectedRoutes";
 import Page404 from "./components/MainPage/404page";
 import Profile from "./components/MainPage/Profile"
-import { messaging } from "./firebase";
+import { messaging } from "./components/firebase";
 import { getToken } from "firebase/messaging";
 
 function App() {

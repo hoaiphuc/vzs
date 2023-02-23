@@ -4,13 +4,13 @@ import { getStorage } from "firebase/storage";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBsBwRW5o-iUjokOv_lJ970jLsPkiBwB6M",
-  authDomain: "secondhandvh-44c3e.firebaseapp.com",
-  projectId: "secondhandvh-44c3e",
-  storageBucket: "secondhandvh-44c3e.appspot.com",
-  messagingSenderId: "798402416096",
-  appId: "1:798402416096:web:28167507165a50b17bef85",
-  measurementId: "G-6EC489LJ21"
+  apiKey: "AIzaSyDE9PJl3jNGQEbfFrezEzr7uzLUBVSV_pA",
+  authDomain: "sell-everything-84f04.firebaseapp.com",
+  projectId: "sell-everything-84f04",
+  storageBucket: "sell-everything-84f04.appspot.com",
+  messagingSenderId: "335132757429",
+  appId: "1:335132757429:web:7756433dadfa28dd49ddfc",
+  measurementId: "G-4YX4VHLBCC"
 };
 
 // Initialize Firebase
