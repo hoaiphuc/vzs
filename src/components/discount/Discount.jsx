@@ -16,7 +16,7 @@ const Discount = () => {
               <i className='fa-solid fa-caret-right'></i>
             </div>
           </div>
-          <Dcard />
+          {/* <Dcard /> */}
         </div>
       </section>
     </>

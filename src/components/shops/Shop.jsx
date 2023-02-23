@@ -21,7 +21,7 @@ const Shop = ({ addToCart, shopItems }) => {
               </div>
             </div>
             <div className='product-content  grid1'>
-              <ShopCart addToCart={addToCart} shopItems={shopItems} />
+              {/* <ShopCart addToCart={addToCart} shopItems={shopItems} /> */}
             </div>
           </div>
         </div>
