@@ -1,19 +1,17 @@
 import React, { useState } from "react"
 import { Link } from "react-router-dom"
+import Categories from "../../components/MainPage/Categories"
 
 const Navbar = () => {
   // Toogle Menu
   const [MobileMenu, setMobileMenu] = useState(false)
+
+  const [open, setOpen] = useState(false)
   return (
     <>
       <header className='header'>
         <div className='container d_flex'>
-          <div className='catgrories d_flex'>
-            <span className='fa-solid fa-border-all'></span>
-            <h4>
-              Categories <i className='fa fa-chevron-down'></i>
-            </h4>
-          </div>
+          <Categories/>
 
           <div className='navlink'>
             <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} onClick={() => setMobileMenu(false)}>

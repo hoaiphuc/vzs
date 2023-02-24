@@ -1,77 +1,62 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 // reactstrap components
 import { Button, Card, Container, Row, Col } from "reactstrap";
+import ChangeAvatarProfile from "./ChangeAvatarProfile";
 
 
 const Profile = () => {
-
+ 
   return (
-    <div>
-      <section className="section-profile-cover section-shaped my-0">
-        {/* Circles background */}
-        <div className="shape shape-style-1 shape-default alpha-4">
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-          <span />
-        </div>
-        {/* SVG separator */}
-        <div className="separator separator-bottom separator-skew">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            preserveAspectRatio="none"
-            version="1.1"
-            viewBox="0 0 2560 100"
-            x="0"
-            y="0"
-          >
-            <polygon
-              className="fill-white"
-              points="2560 0 2560 100 0 100"
-            />
-          </svg>
-        </div>
-      </section>
-      <section className="section">
+    <div className="my-10 mx-10" style={{ backgroundColor: '#e89015', borderRadius: '20px' }}>
+      {/* <Container className="justify-content-center align-items-center py-5 h-100" style={{display: 'unset'}}>
+            <Row className="h-100">
+              <img src="https://khoinguonsangtao.vn/wp-content/uploads/2022/07/avatar-gau-cute.jpg" style={{width: '85px', height: '85px'}}/>
+              <h3>Your name</h3>            
+            </Row>
+            <Row>
+              
+            </Row>
+
+
+          </Container> */}
+
+
+      <section className="mx-10">
         <Container>
-          <Card className="card-profile shadow mt--300">
-          <div className="px-4">
-              <Row className="justify-content-center">
-                <Col className="order-lg-2" lg="3">
-                  <div className="card-profile-image">
-                    <a href="#pablo" >
-                      <img
-                        alt="..."
-                        className="rounded-circle"
-                        src={require("../../assets/img/theme/team-4-800x800.jpg")}
-                      />
-                    </a>
+          <Card className="card-profile shadow mt-300 "  style={{ borderRadius: '20px' }}>
+            <div className="px-4">
+              <Row className="justify-content-center" style={{ width: '100%' }}>
+                <Col className="text-center order-lg-1" lg="3">
+                  <div className="card-profile-image">             
+                    <ChangeAvatarProfile/>                  
                   </div>
                 </Col>
                 <Col
-                  className="order-lg-3 text-lg-right align-self-lg-center"
-                  lg="4"
+                  className="text-center order-lg-1 mt-5" lg="4"
                 >
-                </Col>
-                <Col className="order-lg-1" lg="4">
-                  <div className="card-profile-stats d-flex justify-content-center">
-                    <div>
-                      <span className="heading">22</span>
-                      <span className="description">Friends</span>
+                  <div style={{fontSize: '35px'}}>Võ Thanh Duy</div>
+                  <div className="d-flex justify-content-center mt-10">
+                    <div className="border border-4 border-warning px-7 py-3 mx-2" style={{ borderRadius: '60px' }}>
+                      <span className="heading">22 </span>
+                      <span className="description">Photos  </span>
                     </div>
-                    <div>
-                      <span className="heading">10</span>
-                      <span className="description">Photos</span>
+                    <div className="border border-4 border-warning px-7 py-3 mx-2" style={{borderRadius: '60px' }}>
+                      <span className="heading">100 </span>
+                      <span className="description">Followers</span>
                     </div>
-                    <div>
-                      <span className="heading">89</span>
-                      <span className="description">Comments</span>
+                    <div className="border border-4 border-warning px-7 py-3 mx-2" style={{borderRadius: '60px' }}>
+                      <span className="heading">89 </span>
+                      <span className="description">Favorites</span>
                     </div>
                   </div>
+                </Col>
+                <Col className="text-center order-lg-1 mt-20" lg="4" style={{fontSize: '20px'}}>
+                  <div>Ngày sinh: 09/10/2001</div>
+                  <div>Địa chỉ: Hihi hihi hihi</div>
+                  <div>Email: duybpz@gmail.com</div>
+                  <div>Số điện thoại: 0334416510</div>
+                  <div>-------------------------</div>
                 </Col>
               </Row>
               <div className="text-center mt-5">
@@ -79,7 +64,7 @@ const Profile = () => {
                   Jessica Jones{" "}
                   <span className="font-weight-light">, 27</span>
                 </h3>
-                <div className="h6 font-weight-300">
+                <div className="h1 font-weight-300">
                   <i className="ni location_pin mr-2" />
                   Bucharest, Romania
                 </div>
@@ -92,9 +77,10 @@ const Profile = () => {
                   University of Computer Science
                 </div>
               </div>
-              <div className="mt-5 py-5 border-top text-center">
-                <Row className="justify-content-center">
-                  <Col lg="9">
+
+              <div className="mt-5 py-5 border-top">
+                <Row className="justify-content-center" style={{ width: '100%' }}>
+                  <Col className="text-center" lg="9">
                     <p>
                       An artist of considerable range, Ryan — the name taken
                       by Melbourne-raised, Brooklyn-based Nick Murphy —

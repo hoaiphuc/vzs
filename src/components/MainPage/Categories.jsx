@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 
 const Categories = () => {
   const data = [
@@ -48,18 +48,29 @@ const Categories = () => {
     },
   ]
 
+  const [open, setOpen] = useState(false)
+
   return (
     <>
-      <div className='category'>
-        {data.map((value, index) => {
-          return (
-            <div className='box f_flex' key={index}>
-              <img src={value.cateImg} alt='' />
-              <span>{value.cateName}</span>
-            </div>
-          )
-        })}
+      <div className='catgrories d_flex'>
+        <span className='fa-solid fa-border-all'></span>
+        <h4 onClick={() => setOpen(!open)}>
+          Categories <i className='fa fa-chevron-down'></i>
+        </h4>
       </div>
+      {
+        open && <div className='category mr-40'>
+          {data.map((value, index) => {
+            return (
+              <div className='box f_flex' key={index}>
+                <img src={value.cateImg} alt='' />
+                <span>{value.cateName}</span>
+              </div>
+            )
+          })}
+        </div>
+      }
+
     </>
   )
 }

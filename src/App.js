@@ -9,7 +9,7 @@ import Footer from "./common/footer/Footer"
 import Sdata from "./components/shops/Sdata"
 import SignIn from "../src/components/MainPage/SignIn"
 import SignUp from "../src/components/MainPage/SignUp"
-import UploadFileImage from "../src/components/MainPage/UploadFileImage"
+import UploadFileImage from "./components/MainPage/ChangeAvatarProfile"
 import { AuthContextProvider } from "./context/AuthContext"
 import Account from "./components/MainPage/Account"
 import ProtectedRoutes from "./components/MainPage/ProtectedRoutes";
@@ -17,6 +17,7 @@ import Page404 from "./components/MainPage/404page";
 import Profile from "./components/MainPage/Profile"
 import { messaging } from "./components/firebase";
 import { getToken } from "firebase/messaging";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
   async function requestPermission() {
