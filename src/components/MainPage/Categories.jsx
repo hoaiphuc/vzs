@@ -1,4 +1,5 @@
-import React, { useState } from "react"
+import React, { useState } from "react";
+import { MultiSelect } from "react-multi-select-component";
 
 const Categories = () => {
   const data = [
@@ -48,31 +49,56 @@ const Categories = () => {
     },
   ]
 
-  const [open, setOpen] = useState(false)
+  const options = [
+    { label: "👚 Fashion", value: "fashion" },
+    { label: "🔌 Electronic", value: "electronic" },
+    { label: "🚔 Cars", value: "cars"},
+    { label: "🏡 Home & Garden", value: "homeAndGarden" },
+    { label: "👩‍❤️‍👩 Health & Beauty", value: "healthAndBeauty" },
+    { label: "📚 Books", value: "books"}
+  ];
+  // const [open, setOpen] = useState(false)
 
+  // return (
+  //   <>
+  //     <div className='catgrories d_flex'>
+  //       <span className='fa-solid fa-border-all'></span>
+  //       <h4 onClick={() => setOpen(!open)}>
+  //         Categories <i className='fa fa-chevron-down'></i>
+  //       </h4>
+  //     </div>
+  //     {
+  //       open && <div className='category mr-40'>
+  //         {data.map((value, index) => {
+  //           return (
+  //             <div className='box f_flex' key={index}>
+  //               <img src={value.cateImg} alt='' />
+  //               <span>{value.cateName}</span>
+  //             </div>
+  //           )
+  //         })}
+  //       </div>
+  //     }
+
+  //   </>
+  // )
+  const [selected, setSelected] = useState([]);
+
+  
   return (
-    <>
-      <div className='catgrories d_flex'>
-        <span className='fa-solid fa-border-all'></span>
-        <h4 onClick={() => setOpen(!open)}>
-          Categories <i className='fa fa-chevron-down'></i>
-        </h4>
-      </div>
-      {
-        open && <div className='category mr-40'>
-          {data.map((value, index) => {
-            return (
-              <div className='box f_flex' key={index}>
-                <img src={value.cateImg} alt='' />
-                <span>{value.cateName}</span>
-              </div>
-            )
-          })}
-        </div>
-      }
-
-    </>
-  )
+    <div className="">
+      {/* <h1>Select Fruits</h1>
+      <pre>{JSON.stringify(selected)}</pre> */}
+      <MultiSelect
+      
+        options={options}
+        value={selected}
+        onChange={setSelected}
+        labelledBy={"Select"}
+        
+      />
+    </div>
+  );
 }
 
 export default Categories

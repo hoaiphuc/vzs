@@ -5,7 +5,7 @@ import "./style.css"
 const FlashDeals = ({ productItems, addToCart }) => {
   return (
     <>
-      <section className='flash mt-80'>
+      <section className='flash mt-20'>
         <div className='container'>
           <div className='heading f_flex'>
             <i className='fa fa-bolt'></i>

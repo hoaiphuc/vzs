@@ -247,3 +247,10 @@ button {
   grid-template-columns: repeat(4, 1fr);
   grid-gap: 10px;
 }
+.bg-main-color {
+  background: #FFCC00
+  ;
+}
+.navlink ul li {
+  margin-right: 20px;
+}

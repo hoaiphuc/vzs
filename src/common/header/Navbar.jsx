@@ -11,7 +11,9 @@ const Navbar = () => {
     <>
       <header className='header'>
         <div className='container d_flex'>
-          <Categories/>
+          <div className="ml-2" style={{ width: '20%' }}>
+            <Categories />
+          </div>
 
           <div className='navlink'>
             <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} onClick={() => setMobileMenu(false)}>
@@ -39,7 +41,9 @@ const Navbar = () => {
             <button className='toggle' onClick={() => setMobileMenu(!MobileMenu)}>
               {MobileMenu ? <i className='fas fa-times close home-btn'></i> : <i className='fas fa-bars open'></i>}
             </button>
+
           </div>
+
         </div>
       </header>
     </>
