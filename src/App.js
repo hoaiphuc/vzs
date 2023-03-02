@@ -15,6 +15,7 @@ import Account from "./components/MainPage/Account"
 import ProtectedRoutes from "./components/MainPage/ProtectedRoutes";
 import Page404 from "./components/MainPage/404page";
 import Profile from "./components/MainPage/Profile"
+import UserTable from "./components/MainPage/admin/User"
 import { messaging } from "./components/firebase";
 import { getToken } from "firebase/messaging";
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -96,6 +97,7 @@ function App() {
           <Route path='/signup' element={<SignUp />} />
           <Route path='/uploadfileimage' element={<UploadFileImage />} />
           <Route path='/profile' element={<Profile />} />
+          <Route path='/admin' element={<UserTable />} />
           <Route path='/account' element={<ProtectedRoutes><Account /> </ProtectedRoutes>} />
           <Route path='*' element={<Page404 />} />
         </Routes>
