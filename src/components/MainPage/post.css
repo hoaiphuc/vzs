@@ -1,0 +1,92 @@
+.post {
+  width: 90%;
+  height: 90%;
+  display: flex;
+}
+.post .Container {
+  flex: 6;
+}
+.post .Container .top{
+  background-color:rgb(232, 144, 21)
+}
+.post .Container .top,
+.post .Container .bottom {
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  padding: 10px;
+  margin: 20px;
+  display: flex;
+}
+.post .Container .top h1,
+.post .Container .bottom h1 {
+  color: rgb(241, 239, 237);
+  font-size: 20px;
+  
+}
+.post .Container .top .left,
+.post .Container .bottom .left {
+  flex: 1;
+  text-align: center;
+}
+.post .Container .top .left img,
+.post .Container .bottom .left img {
+  width: 100px;
+  height: 100px;
+  border-radius: 10%;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+
+.post .Container .top .right,
+.post .Container .bottom .right {
+  flex: 2;
+}
+.post .Container .top .right form,
+.post .Container .bottom .right form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: space-around;
+}
+.post .Container .top .right form .formInput,
+.post .Container .bottom .right form .formInput {
+  width: 40%;
+  
+}
+.post .Container .top .right form .formInput label,
+.post .Container .bottom .right form .formInput label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+}
+.post .Container .top .right form .formInput label .icon,
+.post .Container .bottom .right form .formInput label .icon {
+  cursor: pointer;
+}
+.post .Container .top .right form .formInput input,
+.post .Container .bottom .right form .formInput input {
+  width: 100%;
+  padding: 5px;
+  border: none;
+  border-bottom: 1px solid gray;
+}
+.post .Container .top .right form .selectCate select,
+.post .Container .bottom .right form .selectCate select {
+  /* width: 100%; */
+  padding: 5px;
+  border: none;
+  width: 10cm;
+  border-bottom: 1px solid gray;
+  background-color: rgb(241, 210, 175);
+}
+.post .Container .top .right form button,
+.post .Container .bottom .right form button {
+  width: 150px;
+  padding: 10px;
+  border: none;
+  background-color: teal;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin-top: 10px;
+}

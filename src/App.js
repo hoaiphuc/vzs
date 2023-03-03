@@ -19,7 +19,8 @@ import UserTable from "./components/MainPage/admin/User"
 import { messaging } from "./components/firebase";
 import { getToken } from "firebase/messaging";
 import 'bootstrap/dist/css/bootstrap.min.css';
-
+import Post from "./components/MainPage/Post"
+import { inputPost ,category,cates} from "./formSource";
 function App() {
   async function requestPermission() {
     const permission = await Notification.requestPermission();
@@ -96,6 +97,7 @@ function App() {
           <Route path='/signin' element={<SignIn />} />
           <Route path='/signup' element={<SignUp />} />
           <Route path='/uploadfileimage' element={<UploadFileImage />} />
+          <Route path='/post' element={<Post inputs={inputPost} title="Post New Product" cates={cates} />} />
           <Route path='/profile' element={<Profile />} />
           <Route path='/admin' element={<UserTable />} />
           <Route path='/account' element={<ProtectedRoutes><Account /> </ProtectedRoutes>} />
