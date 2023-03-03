@@ -52,8 +52,26 @@
   width: 40%;
   
 }
+/* forminput1 */
+
+.post .Container .top .right form .formInput1,
+.post .Container .bottom .right form .formInput1 {
+  /* border: '1px solid gray';
+  border-radius: '5px';
+  padding: '10px';
+  min-height: '100px'; */
+  width: '40%';  
+}
 .post .Container .top .right form .formInput label,
 .post .Container .bottom .right form .formInput label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+}
+/* forminput1 */
+.post .Container .top .right form .formInput1 label,
+.post .Container .bottom .right form .formInput1 label {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -63,6 +81,10 @@
 .post .Container .bottom .right form .formInput label .icon {
   cursor: pointer;
 }
+.post .Container .top .right form .formInput1 label .icon,
+.post .Container .bottom .right form .formInput1 label .icon {
+  cursor: pointer;
+}
 .post .Container .top .right form .formInput input,
 .post .Container .bottom .right form .formInput input {
   width: 100%;
@@ -70,6 +92,28 @@
   border: none;
   border-bottom: 1px solid gray;
 }
+
+/* forminput1 */
+
+.post .Container .top .right form .formInput1 textarea,
+.post .Container .bottom .right form .formInput1 textarea {
+  width: 600px;
+  height: 5cm;
+  padding: 5px;
+  /* border: none; */
+  /* border-bottom: 1px solid gray; */
+  box-shadow: 2px 4px 10px 1px rgba(201, 201, 201, 0.47);
+  border-radius: 10px 10px 10px 10px;
+  background-color: #d75d071f;
+  overflow: auto;
+
+/* border: '1px solid gray';
+  border-radius: '5px';
+  padding: '10px';
+  min-height: '100px'; */
+
+}
+
 .post .Container .top .right form .selectCate select,
 .post .Container .bottom .right form .selectCate select {
   /* width: 100%; */

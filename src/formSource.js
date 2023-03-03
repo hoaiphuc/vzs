@@ -1,21 +1,25 @@
 export const inputPost = [
     {
       id: 1,
+      name: "formInput",
       label: "Giá",
       type: "text",
     },
     {
       id: 2,
+      name: "formInput",
       label: "Tiêu Đề",
       type: "text",
     },
+    // {
+    //   id: 3,
+    //   name: "formInput1",
+    //   label: "mô tả chi tiết ",
+    //   type: "text",
+    // },
     {
       id: 3,
-      label: "mô tả chi tiết ",
-      type: "text",
-    },
-    {
-      id: 4,
+      name: "formInput",
       label: "Địa Chỉ ",
       type: "text",
     },

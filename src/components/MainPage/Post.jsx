@@ -105,11 +105,15 @@ const handleSelectChange = (event) => {
 
 
               {inputs.map((input) => (
-                <div className="formInput" key={input.id}>
+                <div className={input.name} key={input.id}>
                   <label>{input.label}</label>
                   <input type={input.type} />
                 </div>
               ))}
+              <div className= "formInput1">
+                  <label>mô tả chi tiết</label>
+                  <textarea type = "text" />
+                </div>
               <button>Send</button>
             </form>
           </div>
