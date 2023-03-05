@@ -15,10 +15,15 @@ import {
 } from "@mui/material";
 
 const useStyles = styled({
-  container: {
-    maxHeight: 440,
-  },
-});
+    container: {
+      maxHeight: 440,
+      margin: "16px",
+    },
+    cell: {
+      padding: "16px",
+      fontSize: "14px"
+    }
+  });
 
 const users = [
   { id: 1, name: "John Doe", email: "johndoe@example.com", isActive: true },
@@ -42,28 +47,28 @@ const UserTable = () => {
       <Table stickyHeader>
         <TableHead>
           <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Name</TableCell>
-            <TableCell>Email</TableCell>
-            <TableCell>Active</TableCell>
-            <TableCell>Actions</TableCell>
+            <TableCell className={classes.cell}>ID</TableCell>
+            <TableCell className={classes.cell}>Name</TableCell>
+            <TableCell className={classes.cell}>Email</TableCell>
+            <TableCell className={classes.cell}>Active</TableCell>
+            <TableCell className={classes.cell}>Actions</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
           {userList.map((user) => (
             <TableRow key={user.id}>
-              <TableCell>{user.id}</TableCell>
-              <TableCell>{user.name}</TableCell>
-              <TableCell>{user.email}</TableCell>
-              <TableCell>
+              <TableCell className={classes.cell}>{user.id}</TableCell>
+              <TableCell className={classes.cell}>{user.name}</TableCell>
+              <TableCell className={classes.cell}>{user.email}</TableCell>
+              <TableCell className={classes.cell}>
                 <Switch
                   checked={user.isActive}
                   onChange={() => handleActivate(user.id)}
                   color="primary"
                 />
               </TableCell>
-              <TableCell>
-                <Box display="flex" justifyContent="space-between">
+              <TableCell className={classes.cell}>
+                <Box className={classes.buttonContainer}>
                   <Button variant="contained" color="primary">
                     Edit
                   </Button>
