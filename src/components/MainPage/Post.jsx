@@ -5,7 +5,7 @@ import "./post.css";
 import  Select  from "react-select";
 import { Button, Card, Container, Row, Col } from "reactstrap";
 const Post = ({ inputs, title ,cates }) => {
-  const [file, setFile] = useState("");
+  const [file, setFile] = useState([]);
   const [SelectedOption, setSelectedOption] = useState();
 
   // const category = [
@@ -38,6 +38,15 @@ const handleSelectChange = (event) => {
 }
 
 
+const handleFileChange = (event) => {
+  const files = event.target.files;
+  if (files.length > 6) {
+    alert("You just can select 6 images.");
+  } else {
+    setFile(files);
+  }
+};
+
 
   return (
     <div class="max-w-[1200px] mx-auto my-16 p-4">
@@ -50,14 +59,26 @@ const handleSelectChange = (event) => {
         </div>
         <div className="bottom">
           <div className="left">
-            <img
+            {/* <img
               src={
                 file
                   ? URL.createObjectURL(file)
                   : "https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-              }
-              alt=""
-            />
+              } */}
+              
+              { file.length > 0 ? ( 
+              Array.from(file).slice(0, 6).map((f) => (
+                <img key={f.name} src={URL.createObjectURL(f)} alt="" />
+              ))) : (
+                <img
+                  src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                  alt=""
+                />
+              )
+            
+            }
+              {/* alt="" */}
+            {/* /> */}
           </div>
           <div className="right">
             <form>
@@ -68,8 +89,10 @@ const handleSelectChange = (event) => {
                 <input
                   type="file"
                   id="file"
-                  onChange={(e) => setFile(e.target.files[0])}
+                  // onChange={(e) => setFile(e.target.files)}
+                  onChange={handleFileChange }
                   style={{ display: "none" }}
+                  multiple
                 />
               </div>
 
