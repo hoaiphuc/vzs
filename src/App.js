@@ -15,12 +15,14 @@ import Account from "./components/MainPage/Account"
 import ProtectedRoutes from "./components/MainPage/ProtectedRoutes";
 import Page404 from "./components/MainPage/404page";
 import Profile from "./components/MainPage/Profile"
+//admin page
 import UserTable from "./components/MainPage/admin/User"
+import AdminManagePost from "./components/MainPage/admin/post"
 import { messaging } from "./components/firebase";
 import { getToken } from "firebase/messaging";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Post from "./components/MainPage/Post"
-import { inputPost ,category,cates} from "./formSource";
+import { inputPost, category, cates } from "./formSource";
 function App() {
   async function requestPermission() {
     const permission = await Notification.requestPermission();
@@ -86,25 +88,46 @@ function App() {
       setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExit, qty: productExit.qty - 1 } : item)))
     }
   }
+
+  const [postList, setPostList] = useState([]);
+
+  useEffect(() => {
+    async function fetchPostList() {
+      try {
+        const requestUrl = 'http://secondhandvinhome.herokuapp.com/api/post/limit?page=1';
+        const response = await fetch(requestUrl);
+        const responseJSON = await response.json();
+        console.log({ responseJSON })
+
+        const { rows } = responseJSON.response;
+        setPostList(rows);
+      } catch (error) {
+        console.log("failed to fetch post list", error.message);
+      }
+    }
+    fetchPostList();
+  }, []);
+
   return (
     <>
-    <AuthContextProvider>
-      <Router>
-        <Header CartItem={CartItem} />
-        <Routes>
-          <Route path='/' exact element={<Pages productItems={productItems} addToCart={addToCart} shopItems={shopItems} />}/>
-          <Route path='/cart' exact element={<Cart CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />}/>
-          <Route path='/signin' element={<SignIn />} />
-          <Route path='/signup' element={<SignUp />} />
-          <Route path='/uploadfileimage' element={<UploadFileImage />} />
-          <Route path='/post' element={<Post inputs={inputPost} title="Post New Product" cates={cates} />} />
-          <Route path='/profile' element={<Profile />} />
-          <Route path='/admin' element={<UserTable />} />
-          <Route path='/account' element={<ProtectedRoutes><Account /> </ProtectedRoutes>} />
-          <Route path='*' element={<Page404 />} />
-        </Routes>
-        <Footer />
-      </Router>
+      <AuthContextProvider>
+        <Router>
+          <Header CartItem={CartItem} />
+          <Routes>
+            <Route path='/' exact element={<Pages productItems={productItems} addToCart={addToCart} shopItems={shopItems} />} />
+            <Route path='/cart' exact element={<Cart CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />} />
+            <Route path='/signin' element={<SignIn />} />
+            <Route path='/signup' element={<SignUp />} />
+            <Route path='/uploadfileimage' element={<UploadFileImage />} />
+            <Route path='/post' element={<Post inputs={inputPost} title="Post New Product" cates={cates} />} />
+            <Route path='/profile' element={<Profile />} />
+            <Route path='/admin' element={<UserTable />} />
+            <Route path='/admin/post' element={<AdminManagePost posts={postList} />} />
+            <Route path='/account' element={<ProtectedRoutes><Account /> </ProtectedRoutes>} />
+            <Route path='*' element={<Page404 />} />
+          </Routes>
+          <Footer />
+        </Router>
       </AuthContextProvider>
     </>
   )
