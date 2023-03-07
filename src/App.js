@@ -94,7 +94,7 @@ function App() {
   useEffect(() => {
     async function fetchPostList() {
       try {
-        const requestUrl = 'http://secondhandvinhome.herokuapp.com/api/post/limit?page=1';
+        const requestUrl = 'https://secondhandvinhome.herokuapp.com/api/post/limit?page=1';
         const response = await fetch(requestUrl);
         const responseJSON = await response.json();
         console.log({ responseJSON })
