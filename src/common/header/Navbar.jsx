@@ -19,22 +19,10 @@ const Navbar = () => {
             <ul className={MobileMenu ? "nav-links-MobileMenu" : "link f_flex capitalize"} onClick={() => setMobileMenu(false)}>
               {/*<ul className='link f_flex uppercase {MobileMenu ? "nav-links-MobileMenu" : "nav-links"} onClick={() => setMobileMenu(false)}'>*/}
               <li>
-                <Link to='/'>home</Link>
+                <Link to='/'>Trang chủ</Link>
               </li>
               <li>
-                <Link to='/pages'>pages</Link>
-              </li>
-              <li>
-                <Link to='/account'>user account</Link>
-              </li>
-              <li>
-                <Link to='/vendor'>vendor account</Link>
-              </li>
-              <li>
-                <Link to='/profile'>Profile</Link>
-              </li>
-              <li>
-                <Link to='/post'>Post</Link>
+                <Link to='/post'>Đăng bài</Link>
               </li>
               <li>
                 <Link to='/Signin'>Login</Link>
