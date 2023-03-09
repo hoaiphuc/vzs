@@ -158,6 +158,7 @@ const Post = ({ inputs, title, cates }) => {
   const [price, setPrice] = useState("");
   const [titleInput, setTitleInput] = useState("");
   const [address, setAddress] = useState("");
+  const [imageDemo, setImageDemo] = useState([]);
 
   const optionList = cates.map((option) => (
     <option key={option.id} value={option.value}>
@@ -171,6 +172,8 @@ const Post = ({ inputs, title, cates }) => {
 
   const handleFileChange = (event) => {
     const files = event.target.files;
+    console.log("files", files)
+    setImageDemo(files);
     console.log("files: ", files);
     const filesList = [];
     if (files.length > 6) {
@@ -179,10 +182,9 @@ const Post = ({ inputs, title, cates }) => {
       for (var i = 0; i < files.length; i++) {
         // filesList.push({ url: files[i] });
         filesList.push({ url: URL.createObjectURL(files[i]) });
-
       }
       setFile(filesList);
-      console.log("fileList: ", filesList);
+      console.log("fileListaa: ", filesList);
 
     }
   };
@@ -214,7 +216,6 @@ const Post = ({ inputs, title, cates }) => {
     formData.append("categoryId", selectedOption);
     formData.append("description", description);
     formData.append("userId", "Hieu");
-
     formData.append("price", price);
     formData.append("title", titleInput);
     // fetch("https://secondhandvinhome.herokuapp.com/doc/#/Post/addPost", {
@@ -265,11 +266,11 @@ const Post = ({ inputs, title, cates }) => {
           </div>
           <div className="bottom">
             <div className="left">
-              {file.length > 0 ? (
-                Array.from(file)
+              {imageDemo.length > 0 ? (
+                Array.from(imageDemo)
                   .slice(0, 6)
                   .map((f) => (
-                    <img key={f.name} src={URL.createObjectURL(f)} alt="" />
+                    <img key={f.name} src={ URL.createObjectURL(f)} alt="" />
                   ))
               ) : (
                 <img
