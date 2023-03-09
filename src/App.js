@@ -17,12 +17,14 @@ import Page404 from "./components/MainPage/404page";
 import Profile from "./components/MainPage/Profile"
 //admin page
 import UserTable from "./components/MainPage/admin/User"
-import AdminManagePost from "./components/MainPage/admin/post"
 import { messaging } from "./components/firebase";
 import { getToken } from "firebase/messaging";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Post from "./components/MainPage/Post"
 import { inputPost, category, cates } from "./formSource";
+//admin import
+import PostList from "./components/MainPage/admin/post"
+
 function App() {
   async function requestPermission() {
     const permission = await Notification.requestPermission();
@@ -77,24 +79,7 @@ function App() {
     }
   }
 
-  const [postList, setPostList] = useState([]);
 
-  useEffect(() => {
-    async function fetchPostList() {
-      try {
-        const requestUrl = 'https://secondhandvinhome.herokuapp.com/api/post/limit?page=1';
-        const response = await fetch(requestUrl);
-        const responseJSON = await response.json();
-        console.log({ responseJSON })
-
-        const { rows } = responseJSON.response;
-        setPostList(rows);
-      } catch (error) {
-        console.log("failed to fetch post list", error.message);
-      }
-    }
-    fetchPostList();
-  }, []);
 
   return (
     <>
@@ -110,7 +95,7 @@ function App() {
             <Route path='/post' element={<Post inputs={inputPost} title="Post New Product" cates={cates} />} />
             <Route path='/profile' element={<Profile />} />
             <Route path='/admin' element={<UserTable />} />
-            <Route path='/admin/post' element={<AdminManagePost posts={postList} />} />
+            <Route path='/admin/post' element={<PostList />} />
             <Route path='/account' element={<ProtectedRoutes><Account /> </ProtectedRoutes>} />
             <Route path='*' element={<Page404 />} />
           </Routes>
