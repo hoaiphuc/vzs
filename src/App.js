@@ -4,9 +4,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Header from "./common/header/Header"
 import Pages from "./pages/Pages"
 import Data from "./components/Data"
-import Cart from "./common/Cart/Cart"
 import Footer from "./common/footer/Footer"
-import Sdata from "./components/shops/Sdata"
+import Sdata from "./components/MainPage/Sdata"
 import SignIn from "../src/components/MainPage/SignIn"
 import SignUp from "../src/components/MainPage/SignUp"
 import UploadFileImage from "./components/MainPage/ChangeAvatarProfile"
@@ -47,37 +46,9 @@ function App() {
   }, []);
 
   const { productItems } = Data
+  const { postItems } = Data
+
   const { shopItems } = Sdata
-
-  //Step 2 :
-  const [CartItem, setCartItem] = useState([])
-
-  //Step 4 :
-  const addToCart = (product) => {
-    // if hamro product alredy cart xa bhane  find garna help garxa
-    const productExit = CartItem.find((item) => item.id === product.id)
-
-    if (productExit) {
-      setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExit, qty: productExit.qty + 1 } : item)))
-    } else {
-
-      setCartItem([...CartItem, { ...product, qty: 1 }])
-    }
-  }
-
-  // Stpe: 6
-  const decreaseQty = (product) => {
-    // if hamro product alredy cart xa bhane  find garna help garxa
-    const productExit = CartItem.find((item) => item.id === product.id)
-
-
-    if (productExit.qty === 1) {
-      setCartItem(CartItem.filter((item) => item.id !== product.id))
-    } else {
-
-      setCartItem(CartItem.map((item) => (item.id === product.id ? { ...productExit, qty: productExit.qty - 1 } : item)))
-    }
-  }
 
 
 
@@ -85,10 +56,9 @@ function App() {
     <>
       <AuthContextProvider>
         <Router>
-          <Header CartItem={CartItem} />
+          <Header  />
           <Routes>
-            <Route path='/' exact element={<Pages productItems={productItems} addToCart={addToCart} shopItems={shopItems} />} />
-            <Route path='/cart' exact element={<Cart CartItem={CartItem} addToCart={addToCart} decreaseQty={decreaseQty} />} />
+            <Route path='/' exact element={<Pages productItems={productItems} shopItems={shopItems} postItems={postItems}/>} />
             <Route path='/signin' element={<SignIn />} />
             <Route path='/signup' element={<SignUp />} />
             <Route path='/uploadfileimage' element={<UploadFileImage />} />
