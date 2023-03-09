@@ -1,16 +1,9 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import GetPost from '../../../common/axios/getPostsAxios';
 
-PostList.propTypes = {
-  posts: PropTypes.array,
-};
 
-PostList.defaultProps = {
-  posts: [],
-};
-
-function PostList(props) {
-  const { posts } = props;
+const PostList = () => {
+  const [posts] = GetPost();
   return (
     <div className="flex flex-col items-center">
       <ul className="w-full max-w-md">

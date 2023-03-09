@@ -6,7 +6,9 @@ const ProtectedRoutes = ({children}) => {
     const { user } = UserAuth()
 
     if (!user) {
-        return <Navigate to='/' />
+        return <Navigate to='/login' />
+    } else if(user.role == "admin") {
+        <Navigate to = '/admin' />
     }
     return children
 }
