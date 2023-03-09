@@ -1,13 +1,13 @@
 export const inputPost = [
     {
       id: 1,
-      name: "formInput",
+      name: "price",
       label: "Giá",
       type: "text",
     },
     {
       id: 2,
-      name: "formInput",
+      name: "title",
       label: "Tiêu Đề",
       type: "text",
     },
@@ -19,7 +19,7 @@ export const inputPost = [
     // },
     {
       id: 3,
-      name: "formInput",
+      name: "address",
       label: "Địa Chỉ ",
       type: "text",
     },
