@@ -54,13 +54,13 @@ const BlogPost = () => {
                     <MoreVertIcon />
                   </IconButton>
                 }
-                title="Shrimp and Chorizo Paella"
+                title={post.title}
                 subheader="September 14, 2016"
               />
               <CardMedia
                 component="img"
-                height="194"
-                image={defaultImage}
+                height="400"
+                image={post.img.url || post.img }
                 alt="Paella dish"
               />
               <CardContent>
