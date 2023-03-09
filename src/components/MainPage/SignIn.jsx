@@ -16,7 +16,7 @@ const SignIn = () => {
             })
             console.log("token: ", token)
         })
-        navigate('/account')
+        navigate('/profile')
     }
     //login gmail password
     const [email, setEmail] = useState('')
@@ -30,7 +30,7 @@ const SignIn = () => {
         setError('')
         try {
             await signIn(email, password)
-            navigate('/account')
+            navigate('/profile')
         } catch (e) {
             setError(e.message)
             console.log(e.message)

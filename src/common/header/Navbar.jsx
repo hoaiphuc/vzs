@@ -24,9 +24,6 @@ const Navbar = () => {
               <li>
                 <Link to='/post'>Đăng bài</Link>
               </li>
-              <li>
-                <Link to='/Signin'>Login</Link>
-              </li>
             </ul>
 
             <button className='toggle' onClick={() => setMobileMenu(!MobileMenu)}>

@@ -63,7 +63,7 @@ function App() {
             <Route path='/signup' element={<SignUp />} />
             <Route path='/uploadfileimage' element={<UploadFileImage />} />
             <Route path='/post' element={<Post inputs={inputPost} title="Post New Product" cates={cates} />} />
-            <Route path='/profile' element={<Profile />} />
+            <Route path='/profile' element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
             <Route path='/admin' element={<UserTable />} />
             <Route path='/admin/post' element={<PostList />} />
             <Route path='/account' element={<ProtectedRoutes><Account /> </ProtectedRoutes>} />

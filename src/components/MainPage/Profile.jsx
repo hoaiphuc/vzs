@@ -3,10 +3,25 @@ import React, { useState, useEffect } from "react";
 // reactstrap components
 import { Button, Card, Container, Row, Col } from "reactstrap";
 import ChangeAvatarProfile from "./ChangeAvatarProfile";
+import { Link, useNavigate } from 'react-router-dom';
+import { UserAuth } from '../../context/AuthContext'
 
 
 const Profile = () => {
- 
+
+  const { user, logout } = UserAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/')
+      console.log('you are logged out');
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+
   return (
     <div className="my-10 mx-10" style={{ backgroundColor: '#e89015', borderRadius: '20px' }}>
       {/* <Container className="justify-content-center align-items-center py-5 h-100" style={{display: 'unset'}}>
@@ -24,34 +39,34 @@ const Profile = () => {
 
       <section className="mx-10">
         <Container>
-          <Card className="card-profile shadow mt-300 "  style={{ borderRadius: '20px' }}>
+          <Card className="card-profile shadow mt-300 " style={{ borderRadius: '20px' }}>
             <div className="px-4">
               <Row className="justify-content-center" style={{ width: '100%' }}>
                 <Col className="text-center order-lg-1" lg="3">
-                  <div className="card-profile-image">             
-                    <ChangeAvatarProfile/>                  
+                  <div className="card-profile-image">
+                    <ChangeAvatarProfile />
                   </div>
                 </Col>
                 <Col
                   className="text-center order-lg-1 mt-5" lg="4"
                 >
-                  <div style={{fontSize: '35px'}}>Võ Thanh Duy</div>
+                  <div style={{ fontSize: '35px' }}>Võ Thanh Duy</div>
                   <div className="d-flex justify-content-center mt-10">
                     <div className="border border-4 border-warning px-7 py-3 mx-2" style={{ borderRadius: '60px' }}>
                       <span className="heading">22 </span>
                       <span className="description">Photos  </span>
                     </div>
-                    <div className="border border-4 border-warning px-7 py-3 mx-2" style={{borderRadius: '60px' }}>
+                    <div className="border border-4 border-warning px-7 py-3 mx-2" style={{ borderRadius: '60px' }}>
                       <span className="heading">100 </span>
                       <span className="description">Followers</span>
                     </div>
-                    <div className="border border-4 border-warning px-7 py-3 mx-2" style={{borderRadius: '60px' }}>
+                    <div className="border border-4 border-warning px-7 py-3 mx-2" style={{ borderRadius: '60px' }}>
                       <span className="heading">89 </span>
                       <span className="description">Favorites</span>
                     </div>
                   </div>
                 </Col>
-                <Col className="text-center order-lg-1 mt-20" lg="4" style={{fontSize: '20px'}}>
+                <Col className="text-center order-lg-1 mt-20" lg="4" style={{ fontSize: '20px' }}>
                   <div>Ngày sinh: 09/10/2001</div>
                   <div>Địa chỉ: Hihi hihi hihi</div>
                   <div>Email: duybpz@gmail.com</div>
@@ -98,6 +113,13 @@ const Profile = () => {
           </Card>
         </Container>
       </section>
+
+      <div className='max-w-[600px] mx-auto my-16 p-4'>
+        <h1 className='text-2xl font-bold -py-4'>Account</h1>
+        <p>User Email: {user && user.email}</p>
+        <button onClick={handleLogout} className='border px-6 py-2 my-4'>Logout</button>
+      </div>
+
     </div>
   );
 }
