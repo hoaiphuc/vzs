@@ -1,11 +1,11 @@
 import React from "react"
 import BlogPost from "../components/MainPage/BlogPost/BlogPost"
 import Home from "../components/MainPage/Home"
-const Pages = ({ productItems, shopItems, postItems }) => {
+const Pages = () => {
   return (
     <>
       <Home />
-      <BlogPost posts={postItems}/>
+      <BlogPost />
 
     </>
   )
