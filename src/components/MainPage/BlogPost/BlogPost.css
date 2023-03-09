@@ -1,0 +1,32 @@
+.blog-post {
+    display: flex;
+    margin-bottom: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 1rem;
+  }
+  
+  .blog-post img {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    margin-right: 1rem;
+  }
+  
+  .blog-post-content {
+    flex: 1;
+  }
+  
+  .blog-post h2 {
+    margin: 0 0 0.5rem;
+  }
+  
+  .blog-post-details {
+    font-size: 0.8rem;
+    color: #777;
+    margin: 0;
+  }
+  
+  .blog-post p {
+    margin: 0;
+  }
