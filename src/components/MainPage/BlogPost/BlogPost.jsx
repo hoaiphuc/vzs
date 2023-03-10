@@ -60,7 +60,7 @@ const BlogPost = () => {
               <CardMedia
                 component="img"
                 height="400"
-                image={post.img.url || post.img }
+                image={post.img.url || post.img}
                 alt="Paella dish"
               />
               <CardContent>
@@ -74,6 +74,9 @@ const BlogPost = () => {
                 </IconButton>
                 <IconButton aria-label="share">
                   <ShareIcon />
+                </IconButton>
+                <IconButton aria-label="buy">
+                  <i class="fa-solid fa-cart-shopping"></i>
                 </IconButton>
               </CardActions>
             </Card>

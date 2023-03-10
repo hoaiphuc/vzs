@@ -10,7 +10,7 @@ const Footer = () => {
           <div className='box'>
             {/* <h1>VZS</h1> */}
             <img src={logo} alt='' />
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Auctor libero id et, in gravida. Sit diam duis mauris nulla cursus. Erat et lectus vel ut sollicitudin elit at amet.</p>
+            <p>Bán hàng dể và mua hàng cũng vậy</p>
             <div className='icon d_flex'>
               <div className='img d_flex'>
                 <i className='fa-brands fa-google-play'></i>
