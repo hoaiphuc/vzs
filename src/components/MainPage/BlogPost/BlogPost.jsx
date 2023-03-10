@@ -3,7 +3,6 @@ import React from 'react';
 import GetPost from '../../../common/axios/getPostsAxios';
 import { Card, CardMedia, CardContent, CardActions } from "@mui/material";
 import { Typography } from "@mui/material";
-import { styled } from '@mui/material/styles';
 import CardHeader from '@mui/material/CardHeader';
 import Grid from '@mui/material/Grid';
 import Avatar from '@mui/material/Avatar';
@@ -12,6 +11,8 @@ import { red } from '@mui/material/colors';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import ReactPaginate from 'react-paginate';
+import Container from '@mui/material/Container';
 const defaultImage = "https://via.placeholder.com/400x400";
 
 
@@ -31,8 +32,11 @@ const BlogPost = () => {
   //       ))}
   //   </>
   // );
+  const handlePageClick = (posts) => {
+    console.log(posts.selected);
+  }
   return (
-    <>
+    <Container maxWidth="lg" sx={{ marginTop: '2rem' }}>
       <Grid
         container
         spacing={2}
@@ -60,7 +64,7 @@ const BlogPost = () => {
               <CardMedia
                 component="img"
                 height="400"
-                image={post.img.url || post.img}
+                image={post.img.url || defaultImage}
                 alt="Paella dish"
               />
               <CardContent>
@@ -75,7 +79,7 @@ const BlogPost = () => {
                 <IconButton aria-label="share">
                   <ShareIcon />
                 </IconButton>
-                <IconButton aria-label="buy">
+                <IconButton aria-label="buy" href={`/blogdetail/${post.id}`} id={post.id}>
                   <i class="fa-solid fa-cart-shopping"></i>
                 </IconButton>
               </CardActions>
@@ -83,7 +87,21 @@ const BlogPost = () => {
           </Grid>
         ))}
       </Grid>
-    </>
+
+      <div>
+
+        <ReactPaginate
+          previousLabel={'previous'}
+          nextLabel={'next'}
+          breakLabel={'...'}
+          pageCount={25}
+          marginPagesDisplayed={4}
+          pageRangeDisplayed={2}
+          onPageChange={handlePageClick}
+        />
+      </div>
+
+    </ Container>
   );
 }
 

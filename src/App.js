@@ -20,6 +20,7 @@ import { messaging } from "./components/firebase";
 import { getToken } from "firebase/messaging";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Post from "./components/MainPage/Post"
+import BlogDetail from "./components/MainPage/BlogPost/BlogDetail"
 import { inputPost, category, cates } from "./formSource";
 //admin import
 import PostList from "./components/MainPage/admin/post"
@@ -61,6 +62,7 @@ function App() {
             <Route path='/' exact element={<Pages productItems={productItems} shopItems={shopItems} postItems={postItems}/>} />
             <Route path='/signin' element={<SignIn />} />
             <Route path='/signup' element={<SignUp />} />
+            <Route path='/blogdetail/:id' element={<BlogDetail />} />
             <Route path='/uploadfileimage' element={<UploadFileImage />} />
             <Route path='/post' element={<Post inputs={inputPost} title="Post New Product" cates={cates} />} />
             <Route path='/profile' element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
