@@ -1,8 +1,8 @@
 export const inputPost = [
     {
       id: 1,
-      name: "price",
-      label: "Giá",
+      name: "productName",
+      label: "Tên sản phẩm",
       type: "text",
     },
     {
@@ -21,6 +21,12 @@ export const inputPost = [
       id: 3,
       name: "address",
       label: "Địa Chỉ ",
+      type: "text",
+    },
+    {
+      id: 4,
+      name: "price",
+      label: "Giá",
       type: "text",
     },
    
