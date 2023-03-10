@@ -50,7 +50,7 @@ const Profile = () => {
                 <Col
                   className="text-center order-lg-1 mt-5" lg="4"
                 >
-                  <div style={{ fontSize: '35px' }}>Võ Thanh Duy</div>
+                  <div style={{ fontSize: '35px' }}>{user.displayName}</div>
                   <div className="d-flex justify-content-center mt-10">
                     <div className="border border-4 border-warning px-7 py-3 mx-2" style={{ borderRadius: '60px' }}>
                       <span className="heading">22 </span>
@@ -69,7 +69,7 @@ const Profile = () => {
                 <Col className="text-center order-lg-1 mt-20" lg="4" style={{ fontSize: '20px' }}>
                   <div>Ngày sinh: 09/10/2001</div>
                   <div>Địa chỉ: Hihi hihi hihi</div>
-                  <div>Email: duybpz@gmail.com</div>
+                  <div>Email: {user && user.email}</div>
                   <div>Số điện thoại: 0334416510</div>
                   <div>-------------------------</div>
                 </Col>
@@ -115,8 +115,8 @@ const Profile = () => {
       </section>
 
       <div className='max-w-[600px] mx-auto my-16 p-4'>
-        <h1 className='text-2xl font-bold -py-4'>Account</h1>
-        <p>User Email: {user && user.email}</p>
+        {/* <h1 className='text-2xl font-bold -py-4'>Account</h1>
+        <p>User Email: {user && user.email}</p> */}
         <button onClick={handleLogout} className='border px-6 py-2 my-4'>Logout</button>
       </div>
 
