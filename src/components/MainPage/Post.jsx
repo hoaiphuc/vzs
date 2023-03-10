@@ -6,6 +6,7 @@ import "./post.css";
 import Select from "react-select";
 import { Button, Card, Container, Row, Col } from "reactstrap";
 import { addNewPost } from '../../common/feartures/postSlice';
+import { uploadImgPost, useAuth } from "../firebase";
 
 const Post = ({ inputs, title, cates }) => {
 
@@ -19,7 +20,11 @@ const Post = ({ inputs, title, cates }) => {
   const [address, setAddress] = useState("");
   const [imageDemo, setImageDemo] = useState([]);
   const [isSubmit, setIsSubmit] = useState(false)
-  const [postData, setPostData] = useState()
+  const [postData, setPostData] = useState();
+  const [loading, setLoading] = useState(false);
+  const [photoURL, setPhotoURL] = useState([]);
+
+  const currentUser = useAuth();
 
   const optionList = cates.map((option) => (
     <option key={option.id} value={option.value}>
@@ -33,19 +38,13 @@ const Post = ({ inputs, title, cates }) => {
 
   const handleFileChange = (event) => {
     const files = event.target.files;
+    setFile(files);
     console.log("files", files)
     setImageDemo(files);
     console.log("files: ", files);
     const filesList = [];
     if (files.length > 6) {
       alert("You can select up to 6 images.");
-    } else {
-      for (var i = 0; i < files.length; i++) {
-        filesList.push({ url: URL.createObjectURL(files[i]) });
-      }
-      setFile(filesList);
-      console.log("fileListaa: ", filesList);
-
     }
   };
 
@@ -58,7 +57,7 @@ const Post = ({ inputs, title, cates }) => {
     categoryId: "123131313",
     imgIds: [
       {
-        url: "https://example.com/image10.jpg"
+        url: photoURL
       }
     ]
   }
@@ -69,41 +68,25 @@ const Post = ({ inputs, title, cates }) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log(file);
+    console.log("url file:", file);
+    uploadImgPost(file, currentUser, setLoading);
+    console.log("currentUser.urlImageList", currentUser.urlImageList)
+    setPhotoURL(currentUser.urlImageList)
+  };
+  useEffect(() => {
     const data = {
-      imgIds: postdemo.imgIds,
-      categoryId: selectedOption,
+      imgIds: photoURL,
+      categoryId: "1",
       description: description,
       productName: productName,
-      userId: "Hieu",
+      userId: "dsadsadasdsadasd",
       price: price,
       title: titleInput
     }
-    // const formData = new FormData();
-    // formData.append("imgIds", postdemo.imgIds);
-    // formData.append("categoryId", selectedOption);
-    // formData.append("description", description);
-    // formData.append("userId", "Hieu");
-    // formData.append("price", price);
-    // formData.append("title", titleInput);
-    // fetch("https://secondhandvinhome.herokuapp.com/doc/#/Post/addPost", {
     console.log("data", data)
-    // fetch("https://secondhandvinhome.herokuapp.com/api/post/createpost", {
-    //   method: "POST",
-    //   body: data,
-    // })
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log("date",data);
-    //     alert("Post submitted successfully!");
-    //   })
-    //   .catch((error) => {
-    //     console.error(error);
-    //     alert("Failed to submit post.");
-    //   });
-    // console.log("formData", formData.getAll)
+    console.log("đuyuyduy:", photoURL);
     dispatch(addNewPost(data));
-  };
+  }, [currentUser])
 
   const inputValues = {
     price: price,
