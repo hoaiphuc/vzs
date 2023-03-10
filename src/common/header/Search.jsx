@@ -1,6 +1,9 @@
-import React from "react"
+import React, { useState } from "react"
 import logo from "../../components/assets/images/logo.svg"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from 'react-router-dom';
+import { UserAuth } from '../../context/AuthContext'
+import Popover from '@mui/material/Popover';
+import Button from '@mui/material/Button';
 
 const Search = () => {
   // fixed Header
@@ -9,6 +12,31 @@ const Search = () => {
     search.classList.toggle("active", window.scrollY > 100)
   })
 
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleUserClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+  const id = open ? 'user-menu-popover' : undefined;
+
+  const { user, logout } = UserAuth();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    try {
+      await logout();
+      navigate('/')
+      console.log('you are logged out');
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
   return (
     <>
       <section className='search'>
@@ -24,11 +52,33 @@ const Search = () => {
           </div>
 
           <div className='icon f_flex width'>
-            <Link to='/profile'><i className='fa fa-user icon-circle'></i></Link>
+            <div>
+              <button onClick={handleUserClick}>
+                <i className='fa fa-user icon-circle'> </i>
+              </button>
+              <Popover
+                id={id}
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'center',
+                }}
+                transformOrigin={{
+                  vertical: 'top',
+                  horizontal: 'center',
+                }}
+              >
+                 <div style={{ display: 'flex', flexDirection: 'column' }}>
+                <Button component={Link} to='/profile' sx={{ padding: '10px', minWidth: '150px' }}>Profile</Button>
+                <Button sx={{ padding: '10px', minWidth: '150px' }} onClick={handleLogout}>Logout</Button>
+                </div>
+              </Popover>
+            </div>
             <div className='cart'>
               <Link to='/cart'>
                 <i className='fa fa-shopping-bag icon-circle'></i>
-                {/* <span>{CartItem.length === 0 ? "" : CartItem.length}</span> */}
               </Link>
             </div>
           </div>
