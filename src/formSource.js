@@ -90,13 +90,13 @@ export const inputPost = [
   //   },
   // ];
   export const cates = [
-    { id:0, label: "Choose your option", value: "" },
-    { id:1, label: "👚 Fashion", value: "fashion" },
-    { id:2, label: "🔌 Electronic", value: "electronic" },
-    { id:3, label: "🚔 Cars", value: "cars"},
-    { id:4, label: "🏡 Home & Garden", value: "homeAndGarden" },
-    { id:5, label: "👩‍❤️‍👩 Health & Beauty", value: "healthAndBeauty" },
-    { id:6, label: "📚 Books", value: "books"}
+    { id:0, label: "Choose your option", value: "01" },
+    { id:1, label: "👚 Fashion", value: "02" },
+    { id:2, label: "🔌 Electronic", value: "03" },
+    { id:3, label: "🚔 Cars", value: "04"},
+    { id:4, label: "🏡 Home & Garden", value: "05" },
+    { id:5, label: "👩‍❤️‍👩 Health & Beauty", value: "06" },
+    { id:6, label: "📚 Books", value: "07"}
   ];
 {/* <option>Shirts</option>
                 <option>Jacket</option>

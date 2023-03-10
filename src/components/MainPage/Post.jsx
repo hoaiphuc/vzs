@@ -19,8 +19,6 @@ const Post = ({ inputs, title, cates }) => {
   const [titleInput, setTitleInput] = useState("");
   const [address, setAddress] = useState("");
   const [imageDemo, setImageDemo] = useState([]);
-  const [isSubmit, setIsSubmit] = useState(false)
-  const [postData, setPostData] = useState();
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState([]);
 
@@ -39,10 +37,7 @@ const Post = ({ inputs, title, cates }) => {
   const handleFileChange = (event) => {
     const files = event.target.files;
     setFile(files);
-    console.log("files", files)
     setImageDemo(files);
-    console.log("files: ", files);
-    const filesList = [];
     if (files.length > 6) {
       alert("You can select up to 6 images.");
     }
@@ -68,25 +63,21 @@ const Post = ({ inputs, title, cates }) => {
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
-    console.log("url file:", file);
-    uploadImgPost(file, currentUser, setLoading);
-    console.log("currentUser.urlImageList", currentUser.urlImageList)
-    setPhotoURL(currentUser.urlImageList)
+    uploadImgPost(file, setLoading, setPhotoURL);
   };
+
   useEffect(() => {
     const data = {
       imgIds: photoURL,
-      categoryId: "1",
+      categoryId: selectedOption,
       description: description,
       productName: productName,
       userId: "dsadsadasdsadasd",
       price: price,
       title: titleInput
     }
-    console.log("data", data)
-    console.log("đuyuyduy:", photoURL);
     dispatch(addNewPost(data));
-  }, [currentUser])
+  }, [photoURL])
 
   const inputValues = {
     price: price,
@@ -175,7 +166,7 @@ const Post = ({ inputs, title, cates }) => {
                     onChange={handleDescriptionChange}
                   />
                 </div>
-                <button type="submit">Post</button>
+                <button disabled={loading} type="submit">Post</button>
               </form>
             </div>
           </div>

@@ -53,9 +53,9 @@ export async function upload(file, currentUser, setLoading) {
 }
 
 
-export async function uploadImgPost(files, currentUser, setLoading) {
+export async function uploadImgPost(files, setLoading, setPhotoURL) {
   setLoading(true);
-console.log("filelelelele: " , files);
+  console.log("filelelelele: ", files);
   const urls = [];
   try {
     for (let i = 0; i < files.length; i++) {
@@ -63,22 +63,18 @@ console.log("filelelelele: " , files);
       const fileRef = ref(storage, `images/${v4()}`);
       const snapshot = await uploadBytes(fileRef, file);
       const url = await getDownloadURL(snapshot.ref);
-      console.log("second: ", url)
+      console.log("second: ", url);
       urls.push(url);
     }
     console.log("first url", urls);
-    const urlList = urls.map(u => ({
-      url: u
-    }))
-    console.log("urlList",urlList)
-    // Update user's photoURL with the first uploaded image URL
+    const urlList = urls.map((url) => ({ url }));
+    console.log("urlList", urlList);
+    // Update user's urlImageList with the uploaded image URLs
     if (urlList.length > 0) {
-      await updateProfile(currentUser, {
-        urlImageList: urlList
-      });
+      setLoading(false);
+      alert("Uploaded files!");
+      setPhotoURL(urlList);
     }
-    setLoading(false);
-    alert("Uploaded files!");
   } catch (error) {
     console.error(error);
     setLoading(false);
