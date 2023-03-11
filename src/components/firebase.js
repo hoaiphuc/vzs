@@ -72,14 +72,15 @@ export async function uploadImgPost(files, setLoading, setPhotoURL, setIsCreated
     // Update user's urlImageList with the uploaded image URLs
     if (urlList.length > 0) {
       setLoading(false);
-      alert("Uploaded files!");
       setPhotoURL(urlList);
       setIsCreated(true);
+      alert("Uploaded files!");
       return true;
     }
   } catch (error) {
     console.error(error);
     setLoading(false);
+    setIsCreated(false);
     alert("Failed to upload files");
     return false;
   }

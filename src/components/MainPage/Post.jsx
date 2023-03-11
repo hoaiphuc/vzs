@@ -50,6 +50,25 @@ const Post = ({ inputs, title, cates }) => {
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     const isCreated = await uploadImgPost(file, setLoading, setPhotoURL, setIsCreated);
+    setIsCreated(isCreated);
+    // if (isCreated && photoURL.length > 0) {
+    //   const data = {
+    //     imgIds: photoURL,
+    //     categoryId: selectedOption,
+    //     description: description,
+    //     productName: productName,
+    //     userId: "dsadsadasdsadasd",
+    //     price: price,
+    //     title: titleInput
+    //   }
+    //   dispatch(addNewPost(data)).then(result => {
+    //     if (result) {
+    //       alert("Đã đăng bài thành công, ấn ok để tiếp tục");
+    //     }
+    //   })
+    // }
+  };
+  useEffect(() => {
     if (isCreated) {
       const data = {
         imgIds: photoURL,
@@ -62,11 +81,12 @@ const Post = ({ inputs, title, cates }) => {
       }
       dispatch(addNewPost(data)).then(result => {
         if (result) {
+          setIsCreated(false);
           alert("Đã đăng bài thành công, ấn ok để tiếp tục");
         }
       })
     }
-  };
+  }, [isCreated])
   const inputValues = {
     price: price,
     title: titleInput,
