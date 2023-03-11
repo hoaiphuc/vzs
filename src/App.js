@@ -32,7 +32,7 @@ function App() {
       // Generate Token
       const token = await getToken(messaging, {
         vapidKey:
-          "BEiIpr4-VTtzkgJ1BWEMaC4sFJP35pEPyp7LecoaK7zpGpDijK_iqafKJ7PmmYJh8EfWvhCIxiV85NF-1N6xQEo"
+          "BFkq5Vuf3DyKL-Of4gfuy-Q0H2QvjoNVFvrRiGtU-8oZDtdC5XGAoVClzQA8DcUuvxJJ_mrVsB5r-3ElSIA-VRw"
       });
       console.log("Token Gen", token);
       // Send this token  to server ( db)
