@@ -47,8 +47,8 @@ const Search = () => {
 
           <div className='search-box f_flex'>
             <i className='fa fa-search'></i>
-            <input type='text' placeholder='Search and hit enter...' />
-            <span>All Category</span>
+            <input type='text' placeholder='Nhập từ khóa cần tìm' />
+            <span>Loại</span>
           </div>
 
           <div className='icon f_flex width'>
@@ -71,7 +71,9 @@ const Search = () => {
                 }}
               >
                  <div style={{ display: 'flex', flexDirection: 'column' }}>
-                <Button component={Link} to='/profile' sx={{ padding: '10px', minWidth: '150px' }}>Profile</Button>
+                <Button component={Link} to='/profile' sx={{ padding: '10px', minWidth: '150px' }}>Cá nhân</Button>
+                <Button component={Link} to='/mypost' sx={{ padding: '10px', minWidth: '150px' }}>Bài đăng</Button>
+
                 <Button sx={{ padding: '10px', minWidth: '150px' }} onClick={handleLogout}>Logout</Button>
                 </div>
               </Popover>

@@ -67,11 +67,11 @@ const BlogPost = () => {
                   </IconButton>
                 }
                 title={post.title.length < 20? post.title:  post.title.slice(0, 21) + "..."}
-                subheader="September 14, 2016"
+                subheader="March 11, 2023"
               />
               <CardMedia
                 component="img"
-                style={{ height: 300  }}
+                style={{ height: 300 }}
                 image={post.img.url || defaultImage}
                 alt="Paella dish"
               />
