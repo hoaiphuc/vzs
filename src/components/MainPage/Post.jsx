@@ -21,8 +21,7 @@ const Post = ({ inputs, title, cates }) => {
   const [imageDemo, setImageDemo] = useState([]);
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState([]);
-
-  const currentUser = useAuth();
+  const [isCreated, setIsCreated] = useState(false);
 
   const optionList = cates.map((option) => (
     <option key={option.id} value={option.value}>
@@ -43,42 +42,31 @@ const Post = ({ inputs, title, cates }) => {
     }
   };
 
-  const postdemo = {
-    title: "Test Product111",
-    description: "This is a test product111",
-    userId: "Hieunmt",
-    productName: "Sex toy",
-    price: "ssssssss",
-    categoryId: "123131313",
-    imgIds: [
-      {
-        url: photoURL
-      }
-    ]
-  }
   const handleDescriptionChange = (event) => {
     setDescription(event.target.value);
   };
   const dispatch = useDispatch();
 
-  const handleFormSubmit = (event) => {
+  const handleFormSubmit = async (event) => {
     event.preventDefault();
-    uploadImgPost(file, setLoading, setPhotoURL);
-  };
-
-  useEffect(() => {
-    const data = {
-      imgIds: photoURL,
-      categoryId: selectedOption,
-      description: description,
-      productName: productName,
-      userId: "dsadsadasdsadasd",
-      price: price,
-      title: titleInput
+    const isCreated = await uploadImgPost(file, setLoading, setPhotoURL, setIsCreated);
+    if (isCreated) {
+      const data = {
+        imgIds: photoURL,
+        categoryId: selectedOption,
+        description: description,
+        productName: productName,
+        userId: "dsadsadasdsadasd",
+        price: price,
+        title: titleInput
+      }
+      dispatch(addNewPost(data)).then(result => {
+        if (result) {
+          alert("Đã đăng bài thành công, ấn ok để tiếp tục");
+        }
+      })
     }
-    dispatch(addNewPost(data));
-  }, [photoURL])
-
+  };
   const inputValues = {
     price: price,
     title: titleInput,

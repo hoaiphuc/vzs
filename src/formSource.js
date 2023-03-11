@@ -90,13 +90,14 @@ export const inputPost = [
   //   },
   // ];
   export const cates = [
-    { id:0, label: "Choose your option", value: "01" },
-    { id:1, label: "👚 Fashion", value: "02" },
-    { id:2, label: "🔌 Electronic", value: "03" },
-    { id:3, label: "🚔 Cars", value: "04"},
-    { id:4, label: "🏡 Home & Garden", value: "05" },
-    { id:5, label: "👩‍❤️‍👩 Health & Beauty", value: "06" },
-    { id:6, label: "📚 Books", value: "07"}
+    { id:0, label: "Choose your option", value: "1" },
+    { id:1, label: "🏡 Đồ gia dụng", value: "123" },
+    { id:2, label: "👚 Quần áo", value: "2" },
+    { id:3, label: "🔌 Đồ điện tử", value: "3" },
+    { id:4, label: "🚔 Xe cộ", value: "4"},
+    { id:5, label: "🏡 Nhà cửa", value: "5" },
+    { id:6, label: "👩‍❤️‍👩 Sức khỏe và sắc đẹp", value: "6" },
+    { id:7, label: "📚 Sách", value: "7"}
   ];
 {/* <option>Shirts</option>
                 <option>Jacket</option>

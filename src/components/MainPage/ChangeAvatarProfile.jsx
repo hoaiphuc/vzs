@@ -19,6 +19,7 @@ function ChangeAvatarProfile() {
   }
 
   useEffect(() => {
+    console.log("currentuser: ", currentUser);
     if (currentUser?.photoURL) {
       setPhotoURL(currentUser.photoURL)
     }

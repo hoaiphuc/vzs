@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 // import './BlogPost.css';
 import GetPost from '../../../common/axios/getPostsAxios';
 import { Card, CardMedia, CardContent, CardActions } from "@mui/material";
@@ -13,11 +13,13 @@ import ShareIcon from '@mui/icons-material/Share';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import ReactPaginate from 'react-paginate';
 import Container from '@mui/material/Container';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchAllPosts, selectAllPosts } from '../../../common/feartures/postSlice';
 const defaultImage = "https://via.placeholder.com/400x400";
 
 
 const BlogPost = () => {
-  const [posts] = GetPost();
+  // const [posts] = GetPost();
   // return (
   //   <>
   //       {posts.map(post => (
@@ -32,6 +34,12 @@ const BlogPost = () => {
   //       ))}
   //   </>
   // );
+  const dispatch = useDispatch();
+  const posts = useSelector(selectAllPosts);
+
+  useEffect(() => {
+    dispatch(fetchAllPosts());
+  }, [dispatch]);
   const handlePageClick = (posts) => {
     console.log(posts.selected);
   }
@@ -44,7 +52,7 @@ const BlogPost = () => {
         justify="flex-start"
         alignItems="flex-start"
       >
-        {posts.map(post => (
+        {posts && posts.map(post => (
           <Grid item xs={12} sm={6} md={3} key={posts.indexOf(post)}>
             <Card sx={{ maxWidth: 345 }}>
               <CardHeader
@@ -88,7 +96,7 @@ const BlogPost = () => {
         ))}
       </Grid>
 
-      <div>
+      {/* <div>
 
         <ReactPaginate
           previousLabel={'previous'}
@@ -99,7 +107,7 @@ const BlogPost = () => {
           pageRangeDisplayed={2}
           onPageChange={handlePageClick}
         />
-      </div>
+      </div> */}
 
     </ Container>
   );

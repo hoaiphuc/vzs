@@ -53,7 +53,7 @@ export async function upload(file, currentUser, setLoading) {
 }
 
 
-export async function uploadImgPost(files, setLoading, setPhotoURL) {
+export async function uploadImgPost(files, setLoading, setPhotoURL, setIsCreated) {
   setLoading(true);
   console.log("filelelelele: ", files);
   const urls = [];
@@ -74,10 +74,13 @@ export async function uploadImgPost(files, setLoading, setPhotoURL) {
       setLoading(false);
       alert("Uploaded files!");
       setPhotoURL(urlList);
+      setIsCreated(true);
+      return true;
     }
   } catch (error) {
     console.error(error);
     setLoading(false);
     alert("Failed to upload files");
+    return false;
   }
 }
