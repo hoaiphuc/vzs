@@ -15,7 +15,7 @@ import ReactPaginate from 'react-paginate';
 import Container from '@mui/material/Container';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchAllPosts, selectAllPosts } from '../../../common/feartures/postSlice';
-const defaultImage = "https://via.placeholder.com/400x400";
+const defaultImage = "https://via.placeholder.com/300x300";
 
 
 const BlogPost = () => {
@@ -66,18 +66,18 @@ const BlogPost = () => {
                     <MoreVertIcon />
                   </IconButton>
                 }
-                title={post.title}
+                title={post.title.length < 20? post.title:  post.title.slice(0, 21) + "..."}
                 subheader="September 14, 2016"
               />
               <CardMedia
                 component="img"
-                height="400"
+                style={{ height: 300  }}
                 image={post.img.url || defaultImage}
                 alt="Paella dish"
               />
               <CardContent>
                 <Typography variant="body2" color="text.secondary">
-                  {post.description}
+                  {post.description < 20? post.description: post.description.slice(0, 32) + "..."}
                 </Typography>
               </CardContent>
               <CardActions disableSpacing>
