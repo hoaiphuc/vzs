@@ -88,7 +88,7 @@ const BlogPost = () => {
                   <ShareIcon />
                 </IconButton>
                 <IconButton aria-label="buy" href={`/blogdetail/${post.id}`} id={post.id}>
-                  <i class="fa-solid fa-cart-shopping"></i>
+                  <i className="fa-solid fa-cart-shopping"></i>
                 </IconButton>
               </CardActions>
             </Card>

@@ -93,7 +93,7 @@ const Post = ({ inputs, title, cates }) => {
     }
   };
   return (
-    <div class="max-w-[1200px] mx-auto my-16 p-4">
+    <div className="max-w-[1200px] mx-auto my-16 p-4">
       <div className="post">
         <div className="Container">
           <div className="top">
