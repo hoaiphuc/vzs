@@ -1,100 +1,67 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { getCategories, createCategory, deleteCategory } from './categories.service';
 
 const initialState = {
   categories: [],
-  loading: false,
+  status: 'idle',
   error: null,
 };
 
-export const fetchCategories = createAsyncThunk(
-  'categories/fetchCategories',
-  async () => {
-    const response = await fetch('/api/categories');
-    if (!response.ok) {
-      throw new Error('Failed to fetch categories');
-    }
-    const categories = await response.json();
-    return categories;
-  }
-);
+export const fetchCategories = createAsyncThunk('categories/fetchCategories', async () => {
+  const categories = await getCategories();
+  return categories;
+});
 
-export const createCategory = createAsyncThunk(
-  'categories/createCategory',
-  async (category) => {
-    const response = await fetch('/api/categories', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(category),
-    });
-    if (!response.ok) {
-      throw new Error('Failed to create category');
-    }
-    const createdCategory = await response.json();
-    return createdCategory;
-  }
-);
+export const addCategory = createAsyncThunk('categories/addCategory', async (category) => {
+  const newCategory = await createCategory(category);
+  return newCategory;
+});
 
-export const deleteCategory = createAsyncThunk(
-  'categories/deleteCategory',
-  async (id) => {
-    const response = await fetch(`/api/categories/${id}`, {
-      method: 'DELETE',
-    });
-    if (!response.ok) {
-      throw new Error('Failed to delete category');
-    }
-    return id;
-  }
-);
+export const removeCategory = createAsyncThunk('categories/removeCategory', async (id) => {
+  await deleteCategory(id);
+  return id;
+});
 
-export const categoriesSlice = createSlice({
+const categoriesSlice = createSlice({
   name: 'categories',
   initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
       .addCase(fetchCategories.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+        state.status = 'loading';
       })
       .addCase(fetchCategories.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
+        state.status = 'succeeded';
         state.categories = action.payload;
       })
       .addCase(fetchCategories.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || 'Failed to fetch categories';
+        state.status = 'failed';
+        state.error = action.error.message;
       })
-      .addCase(createCategory.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+      .addCase(addCategory.pending, (state) => {
+        state.status = 'loading';
       })
-      .addCase(createCategory.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
+      .addCase(addCategory.fulfilled, (state, action) => {
+        state.status = 'succeeded';
         state.categories.push(action.payload);
       })
-      .addCase(createCategory.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || 'Failed to create category';
+      .addCase(addCategory.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
       })
-      .addCase(deleteCategory.pending, (state) => {
-        state.loading = true;
-        state.error = null;
+      .addCase(removeCategory.pending, (state) => {
+        state.status = 'loading';
       })
-      .addCase(deleteCategory.fulfilled, (state, action) => {
-        state.loading = false;
-        state.error = null;
-        state.categories = state.categories.filter(
-          (category) => category.id !== action.payload
-        );
+      .addCase(removeCategory.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.categories = state.categories.filter((category) => category.id !== action.payload);
       })
-      .addCase(deleteCategory.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.error.message || 'Failed to delete category';
+      .addCase(removeCategory.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
       });
   },
 });
+
+export default categoriesSlice.reducer;
