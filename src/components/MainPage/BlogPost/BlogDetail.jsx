@@ -38,13 +38,16 @@ function BlogDetail(props) {
         <div className="product__photo">
           <div className="photo-container">
             <div className="photo-main">
-              <img src={!currentImage ? post.img[0].url : currentImage } alt="green apple slice" />
+              <img
+                src={!currentImage ? post.img[0].url : currentImage}
+                alt="green apple slice"
+              />
             </div>
             <div className="photo-album">
               <ul>
                 {post.img.map((img) => (
                   <li>
-                    <img onClick={()=> handleClick(img.url)} src={img.url} />
+                    <img onClick={() => handleClick(img.url)} src={img.url} />
                   </li>
                 ))}
               </ul>
@@ -56,13 +59,17 @@ function BlogDetail(props) {
             <h1>{post.title}</h1>
             {/* <span>COD: 45999</span> */}
           </div>
-          <div className="price">
-            VNĐ <span>{post.product.price}</span>
-          </div>
+
+          {post.product.map((product) => (
+            <div className="price">
+              VNĐ <span>{product.price}</span>
+            </div>
+          ))}
+
           <div className="variant">
             <h3>Số tòa</h3>
             <ul>
-              <strong>{}</strong>
+              <strong>S302</strong>
             </ul>
           </div>
           <div className="description">
