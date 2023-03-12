@@ -55,14 +55,13 @@ const BlogPost = (props) => {
   };
 
   useEffect(() => {
-
     dispatch(fetchAllPosts());
   }, [dispatch]);
   const handlePageClick = (posts) => {
     console.log(posts.selected);
   };
 
-  console.log("Posts: ", posts)
+  console.log("Posts: ", posts);
   return (
     <Container maxWidth="lg" sx={{ marginTop: "2rem" }}>
       <Grid
@@ -77,16 +76,16 @@ const BlogPost = (props) => {
             <Grid item xs={12} sm={6} md={3} key={posts.indexOf(post)}>
               <Card className="card-item" sx={{ maxWidth: 345 }}>
                 <CardHeader
-                  style={{background: 'linear-gradient(to right, #b1fc03, #78eb46)'}}
-
+                  style={{
+                    background: "linear-gradient(to right, #b1fc03, #78eb46)",
+                  }}
                   avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      <img src="https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/09/avatar-anime-1.jpg?ssl=1"/>
+                      <img src="https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/09/avatar-anime-1.jpg?ssl=1" />
                     </Avatar>
                   }
                   action={
                     <IconButton aria-label="settings" children="Add to cart">
-
                       <MoreVertIcon />
                     </IconButton>
                   }
@@ -99,11 +98,12 @@ const BlogPost = (props) => {
                   subheader="Ngày đăng: 11/03/2023"
                   subheaderTypographyProps={{ style: { color: "#f78411" } }}
                 />
+
                 <Link to={`/blogdetail/${post.id}`}>
                   <CardMedia
                     component="img"
                     style={{ height: 200, margin: 0 }}
-                    image={post.img.url || defaultImage}
+                    image={post.img[0].url || defaultImage}
                     alt="Paella dish"
                   />
                 </Link>
