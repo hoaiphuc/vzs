@@ -41,14 +41,17 @@ const Search = () => {
     <>
       <section className='search'>
         <div className='container c_flex'>
-          <div className='logo width '>
+          <div className='logo width'>
+            <Link to='/'>
             <img src={logo} alt='' />
+            </Link>
+            
           </div>
 
           <div className='search-box f_flex'>
-            <i className='fa fa-search'></i>
+            <div className="search-icon"><i className='fa fa-search'></i></div>
             <input type='text' placeholder='Nhập từ khóa cần tìm' />
-            <span>Loại</span>
+            <span>Chọn loại</span>
           </div>
 
           <div className='icon f_flex width'>

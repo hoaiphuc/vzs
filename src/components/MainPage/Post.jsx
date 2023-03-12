@@ -22,6 +22,7 @@ const Post = ({ inputs, title, cates }) => {
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState([]);
   const [isCreated, setIsCreated] = useState(false);
+  const currentUser = useAuth();
 
   const optionList = cates.map((option) => (
     <option key={option.id} value={option.value}>
@@ -79,6 +80,7 @@ const Post = ({ inputs, title, cates }) => {
         price: price,
         title: titleInput
       }
+      console.log('Data: ', data)
       dispatch(addNewPost(data)).then(result => {
         if (result) {
           setIsCreated(false);

@@ -15,19 +15,25 @@
 /*------search-----------*/
 .search {
   padding: 20px 0;
+  background: linear-gradient(to right, #b1fc03, #78eb46);
 }
 .search .logo img {
-  width: auto;
+  width: 100%;
   height: auto;
 }
 .search .width {
   width: 20%;
 }
+.search-icon{
+  
+}
 .search-box {
-  width: 80%;
-  border: 2px solid rgba(0, 0, 0, 0.1);
+  width: 50%;
+  border: 2px solid #eaf5e9;
   /*padding: 10px;*/
-  border-radius: 50px;
+  border-radius: 10px;
+  box-shadow: 0px 0px 10px 0.5px rgba(0, 0, 0, 0.5);
+  
 }
 .search-box i {
   width: 5%;
@@ -88,9 +94,11 @@
 .catgrories h4 i {
   margin-left: 10px;
 }
+
 header {
   height: 8vh;
   box-shadow: -1px 15px 17px -8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, #b1fc03, #78eb46);
 }
 header ul {
   line-height: 8vh;
@@ -110,7 +118,7 @@ header ul li a:hover {
 .open {
   display: none;
 }
-.search.active {
+/* .search.active {
   height: 12vh;
   position: fixed;
   top: 0;
@@ -119,7 +127,7 @@ header ul li a:hover {
   background-color: #fff;
   box-shadow: -1px 11px 24px -11px rgba(0, 0, 0, 0.2);
   transition: 0.5s;
-}
+} */
 
 @media (max-width: 768px) {
   header ul {

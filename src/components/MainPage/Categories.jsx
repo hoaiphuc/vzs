@@ -86,7 +86,7 @@ const Categories = () => {
 
   
   return (
-    <div className="">
+    <>
       {/* <h1>Select Fruits</h1>
       <pre>{JSON.stringify(selected)}</pre> */}
       <MultiSelect
@@ -97,7 +97,7 @@ const Categories = () => {
         labelledBy={"Select"}
         
       />
-    </div>
+    </>
   );
 }
 
