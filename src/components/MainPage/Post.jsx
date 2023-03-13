@@ -103,6 +103,7 @@ const Post = ({ inputs, title, cates }) => {
   const currentStates = currentPlace?.states || [];
   const currentBlock =
     currentStates.find((s) => s.name === state)?.cities || [];
+  const user = JSON.parse(localStorage.getItem('user'))
 
   const optionList = cates.map((option) => (
     <option key={option.id} value={option.value}>
@@ -161,7 +162,7 @@ const Post = ({ inputs, title, cates }) => {
         categoryId: selectedOption,
         description: description,
         productName: productName,
-        userId: "dsadsadasdsadasd",
+        userId: user.id,
         price: price,
         title: titleInput,
       };

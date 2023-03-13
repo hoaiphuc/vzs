@@ -103,7 +103,7 @@ const BlogPost = (props) => {
                   <CardMedia
                     component="img"
                     style={{ height: 200, margin: 0 }}
-                    image={post.img[0].url || defaultImage}
+                    image={post.img[0]?.url || defaultImage}
                     alt="Paella dish"
                   />
                 </Link>
