@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, createSelector } from '@reduxjs/toolkit';
 import { getCategories, createCategory, deleteCategory } from '../services/category.service';
 
 const initialState = {
@@ -65,3 +65,13 @@ const categoriesSlice = createSlice({
 });
 
 export default categoriesSlice.reducer;
+
+export const selectAllCategory = createSelector(
+  (state) => state.category.categories,
+  (categories) => {
+    if (Array.isArray(categories)) {
+      return categories;
+    }
+    return [];
+  }
+);
