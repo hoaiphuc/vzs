@@ -12,7 +12,7 @@ const GetPost = () => {
     //         })
 
     useEffect(() => {
-        axios.get('https://secondhandvinhome.herokuapp.com/api/post/getall').
+        axios.get('https://secondhandvinhome.herokuapp.com/api/post').
             then(function (response) {
                 console.log(response.data);
                 const { post } = response.data;

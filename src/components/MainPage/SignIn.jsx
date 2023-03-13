@@ -6,14 +6,20 @@ import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../../context/AuthContext'
 import googleLogo from '../../../src/assets/img/google.svg';
 import { loginAPI } from '../../common/axios/signinAxios'
+import { getRole } from '../../common/axios/authorizeAxios'
+
 const SignIn = () => {
     const googleAuth = new GoogleAuthProvider();
     const loginGG = async () => {
         const result = await signInWithPopup(auth, googleAuth);
+        const role = null;
         const token = result.user.getIdToken().then((token) => {
             loginAPI(token).then(data => {
-                console.log(data)
+                getRole(data).then(role => {
+                    role = role
+                })
             })
+            console.log(role);
             console.log("token: ", token)
         })
         navigate('/profile')
