@@ -55,7 +55,6 @@ export async function upload(file, currentUser, setLoading) {
 
 export async function uploadImgPost(files, setLoading, setPhotoURL, setIsCreated) {
   setLoading(true);
-  console.log("filelelelele: ", files);
   const urls = [];
   try {
     for (let i = 0; i < files.length; i++) {

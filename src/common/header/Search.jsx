@@ -1,9 +1,11 @@
 import React, { useState } from "react"
+import { useDispatch } from 'react-redux';
 import logo from "../../components/assets/images/logo.svg"
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../context/AuthContext'
 import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
+import { logout } from '../../common/feartures/authSlice';
 
 const Search = () => {
   // fixed Header
@@ -11,6 +13,8 @@ const Search = () => {
     const search = document.querySelector(".search")
     search.classList.toggle("active", window.scrollY > 100)
   })
+
+  const dispatch = useDispatch();
 
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -25,12 +29,12 @@ const Search = () => {
   const open = Boolean(anchorEl);
   const id = open ? 'user-menu-popover' : undefined;
 
-  const { user, logout } = UserAuth();
+  const { user } = UserAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      await logout();
+      await dispatch(logout());
       navigate('/')
       console.log('you are logged out');
     } catch (e) {
