@@ -1,24 +1,36 @@
 // import axios from 'axios'
-import { signInWithPopup, GoogleAuthProvider } from 'firebase/auth'
-import { auth } from '../firebase'
-import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import React, { useEffect, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { UserAuth } from '../../context/AuthContext'
 import googleLogo from '../../../src/assets/img/google.svg';
-import { loginAPI } from '../../common/axios/signinAxios'
+import { loginGoogle } from '../../common/feartures/authSlice';
+
 const SignIn = () => {
-    const googleAuth = new GoogleAuthProvider();
+    const isAuthenticated = localStorage.getItem('user') ? true : false
+    const dispatch = useDispatch();
+    // const googleAuth = new GoogleAuthProvider();
     const loginGG = async () => {
-        const result = await signInWithPopup(auth, googleAuth);
-        const token = result.user.getIdToken().then((token) => {
-            loginAPI(token).then(data => {
-                console.log(data)
-            })
-            console.log("token: ", token)
-        })
-        navigate('/profile')
+        if (isAuthenticated) {
+            navigate('/profile')
+        } else {
+            await dispatch(loginGoogle())
+        }
+        // if (isAuthenticated) {
+        //     navigate('/profile')
+        // }
+        // isAuthenticated && console.log("isAuthenticated: ", isAuthenticated)
+
+        // const result = await signInWithPopup(auth, googleAuth);
+        // const token = result.user.getIdToken().then((token) => {
+        //     loginAPI(token).then(data => {
+        //         console.log(data)
+        //     })
+        //     console.log("token: ", token)
+        // })
+        // navigate('/profile')
     }
-  
+
     //login gmail password
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')

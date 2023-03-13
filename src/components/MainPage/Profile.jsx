@@ -5,22 +5,15 @@ import { Button, Card, Container, Row, Col } from "reactstrap";
 import ChangeAvatarProfile from "./ChangeAvatarProfile";
 import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../context/AuthContext'
+import { logout } from "../../common/feartures/authSlice";
 
 
 const Profile = () => {
 
-  const { user, logout } = UserAuth();
+  const user = JSON.parse(localStorage.getItem('user'))
+  console.log("úeasrfasdasd:", user)
   const navigate = useNavigate();
 
-  const handleLogout = async () => {
-    try {
-      await logout();
-      navigate('/')
-      console.log('you are logged out');
-    } catch (e) {
-      console.log(e.message)
-    }
-  }
 
   return (
     <div className="my-10 mx-10" style={{ backgroundColor: '#e89015', borderRadius: '20px' }}>
@@ -50,7 +43,7 @@ const Profile = () => {
                 <Col
                   className="text-center order-lg-1 mt-5" lg="4"
                 >
-                  <div style={{ fontSize: '35px' }}>{user.displayName}</div>
+                  <div style={{ fontSize: '35px' }}>{user.fullName}</div>
                   <div className="d-flex justify-content-center mt-10">
                     <div className="border border-4 border-warning px-7 py-3 mx-2" style={{ borderRadius: '60px' }}>
                       <span className="heading">22 </span>

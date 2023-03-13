@@ -4,10 +4,12 @@ import { UserAuth } from '../../context/AuthContext'
 
 const ProtectedRoutes = ({children}) => {
     const { user } = UserAuth()
+    const isAuthenticated = localStorage.getItem('user')? true: false
 
-    if (!user) {
+    if (!isAuthenticated) {
         return <Navigate to='/Signin' />
     } 
+    console.log(user);
     return children
 }
 
