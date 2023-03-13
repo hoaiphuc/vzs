@@ -22,6 +22,7 @@ const [user, setUser] = useState({})
     }
 
     const logout = () => {
+        localStorage.removeItem('user')
         return signOut(auth)
     }
 
