@@ -8,6 +8,7 @@ const ProtectedRoutes = ({children}) => {
     if (!user) {
         return <Navigate to='/Signin' />
     } 
+    console.log(user);
     return children
 }
 

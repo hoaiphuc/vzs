@@ -12,16 +12,17 @@ const SignIn = () => {
     const googleAuth = new GoogleAuthProvider();
     const loginGG = async () => {
         const result = await signInWithPopup(auth, googleAuth);
-        const role = null;
+        let roleCurrent = null;
         const token = result.user.getIdToken().then((token) => {
             loginAPI(token).then(data => {
-                getRole(data).then(role => {
-                    role = role
+                getRole(data.acesstoken).then(role => {
+                    roleCurrent = role
+                    console.log(roleCurrent);
                 })
             })
-            console.log(role);
             console.log("token: ", token)
         })
+        
         navigate('/profile')
     }
   
