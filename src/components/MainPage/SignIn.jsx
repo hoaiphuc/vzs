@@ -12,9 +12,11 @@ const SignIn = () => {
     // const googleAuth = new GoogleAuthProvider();
     const loginGG = async () => {
         if (isAuthenticated) {
-            navigate('/profile')
+            navigate('/')
         } else {
             await dispatch(loginGoogle())
+            navigate('/')
+
         }
         // if (isAuthenticated) {
         //     navigate('/profile')
