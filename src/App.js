@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import "./App.css"
+import "./components/MainPage/BlogPost/BlogPost.css"
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom"
 import Header from "./common/header/Header"
 import Pages from "./pages/Pages"

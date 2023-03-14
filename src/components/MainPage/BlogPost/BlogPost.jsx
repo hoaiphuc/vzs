@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-// import './BlogPost.css';
+// import "./BlogPost.css";
 import GetPost from "../../../common/axios/getPostsAxios";
 import { Card, CardMedia, CardContent, CardActions } from "@mui/material";
 import { Typography } from "@mui/material";
@@ -66,87 +66,98 @@ const BlogPost = (props) => {
 
   console.log("Posts: ", posts);
   return (
-    <Container maxWidth="lg" sx={{ marginTop: "2rem" }}>
-      <Grid
-        container
-        spacing={2}
-        direction="row"
-        justify="flex-start"
-        alignItems="flex-start"
-      >
-        {posts &&
-          posts.map((post) => (
-            <Grid item xs={12} sm={6} md={3} key={posts.indexOf(post)}>
-              <Card className="card-item" sx={{ maxWidth: 345 }}>
-                <CardHeader
+    <div className="containerHome">
+      <Container maxWidth="" sx={{ }}>
+        <Grid
+          container
+          spacing={2}
+          direction="row"
+          justify="flex-start"
+          alignItems="flex-start"
+        >
+          {posts &&
+            posts.map((post) => (
+              <Grid item xs={12} sm={6} md={3} key={posts.indexOf(post)}>
+                <Card
+                  className="card-item"
+                  sx={{ maxWidth: 345 }}
                   style={{
-                    background: "linear-gradient(to right, #b1fc03, #78eb46)",
+                    borderRadius: "20px",
+                    boxShadow: '2px 2px 25px -7px #4c4c4c',
+                    transition: 'transform 0.4s ease-in-out'
                   }}
-                  avatar={
-                    <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      <img src={post.userId}/>
-                    </Avatar>
-                  }
-                  action={
-                    <IconButton aria-label="settings" children="Add to cart">
-                      <MoreVertIcon />
-                    </IconButton>
-                  }
-                  title={
-                    post.title.length < 15
-                      ? post.title
-                      : post.title.slice(0, 15) + "..."
-                  }
-                  titleTypographyProps={{ style: { fontWeight: "bold" } }}
-                  subheader="Ngày đăng: 11/03/2023"
-                  subheaderTypographyProps={{ style: { color: "#f78411" } }}
-                />
-
-                <Link to={`/blogdetail/${post.id}`}>
-                  <CardMedia
-                    component="img"
-                    style={{ height: 200, margin: 0 }}
-                    image={post.img[0]?.url || defaultImage}
-                    alt="Paella dish"
+                >
+                  <CardHeader
+                    style={
+                      {
+                        // background: "linear-gradient(to right, #b1fc03, #78eb46)",
+                      }
+                    }
+                    avatar={
+                      <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
+                        <img src={post.img[0]?.url || defaultImage} />
+                      </Avatar>
+                    }
+                    action={
+                      <IconButton aria-label="settings" children="Add to cart">
+                        <MoreVertIcon />
+                      </IconButton>
+                    }
+                    title={
+                      post.title.length < 15
+                        ? post.title
+                        : post.title.slice(0, 15) + "..."
+                    }
+                    titleTypographyProps={{ style: { fontWeight: "bold", fontSize: '15px' } }}
+                    subheader="Đã đăng 1 tiếng trước"
+                    subheaderTypographyProps={{ style: { color: "#a8a8a8", fontStyle: 'italic' } }}
                   />
-                </Link>
 
-                <CardContent>
-                  <Typography variant="body2" color="text.secondary">
-                    {post.description < 32
-                      ? post.description
-                      : post.description.slice(0, 32) + "..."}
-                  </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                  <IconButton
-                    onClick={() => handleFavoriteClick(post.id)}
-                    aria-label="add to favorites"
-                  >
-                    {favoriteProducts.includes(post.id) ? (
-                      <FavoriteIcon style={{ color: "red" }} />
-                    ) : (
-                      <FavoriteBorderIcon />
-                    )}
-                  </IconButton>
-                  <IconButton aria-label="share">
-                    <ShareIcon />
-                  </IconButton>
-                  <IconButton
-                    aria-label="buy"
-                    href={`/blogdetail/${post.id}`}
-                    id={post.id}
-                  >
-                    <i className="fa-solid fa-cart-shopping"></i>
-                  </IconButton>
-                  <button className="care--btn">Quan tâm</button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-      </Grid>
+                  <Link to={`/blogdetail/${post.id}`}>
+                    <CardMedia
+                      component="img"
+                      style={{ height: 200, margin: 0 }}
+                      image={post.img[0]?.url || defaultImage}
+                      alt="Paella dish"
+                    />
+                  </Link>
 
-      {/* <div>
+                  <CardContent>
+                    <Typography variant="body2" color="text.secondary">
+                      {post.description.length < 25
+                        ? post.description
+                        : post.description.slice(0, 25) + "..."}
+                    </Typography>
+                  </CardContent>
+                  <CardActions disableSpacing>
+                    <IconButton
+                      onClick={() => handleFavoriteClick(post.id)}
+                      aria-label="add to favorites"
+                    >
+                      {favoriteProducts.includes(post.id) ? (
+                        <FavoriteIcon style={{ color: "red" }} />
+                      ) : (
+                        <FavoriteBorderIcon />
+                      )}
+                    </IconButton>
+                    <IconButton aria-label="share">
+                      <ShareIcon />
+                    </IconButton>
+                    <IconButton
+                      aria-label="buy"
+                      href={`/blogdetail/${post.id}`}
+                      id={post.id}
+                    >
+                      <i className="fa-solid fa-cart-shopping"></i>
+                    </IconButton>
+                    <button className="care--btn">Quan tâm</button>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+        </Grid>
+
+        {/* <div>
 
         <ReactPaginate
           previousLabel={'previous'}
@@ -158,7 +169,8 @@ const BlogPost = (props) => {
           onPageChange={handlePageClick}
         />
       </div> */}
-    </Container>
+      </Container>
+    </div>
   );
 };
 

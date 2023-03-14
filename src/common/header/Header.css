@@ -15,8 +15,7 @@
 /*------search-----------*/
 .search {
   padding: 20px 0;
-  background: linear-gradient(to right, #b1fc03, #78eb46);
-}
+  background: linear-gradient(to right, #66FF00, #7FFF00);}
 .search .logo img {
   width: 100%;
   height: auto;
@@ -103,7 +102,7 @@
 header {
   height: 8vh;
   box-shadow: -1px 15px 17px -8px rgba(0, 0, 0, 0.1);
-  background: linear-gradient(to right, #b1fc03, #78eb46);
+  background: linear-gradient(to right, #66FF00, #7FFF00);
 }
 header ul {
   line-height: 8vh;
