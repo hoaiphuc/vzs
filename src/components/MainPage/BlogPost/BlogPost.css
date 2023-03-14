@@ -10,10 +10,10 @@
   font-weight: 500;
   letter-spacing: 1.3px;
   color: #fff;
-  background-color: #4bd036;
+  background: linear-gradient(rgb(66, 230, 149), rgb(59, 178, 184));
   box-shadow: 2px 2px 25px -7px #4c4c4c;
   cursor: pointer;
-  transition: transform 0.2s ease-in-out;
+  transition: transform 0.4s ease-in-out;
 }
 
 .care--btn:hover {

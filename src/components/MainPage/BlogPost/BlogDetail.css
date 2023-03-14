@@ -1,7 +1,7 @@
 /* ----- Product Section ----- */
-.containerHome{
+/* .containerHome{
     background-color: #e4f5cb;
-}
+} */
 .productt {
     display: grid;
     grid-template-columns: 1.1fr 1fr;
@@ -79,20 +79,20 @@
   }
   
   .photo-album ul li {
-    float: left;
-    width: 55px;
-    height: 55px;
-    padding: 7px;
+  
+    width: 60px;
+    height: 60px;
     border: 1px solid #a6a6a6;
-    border-radius: 3px;
+    border-radius: 2px;
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
   .photo-album li:hover{
-    border: 1px solid #e49e11;
+    border: 2px solid #5ae040;
   }
+  
   
   
   

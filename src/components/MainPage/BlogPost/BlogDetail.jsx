@@ -6,6 +6,7 @@ import { uuidv4 } from "@firebase/util";
 import ZaloPopup from "./ZaloPopup";
 import "./BlogDetail.css";
 import { Loading, Spacer } from "@nextui-org/react";
+import { CardMedia } from "@mui/material";
 
 function BlogDetail(props) {
   const { id } = useParams();
@@ -48,17 +49,23 @@ function BlogDetail(props) {
   }
 
   return (
-    <div style={{ display: "grid", height: "100%", background: "#e4f5cb" }}>
+    <div style={{height: "100%" }}>
       <link rel="stylesheet" type="text/css" href="BlogDetail.css" />
       <section className="productt">
         <div className="product__photo">
           <div className="photo-container">
-            <div className="photo-main">
-              <img
+           
+              {/* <img
                 src={!currentImage ? post.img[0]?.url : currentImage}
                 alt="green apple slice"
-              />
-            </div>
+              /> */}
+               <CardMedia
+                      component="img"
+                      style={{ height: 500, margin: 0 }}
+                      image={!currentImage ? post.img[0]?.url : currentImage || defaultImage}
+                      alt="Paella dish"
+                    />
+            
             <div className="photo-album">
               <ul>
                 {post.img.map((img) => (
@@ -106,5 +113,7 @@ function BlogDetail(props) {
     </div>
   );
 }
+
+
 
 export default BlogDetail;

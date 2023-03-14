@@ -34,6 +34,7 @@ export default function HeaderClient() {
     <Layout>
       <Navbar isBordered variant="sticky">
         <Navbar.Brand css={{ mr: "$4" }}>
+          
           <AcmeLogo />
           
           <Navbar.Content hideIn="xs" variant="highlight">

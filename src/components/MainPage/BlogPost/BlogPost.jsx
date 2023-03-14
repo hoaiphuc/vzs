@@ -89,11 +89,11 @@ const BlogPost = (props) => {
               <Grid item xs={12} sm={6} md={3} key={posts.indexOf(post)}>
                 <Card
                   className="card-item"
-                  sx={{ maxWidth: 345 }}
+                  sx={{ maxWidth: 400 }}
                   style={{
                     borderRadius: "20px",
-                    boxShadow: "2px 2px 25px -7px #4c4c4c",
-                    transition: "transform 0.4s ease-in-out",
+                    boxShadow: 'rgba(0, 0, 0, 0.25) 0px 14px 28px',
+                    transition: "transform 0.5s ease-in-out",
                   }}
                 >
                   <CardHeader
