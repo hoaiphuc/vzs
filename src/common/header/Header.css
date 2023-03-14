@@ -31,7 +31,7 @@
   width: 50%;
   border: 2px solid #eaf5e9;
   /*padding: 10px;*/
-  border-radius: 10px;
+  border-radius: 5px;
   box-shadow: 0px 0px 10px 0.5px rgba(0, 0, 0, 0.5);
   
 }
@@ -46,15 +46,20 @@
 .search-box input {
   width: 100%;
   padding: 10px;
+  border-radius: 10px;
+  margin: 2px 5px;
 }
 ::placeholder {
   font-size: 15px;
 }
 .search-box span {
   width: 20%;
-  opacity: 0.5;
+  text-align: center;
   border-left: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
   padding: 10px;
+  background: #ffffff;
+  margin: 2px 5px;
 }
 .cart {
   position: relative;

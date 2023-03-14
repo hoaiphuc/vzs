@@ -62,6 +62,7 @@ const BlogPost = (props) => {
   const handlePageClick = (posts) => {
     console.log(posts.selected);
   };
+  // const user = JSON.parse(localStorage.getItem('user'))
 
   console.log("Posts: ", posts);
   return (
@@ -83,7 +84,7 @@ const BlogPost = (props) => {
                   }}
                   avatar={
                     <Avatar sx={{ bgcolor: red[500] }} aria-label="recipe">
-                      <img src="https://i0.wp.com/thatnhucuocsong.com.vn/wp-content/uploads/2022/09/avatar-anime-1.jpg?ssl=1" />
+                      <img src={post.userId}/>
                     </Avatar>
                   }
                   action={

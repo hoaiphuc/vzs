@@ -3,15 +3,26 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { Col, Row } from "reactstrap";
 import { uuidv4 } from "@firebase/util";
+import ZaloPopup from "./ZaloPopup";
+
+
 function BlogDetail(props) {
   const { id } = useParams();
   const [post, setPost] = useState();
   const [urlList, setUrlList] = useState([]);
   const [currentImage, setCurrentImage] = useState();
-
+  const [phone, setPhone] = useState('0334416510')
   // setCurrentImage(post.img[0].url)
   const defaultImage = "https://via.placeholder.com/300x300";
-
+  function formatCurrency(amount){
+    const amu = parseInt(amount)
+    const formattedAmount = amu.toLocaleString('en-US', {style: 'currency', currency: 'VND'});
+    return formattedAmount;
+  }
+  // const handleLinkClick = (props) => {
+  //   window.location.href = "https://zalo.me/"+props; // Thay your-link bằng link của bạn
+  // };
+  const linkZalo = "https://zalo.me/"+phone;
   const handleClick = (image) => {
     setCurrentImage(image);
   };
@@ -30,7 +41,7 @@ function BlogDetail(props) {
   if (!post) {
     return <div>Loading...</div>;
   }
-
+  
   return (
     <div style={{ display: "grid", height: "100%" }}>
       <link rel="stylesheet" type="text/css" href="BlogDetail.css" />
@@ -62,7 +73,7 @@ function BlogDetail(props) {
 
           {post.product.map((product) => (
             <div className="price">
-              VNĐ <span>{product.price}</span>
+              <span>{formatCurrency(product.price).replace(/,/g, '.')}</span>
             </div>
           ))}
 
@@ -78,10 +89,17 @@ function BlogDetail(props) {
               <li>{post.description}</li>
             </ul>
           </div>
+          <div className="contact">
           <button className="buy--btn">Quan tâm</button>
-          <button className="contact--btn">Liên hệ</button>
+          <a href={linkZalo}className="zalo-button">
+        <div className="zalo-icon" />
+        LH Zalo
+      </a>
+          </div>
+          
         </div>
       </section>
+      
     </div>
   );
 }

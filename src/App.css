@@ -344,7 +344,7 @@ img {
   position: relative;
   border-radius: 6px 6px 0 0;
   background-color: #9be010;
-  background: radial-gradient(#e5f89e, #e49e11);
+  background: radial-gradient(#e9ebe5, #c3bbab);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -361,7 +361,7 @@ img {
   z-index: 2;
 }
 
-.photo-main:hover img {
+.photo-main:active img {
   z-index: 2;
   transform: scale(1.4);
 
@@ -432,6 +432,7 @@ img {
 .price span {
   padding-left: 0.15em;
   font-size: 2.9em;
+  color: #4c4c4c;
 }
 
 
@@ -508,17 +509,26 @@ img {
   background-color: #4bd036;
   box-shadow: 2px 2px 25px -7px #4c4c4c;
   cursor: pointer;
+  transition: transform 0.2s ease-in-out;
 
   /* &:active {
 		transform: scale(0.97);
 	} */
 }
-
+.buy--btn:hover {
+  transform: scale(1.1);
+}
 .buy--btn:active {
   transform: scale(0.97);
 }
+.contact {
+  display: flex;
+  
+  align-items: center;
 
-.contact--btn {
+}
+
+/* .contact--btn {
   margin-left: 10px;
   padding: 1.5em 3.1em;
   border: none;
@@ -530,11 +540,15 @@ img {
   background-color: #e49e11;
   box-shadow: 2px 2px 25px -7px #4c4c4c;
   cursor: pointer;
-}
+  transition: transform 0.2s ease-in-out;
 
+}
+.contact--btn:hover {
+  transform: scale(1.2);
+}
 .contact--btn:active {
   transform: scale(0.97);
-}
+} */
 
 .care--btn{
   margin-left: 20px;
@@ -559,3 +573,34 @@ img {
   transform: scale(0.9);
 }
 
+.zalo-button {
+  margin-left: 20px;
+  background-color: #448aff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  padding: 9px 20px;
+  display: flex;
+  align-items: center;
+  border-radius: 7px;
+  box-shadow: 2px 2px 25px -7px #4c4c4c;
+  transition: transform 0.2s ease-in-out;
+
+}
+.zalo-button:hover {
+  transform: scale(1.1);
+}
+
+.zalo-button:active {
+  transform: scale(0.97);
+}
+
+.zalo-icon {
+  width: 40px;
+  height: 40px;
+  margin: 0 5px;
+  background-image: url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Icon_of_Zalo.svg/2048px-Icon_of_Zalo.svg.png');
+  background-size: contain;
+  background-repeat: no-repeat;
+}

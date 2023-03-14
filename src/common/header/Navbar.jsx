@@ -12,7 +12,7 @@ const Navbar = () => {
       <header className='header'>
         <div className='container d_flex'>
           <div className="ml-2" style={{ width: '20%' }}>
-            <Categories />
+            {/* <Categories /> */}
           </div>
 
           <div className='navlink'>

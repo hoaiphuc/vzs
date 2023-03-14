@@ -19,6 +19,7 @@ import UserTable from "./components/MainPage/admin/User"
 import { messaging } from "./components/firebase";
 import { getToken } from "firebase/messaging";
 import 'bootstrap/dist/css/bootstrap.min.css';
+// import myPost from './components/MainPage/postScript'
 import Post from "./components/MainPage/Post"
 import BlogDetail from "./components/MainPage/BlogPost/BlogDetail"
 import { inputPost, category, cates ,place } from "./formSource";
@@ -74,6 +75,7 @@ function App() {
           <Footer />
         </Router>
       </AuthContextProvider>
+      {/* <myPost/> */}
     </>
   )
 }
