@@ -34,7 +34,7 @@ const Profile = () => {
         <Container>
           <Card className="card-profile shadow mt-300 " style={{ borderRadius: '20px' }}>
             <div className="px-4">
-              <Row className="justify-content-center" style={{ width: '100%' }}>
+              <Row className="justify-content-center" style={{ width: '100%', paddingBottom: '30px' }}>
                 <Col className="text-center order-lg-1" lg="3">
                   <div className="card-profile-image">
                     <ChangeAvatarProfile />
@@ -67,7 +67,7 @@ const Profile = () => {
                   <div>-------------------------</div>
                 </Col>
               </Row>
-              <div className="text-center mt-5">
+              {/* <div className="text-center mt-5">
                 <h3>
                   Jessica Jones{" "}
                   <span className="font-weight-light">, 27</span>
@@ -101,7 +101,7 @@ const Profile = () => {
                     </a>
                   </Col>
                 </Row>
-              </div>
+              </div> */}
             </div>
           </Card>
         </Container>

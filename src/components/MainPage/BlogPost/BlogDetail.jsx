@@ -5,6 +5,7 @@ import { Col, Row } from "reactstrap";
 import { uuidv4 } from "@firebase/util";
 import ZaloPopup from "./ZaloPopup";
 import "./BlogDetail.css";
+import { Loading, Spacer } from "@nextui-org/react";
 
 function BlogDetail(props) {
   const { id } = useParams();
@@ -42,7 +43,8 @@ function BlogDetail(props) {
   console.log("Url List: ", urlList);
   console.log("Post: ", post);
   if (!post) {
-    return <div>Loading...</div>;
+    return <div style={{display: 'flex', textAlign: 'center', justifyContent: 'center', padding: '300px'}}><Loading size="xl" />
+    <Spacer /></div>;
   }
 
   return (

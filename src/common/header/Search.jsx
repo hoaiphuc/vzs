@@ -43,7 +43,7 @@ const Search = () => {
   }
   const handleLogin = async () => {
     try {
-      navigate('/signin')
+      navigate('/Signin')
     } catch (e) {
       console.log(e.message)
     }

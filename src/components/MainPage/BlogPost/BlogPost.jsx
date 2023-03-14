@@ -22,6 +22,8 @@ import {
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import { fetchCategories } from "../../../common/feartures/categorySlice";
+import { Loading, Spacer } from "@nextui-org/react";
+
 const defaultImage = "https://via.placeholder.com/300x300";
 
 const BlogPost = (props) => {
@@ -42,7 +44,7 @@ const BlogPost = (props) => {
   // );
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
-
+  
   const [favoriteProducts, setFavoriteProducts] = useState([]);
 
   const handleFavoriteClick = (productId) => {
@@ -55,6 +57,9 @@ const BlogPost = (props) => {
     }
     setFavoriteProducts(updatedFavorites);
   };
+
+
+  
   useEffect(() => {
     dispatch(fetchAllPosts());
     dispatch(fetchCategories());
@@ -64,10 +69,14 @@ const BlogPost = (props) => {
   };
   // const user = JSON.parse(localStorage.getItem('user'))
 
+  if (!posts) {
+    return <div style={{display: 'flex', textAlign: 'center', justifyContent: 'center', padding: '300px'}}><Loading size="xl" />
+    <Spacer /></div>;
+  }
   console.log("Posts: ", posts);
   return (
-    <div className="containerHome">
-      <Container maxWidth="" sx={{ }}>
+    <div className="">
+      <Container maxWidth="" sx={{marginTop: '30px'}}>
         <Grid
           container
           spacing={2}
@@ -83,8 +92,8 @@ const BlogPost = (props) => {
                   sx={{ maxWidth: 345 }}
                   style={{
                     borderRadius: "20px",
-                    boxShadow: '2px 2px 25px -7px #4c4c4c',
-                    transition: 'transform 0.4s ease-in-out'
+                    boxShadow: "2px 2px 25px -7px #4c4c4c",
+                    transition: "transform 0.4s ease-in-out",
                   }}
                 >
                   <CardHeader
@@ -108,9 +117,13 @@ const BlogPost = (props) => {
                         ? post.title
                         : post.title.slice(0, 15) + "..."
                     }
-                    titleTypographyProps={{ style: { fontWeight: "bold", fontSize: '15px' } }}
+                    titleTypographyProps={{
+                      style: { fontWeight: "bold", fontSize: "15px" },
+                    }}
                     subheader="Đã đăng 1 tiếng trước"
-                    subheaderTypographyProps={{ style: { color: "#a8a8a8", fontStyle: 'italic' } }}
+                    subheaderTypographyProps={{
+                      style: { color: "#a8a8a8", fontStyle: "italic" },
+                    }}
                   />
 
                   <Link to={`/blogdetail/${post.id}`}>
