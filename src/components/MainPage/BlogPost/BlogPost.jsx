@@ -21,6 +21,7 @@ import {
 } from "../../../common/feartures/postSlice";
 import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
+import { fetchCategories } from "../../../common/feartures/categorySlice";
 const defaultImage = "https://via.placeholder.com/300x300";
 
 const BlogPost = (props) => {
@@ -41,6 +42,7 @@ const BlogPost = (props) => {
   // );
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
+
   const [favoriteProducts, setFavoriteProducts] = useState([]);
 
   const handleFavoriteClick = (productId) => {
@@ -53,9 +55,9 @@ const BlogPost = (props) => {
     }
     setFavoriteProducts(updatedFavorites);
   };
-
   useEffect(() => {
     dispatch(fetchAllPosts());
+    dispatch(fetchCategories());
   }, [dispatch]);
   const handlePageClick = (posts) => {
     console.log(posts.selected);

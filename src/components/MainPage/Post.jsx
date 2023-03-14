@@ -1,6 +1,6 @@
 import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { category } from "../../formSource";
 import "./post.css";
 import Select from "react-select";
@@ -8,6 +8,7 @@ import { Button, Card, Container, Row, Col } from "reactstrap";
 import { addNewPost } from "../../common/feartures/postSlice";
 import { uploadImgPost, useAuth } from "../firebase";
 import { place } from "../../formSource";
+import { selectAllCategory } from "../../common/feartures/categorySlice";
 
 const Post = ({ inputs, title, cates }) => {
   const [file, setFile] = useState([]);
@@ -28,70 +29,8 @@ const Post = ({ inputs, title, cates }) => {
     state: "",
     block: "",
   });
-
-  //   const countries  = [
-  //     { name :"choose your location"}
-  //   ,{ name :"S1",  states: [
-  //     {
-  //       cities: ['S101', 'S102','S103','S105','S106','S107']
-  //     }
-
-  //   ]
-  // },{ name :"S2",  states: [
-  //   {
-  //     cities: ['S101', 'S102','S103','S105','S106','S107']
-  //   }
-
-  // ]
-  // },{ name :"S3",  states: [
-  //   {
-  //     cities: ['S101', 'S102','S103','S105','S106','S107']
-  //   }
-
-  // ]
-  // },{ name :"S5",  states: [
-  //   {
-  //     cities: ['S101', 'S102','S103','S105','S106','S107']
-  //   }
-
-  // ]
-  // },{ name :"S6",  states: [
-  //   {
-  //     cities: ['S101', 'S102','S103','S105','S106','S107']
-  //   }
-
-  // ]
-  // }
-  // ,{ name :"S7",  states: [
-  //   {
-  //     cities: ['S101', 'S102','S103','S105','S106','S107']
-  //   }
-
-  // ]
-  // }
-  // ,{ name :"S8",  states: [
-  //   {
-  //     cities: ['S101', 'S102','S103','S105','S106','S107']
-  //   }
-
-  // ]
-  // }
-  // ,{ name :"S9",  states: [
-  //   {
-  //     cities: ['S101', 'S102','S103','S105','S106','S107']
-  //   }
-
-  // ]
-  // }
-  // ,{ name :"S10",  states: [
-  //   {
-  //     cities: ['S101', 'S102','S103','S105','S106','S107']
-  //   }
-
-  // ]
-  // }
-  //   ];
-
+  const categoryList = useSelector(selectAllCategory);
+  console.log("categoryList: ", categoryList)
   const { places, state, block } = selected;
 
   const handleSelectChangev1 = (event) => {
@@ -104,10 +43,10 @@ const Post = ({ inputs, title, cates }) => {
   const currentBlock =
     currentStates.find((s) => s.name === state)?.cities || [];
   const user = JSON.parse(localStorage.getItem('user'))
-
-  const optionList = cates.map((option) => (
-    <option key={option.id} value={option.value}>
-      {option.label}{" "}
+  const categories = JSON.parse(localStorage.getItem('categories'))
+  const optionList = categories.map((option) => (
+    <option key={option.id} value={option.id}>
+      {option.categoryName}
     </option>
   ));
 

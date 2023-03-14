@@ -39,7 +39,7 @@ function BlogDetail(props) {
           <div className="photo-container">
             <div className="photo-main">
               <img
-                src={!currentImage ? post.img[0].url : currentImage}
+                src={!currentImage ? post.img[0]?.url : currentImage}
                 alt="green apple slice"
               />
             </div>
@@ -47,7 +47,7 @@ function BlogDetail(props) {
               <ul>
                 {post.img.map((img) => (
                   <li>
-                    <img onClick={() => handleClick(img.url)} src={img.url} />
+                    <img onClick={() => handleClick(img?.url)} src={img?.url} />
                   </li>
                 ))}
               </ul>
