@@ -9,6 +9,7 @@ import { addNewPost } from "../../common/feartures/postSlice";
 import { uploadImgPost, useAuth } from "../firebase";
 import { place } from "../../formSource";
 import { selectAllCategory } from "../../common/feartures/categorySlice";
+import FormDialog from "./Popup/CreateCategoryModal";
 
 const Post = ({ inputs, title, cates }) => {
   const [file, setFile] = useState([]);
@@ -23,7 +24,15 @@ const Post = ({ inputs, title, cates }) => {
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState([]);
   const [isCreated, setIsCreated] = useState(false);
+  const [isOpenCreateCategoryPopup, setIsOpenCreateCategoryPopup] = useState(false);
 
+  const handleOpenPopup = () => {
+    setIsOpenCreateCategoryPopup(true);
+  };
+
+  const handleClosePopup = () => {
+    setIsOpenCreateCategoryPopup(false);
+  };
   const [selected, setSelected] = useState({
     places: "",
     state: "",
@@ -264,6 +273,7 @@ const Post = ({ inputs, title, cates }) => {
                   Post
                 </button>
               </form>
+             
             </div>
           </div>
         </div>

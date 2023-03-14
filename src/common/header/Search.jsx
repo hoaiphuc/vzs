@@ -5,7 +5,7 @@ import { Link, useNavigate } from 'react-router-dom';
 import { UserAuth } from '../../context/AuthContext'
 import Popover from '@mui/material/Popover';
 import Button from '@mui/material/Button';
-import { logout } from '../../common/feartures/authSlice';
+import { login, logout } from '../../common/feartures/authSlice';
 
 const Search = () => {
   // fixed Header
@@ -13,6 +13,7 @@ const Search = () => {
     const search = document.querySelector(".search")
     search.classList.toggle("active", window.scrollY > 100)
   })
+  const user = localStorage.getItem('user');
 
   const dispatch = useDispatch();
 
@@ -29,7 +30,6 @@ const Search = () => {
   const open = Boolean(anchorEl);
   const id = open ? 'user-menu-popover' : undefined;
 
-  const { user } = UserAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -37,6 +37,13 @@ const Search = () => {
       await dispatch(logout());
       navigate('/')
       console.log('you are logged out');
+    } catch (e) {
+      console.log(e.message)
+    }
+  }
+  const handleLogin = async () => {
+    try {
+      navigate('/signin')
     } catch (e) {
       console.log(e.message)
     }
@@ -81,7 +88,7 @@ const Search = () => {
                 <Button component={Link} to='/profile' sx={{ padding: '10px', minWidth: '150px' }}>Cá nhân</Button>
                 <Button component={Link} to='/mypost' sx={{ padding: '10px', minWidth: '150px' }}>Bài đăng</Button>
 
-                <Button sx={{ padding: '10px', minWidth: '150px' }} onClick={handleLogout}>Logout</Button>
+                {user ? <Button sx={{ padding: '10px', minWidth: '150px' }} onClick={handleLogout}>Logout</Button>:<Button sx={{ padding: '10px', minWidth: '150px' }} onClick={handleLogin}>Login</Button>}
                 </div>
               </Popover>
             </div>
