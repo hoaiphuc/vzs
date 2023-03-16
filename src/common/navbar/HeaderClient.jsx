@@ -6,12 +6,22 @@ import { useAuth } from "../../components/firebase.js";
 import { useDispatch } from "react-redux";
 import { logout } from "../feartures/authSlice.js";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function HeaderClient() {
+  const [photoURL, setPhotoURL] = useState('');
+
   const user = JSON.parse(localStorage.getItem("user"));
   const currentUser = useAuth();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  useEffect(()=> {
+    if (currentUser?.photoURL) {
+      setPhotoURL(currentUser.photoURL)
+    }
+  }, [currentUser])
 
   const handleLogout = async () => {
     try {
@@ -33,7 +43,7 @@ export default function HeaderClient() {
   return (
     <Layout>
       <Navbar isBordered variant="sticky">
-        <Navbar.Brand css={{ mr: "$4" }}>
+        <Navbar.Brand>
           
           <AcmeLogo />
           
@@ -42,8 +52,7 @@ export default function HeaderClient() {
               Trang chủ
             </Navbar.Link>
             <Navbar.Link href="/post">Đăng bài</Navbar.Link>
-            {/* <Navbar.Link href="#">Activity</Navbar.Link>
-            <Navbar.Link href="#">Settings</Navbar.Link> */}
+            
           </Navbar.Content>
         </Navbar.Brand>
         <Navbar.Content
@@ -90,14 +99,14 @@ export default function HeaderClient() {
                   bordered
                   as="button"
                   color="success"
-                  size="lg"
-                  src={user ? user.avatar : "https://cdn.lazi.vn/storage/uploads/users/avatar/1587962225_1585288013_anonymous_512.png"}
+                  size="xl"
+                  src={user ? photoURL : "https://api-private.atlassian.com/users/f3ba6e3feb7b6867012f05b2f873affb/avatar"}
                 />
               </Dropdown.Trigger>
             </Navbar.Item>
             <Dropdown.Menu
               aria-label="User menu actions"
-              color="secondary"
+              color="success"
               onAction={(actionKey) => console.log({ actionKey })}
             >
               {!user ? (
@@ -108,7 +117,7 @@ export default function HeaderClient() {
                     color="inherit"
                     css={{ d: "flex" }}
                   >
-                    Sign In
+                    Đăng nhập
                   </Text>
                 </Dropdown.Item>
               ) : (
@@ -131,7 +140,7 @@ export default function HeaderClient() {
               </Dropdown.Item>
               {user ? (
                 <Dropdown.Item key="logout" withDivider color="error">
-                  <div onClick={handleLogout}>Log Out</div>
+                  <div onClick={handleLogout}>Đăng xuất</div>
                 </Dropdown.Item>
               ) : (
                 ""

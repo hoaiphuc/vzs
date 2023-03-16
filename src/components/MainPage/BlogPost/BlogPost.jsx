@@ -76,7 +76,7 @@ const BlogPost = (props) => {
   console.log("Posts: ", posts);
   return (
     <div className="">
-      <Container maxWidth="" sx={{marginTop: '30px'}}>
+      <Container maxWidth="" sx={{marginTop: '50px'}}>
         <Grid
           container
           spacing={2}
@@ -92,7 +92,7 @@ const BlogPost = (props) => {
                   sx={{ maxWidth: 400 }}
                   style={{
                     borderRadius: "20px",
-                    boxShadow: 'rgba(0, 0, 0, 0.25) 0px 14px 28px',
+                    boxShadow: 'rgba(0, 0, 0, 0.25) 0px 54px 55px',
                     transition: "transform 0.5s ease-in-out",
                   }}
                 >

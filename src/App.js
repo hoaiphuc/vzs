@@ -26,6 +26,7 @@ import BlogDetail from "./components/MainPage/BlogPost/BlogDetail"
 import { inputPost, category, cates ,place } from "./formSource";
 //admin import
 import PostList from "./components/MainPage/admin/post"
+import MyPost from "./components/MainPage/MyPost"
 
 function App() {
   async function requestPermission() {
@@ -67,6 +68,7 @@ function App() {
             <Route path='/blogdetail/:id' element={<BlogDetail />} />
             <Route path='/uploadfileimage' element={<UploadFileImage />} />
             <Route path='/post' element={<ProtectedRoutes><Post inputs={inputPost} title="Post New Product" cates={cates}/></ProtectedRoutes>}/>
+            <Route path='/mypost' element={<MyPost />} />
             <Route path='/profile' element={<ProtectedRoutes><Profile /></ProtectedRoutes>} />
             <Route path='/admin' element={<UserTable />} />
             <Route path='/admin/post' element={<PostList />} />
