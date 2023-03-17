@@ -8,9 +8,11 @@ import { logout } from "../feartures/authSlice.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { ClassSharp } from "@mui/icons-material";
 
 export default function HeaderClient() {
   const [photoURL, setPhotoURL] = useState('');
+  // const user = typeof localStorage.getItem("user") === 'string' ? JSON.parse(localStorage.getItem("user")) : null;
 
   const user = JSON.parse(localStorage.getItem("user"));
   const currentUser = useAuth();
@@ -21,6 +23,8 @@ export default function HeaderClient() {
     if (currentUser?.photoURL) {
       setPhotoURL(currentUser.photoURL)
     }
+    console.log('user');
+
   }, [currentUser])
 
   const handleLogout = async () => {
