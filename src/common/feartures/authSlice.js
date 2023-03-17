@@ -7,6 +7,7 @@ const initialState = {
   isAuthenticated: !!localStorage.getItem('access_token'),
   accessToken: localStorage.getItem('access_token') || null,
   error: null,
+  user: null,
   loading: false,
 };
 
@@ -73,7 +74,7 @@ const authSlice = createSlice({
       })
       .addCase(loginGoogle.fulfilled, (state, action) => {
         state.isAuthenticated = true;
-        state.user = action.payload;
+        state.user = action.payload.data;
         state.loading = false;
       })
       .addCase(loginGoogle.rejected, (state, action) => {
@@ -98,6 +99,6 @@ const authSlice = createSlice({
 
 export default authSlice.reducer;
 export const currentuser = createSelector(
-  (state) => state.auth,
-  (auth) =>  auth
+  (state) => state.user,
+  (user) => user
 );

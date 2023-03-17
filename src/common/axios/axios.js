@@ -6,11 +6,9 @@ const API = axios.create({ baseURL: "https://secondhandvinhome.herokuapp.com/api
 //   });
   
   API.interceptors.request.use(async (req) => {
-    console.log(JSON.parse(localStorage.getItem("user")));
       req.headers.Authorization = `Bearer ${
         JSON.parse(localStorage.getItem("user"))
       }`;
-      console.log(req);
     return req;
   });
 

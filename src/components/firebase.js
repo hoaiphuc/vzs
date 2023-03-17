@@ -62,12 +62,9 @@ export async function uploadImgPost(files, setLoading, setPhotoURL, setIsCreated
       const fileRef = ref(storage, `images/${v4()}`);
       const snapshot = await uploadBytes(fileRef, file);
       const url = await getDownloadURL(snapshot.ref);
-      console.log("second: ", url);
       urls.push(url);
     }
-    console.log("first url", urls);
     const urlList = urls.map((url) => ({ url }));
-    console.log("urlList", urlList);
     // Update user's urlImageList with the uploaded image URLs
     if (urlList.length > 0) {
       setLoading(false);

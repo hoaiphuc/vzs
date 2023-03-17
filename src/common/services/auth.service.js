@@ -28,11 +28,9 @@ const authService = {
   },
   getCurrentUser: async (token) => {
     try {
-      console.log("token: ", token)
       const response = await axios.get(`${BASE_URL}/user/current`,{
         headers: { Authorization: `Bearer ${token}` },
       });
-      console.log("user: ", response)
       const user = response.data;
       localStorage.setItem('user', JSON.stringify(user));
       return user;
