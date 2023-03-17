@@ -31,10 +31,8 @@ export default function HeaderClient() {
   useEffect(() => {
     if (currentUser?.photoURL) {
       setPhotoURL(currentUser.photoURL)
-    console.log('user');
-
+    }
   }, [currentUser, user])
-  }, [currentUser])
 
   const handleLogout = async () => {
     try {
