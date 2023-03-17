@@ -5,7 +5,6 @@ const BASE_URL = 'https://secondhandvinhome.herokuapp.com/api';
 export const getCategories = async () => {
   try {
     const response = await axios.get(`${BASE_URL}/category`);
-    console.log("response: ", response)
     localStorage.setItem('categories', JSON.stringify(response.data.response))
     return response.data.response;
   } catch (error) {

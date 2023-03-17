@@ -9,7 +9,6 @@ import { addNewPost } from "../../common/feartures/postSlice";
 import { uploadImgPost, useAuth } from "../firebase";
 import { place } from "../../formSource";
 import { selectAllCategory } from "../../common/feartures/categorySlice";
-import FormDialog from "./Popup/CreateCategoryModal";
 
 const Post = ({ inputs, title, cates }) => {
   const [file, setFile] = useState([]);
@@ -39,7 +38,6 @@ const Post = ({ inputs, title, cates }) => {
     block: "",
   });
   const categoryList = useSelector(selectAllCategory);
-  console.log("categoryList: ", categoryList);
   const { places, state, block } = selected;
 
   const handleSelectChangev1 = (event) => {

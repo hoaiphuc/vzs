@@ -9,7 +9,6 @@ const ProtectedRoutes = ({children}) => {
     if (!isAuthenticated) {
         return <Navigate to='/Signin' />
     } 
-    console.log(user);
     return children
 }
 

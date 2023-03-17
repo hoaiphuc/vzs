@@ -41,8 +41,6 @@ function BlogDetail(props) {
       });
   }, [id]);
 
-  console.log("Url List: ", urlList);
-  console.log("Post: ", post);
   if (!post) {
     return <div style={{display: 'flex', textAlign: 'center', justifyContent: 'center', padding: '300px'}}><Loading size="xl" />
     <Spacer /></div>;

@@ -3,8 +3,8 @@ import { Layout } from "./Layout.js";
 import { AcmeLogo } from "./AcmeLogo.js";
 import { SearchIcon } from "./SearchIcon.js";
 import { useAuth } from "../../components/firebase.js";
-import { useDispatch } from "react-redux";
-import { logout } from "../feartures/authSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { currentuser, logout } from "../feartures/authSlice.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
@@ -13,15 +13,24 @@ export default function HeaderClient() {
   const [photoURL, setPhotoURL] = useState('');
 
   const user = JSON.parse(localStorage.getItem("user"));
+
+  const [activeLink, setActiveLink] = useState('/');
+
+  const current_User = useSelector(currentuser);
+
   const currentUser = useAuth();
+
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
-  useEffect(()=> {
+  useEffect(() => {
+  }, [current_User])
+  useEffect(() => {
     if (currentUser?.photoURL) {
       setPhotoURL(currentUser.photoURL)
     }
-  }, [currentUser])
+  }, [currentUser, user])
 
   const handleLogout = async () => {
     try {
@@ -40,19 +49,25 @@ export default function HeaderClient() {
     }
   };
 
+  const handleClick = (event, href) => {
+    event.preventDefault();
+    setActiveLink(href);
+    navigate(href);
+  };
   return (
     <Layout>
       <Navbar isBordered variant="sticky">
         <Navbar.Brand>
-          
+
           <AcmeLogo />
-          
+
           <Navbar.Content hideIn="xs" variant="highlight">
-            <Navbar.Link isActive href="/">
+            <Navbar.Link isActive={activeLink === '/' ? true : false} onClick={(event) => handleClick(event, '/')}>
               Trang chủ
             </Navbar.Link>
-            <Navbar.Link href="/post">Đăng bài</Navbar.Link>
-            
+            <Navbar.Link isActive={activeLink === '/post' ? true : false} onClick={(event) => handleClick(event, '/post')}>
+              Đăng bài
+            </Navbar.Link>
           </Navbar.Content>
         </Navbar.Brand>
         <Navbar.Content
@@ -78,7 +93,7 @@ export default function HeaderClient() {
               }
               contentLeftStyling={false}
               css={{
-                w: "100%",                 
+                w: "100%",
                 boxShadow: "2px 5px 25px -5px #878383",
                 "@xsMax": {
                   mw: "300px",
@@ -100,7 +115,7 @@ export default function HeaderClient() {
                   as="button"
                   color="success"
                   size="xl"
-                  src={user ? photoURL : "https://api-private.atlassian.com/users/f3ba6e3feb7b6867012f05b2f873affb/avatar"}
+                  src={current_User?.isAuthenticated ? photoURL : "https://api-private.atlassian.com/users/f3ba6e3feb7b6867012f05b2f873affb/avatar"}
                 />
               </Dropdown.Trigger>
             </Navbar.Item>
@@ -109,7 +124,7 @@ export default function HeaderClient() {
               color="success"
               onAction={(actionKey) => console.log({ actionKey })}
             >
-              {!user ? (
+              {!current_User?.isAuthenticated ? (
                 <Dropdown.Item key="profile" css={{ height: "$18" }}>
                   <Text
                     onClick={handleLogin}
@@ -138,7 +153,7 @@ export default function HeaderClient() {
               <Dropdown.Item key="help_and_feedback" withDivider>
                 Trợ giúp & Phản hồi{" "}
               </Dropdown.Item>
-              {user ? (
+              {current_User?.isAuthenticated ? (
                 <Dropdown.Item key="logout" withDivider color="error">
                   <div onClick={handleLogout}>Đăng xuất</div>
                 </Dropdown.Item>

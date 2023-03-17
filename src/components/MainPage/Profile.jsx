@@ -11,7 +11,6 @@ import { logout } from "../../common/feartures/authSlice";
 const Profile = () => {
 
   const user = JSON.parse(localStorage.getItem('user'))
-  console.log("úeasrfasdasd:", user)
   const navigate = useNavigate();
 
 

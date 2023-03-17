@@ -73,7 +73,6 @@ const BlogPost = (props) => {
     return <div style={{display: 'flex', textAlign: 'center', justifyContent: 'center', padding: '300px'}}><Loading size="xl" />
     <Spacer /></div>;
   }
-  console.log("Posts: ", posts);
   return (
     <div className="">
       <Container maxWidth="" sx={{marginTop: '50px'}}>
