@@ -41,7 +41,7 @@ const MyPost = () => {
           </Grid>
       </div> */}
 
-<div className="container mx-auto my-16 p-4">
+<div className="container mx-auto my-16 p-5">
 
       <div class="formbold-main-wrapper">
       {/* <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-zow5z4-MuiGrid-root"> */}
@@ -49,7 +49,7 @@ const MyPost = () => {
 <Grid container spacing={3}>
             {posts.length > 0 ?
               posts.filter((post) => post.userId === user?.id).map((post, index) => (
-  <div class="group border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md" > 
+  <div class="group border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2.5" > 
     <a class="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl" href="#">
       <img class="peer absolute top-0 right-0 h-full w-full object-cover" src={ post.img[0]?.url} alt="product image" />
       <img class="peer peer-hover:right-0 absolute top-0 -right-96 h-full w-full object-cover transition-all delay-100 duration-1000 hover:right-0" src="https://images.unsplash.com/photo-1600185365483-26d7a4cc7519?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8OHx8c25lYWtlcnxlbnwwfHwwfHw%3D&auto=format&fit=crop&w=500&q=60" alt="product image" />
