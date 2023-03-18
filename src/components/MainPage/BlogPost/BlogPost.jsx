@@ -117,7 +117,7 @@ const BlogPost = (props) => {
                         : post.title.slice(0, 15) + "..."
                     }
                     titleTypographyProps={{
-                      style: { fontWeight: "bold", fontSize: "15px" },
+                      style: { fontWeight: "bold", fontSize: "20px" },
                     }}
                     subheader="Đã đăng 1 tiếng trước"
                     subheaderTypographyProps={{
@@ -135,7 +135,7 @@ const BlogPost = (props) => {
                   </Link>
 
                   <CardContent>
-                    <Typography variant="body2" color="text.secondary">
+                    <Typography variant="body2" color="text.secondary" style={{fontWeight:"Bold", fontSize:"20px"}}>
                       {post.description.length < 25
                         ? post.description
                         : post.description.slice(0, 25) + "..."}
