@@ -22,43 +22,44 @@ const MyPost = () => {
   const list = [];
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
+  const myposts = posts.filter((post) => post.userId === user?.id);
+
+  function formatCurrency(amount) {
+    const amu = parseInt(amount);
+    const formattedAmount = amu.toLocaleString("en-US", {
+      style: "currency",
+      currency: "VND",
+    });
+    return formattedAmount;
+  }
+  
   useEffect(() => {
     dispatch(fetchAllPosts());
+    console.log("postlist: ", posts)
     dispatch(fetchCategories());
   }, [dispatch]);
   const handleDelete = (event, id) => {
-    setValueTarget(id)
-    console.log("id", id);
-    dispatch(removePost(id));
+    const confirm = window.confirm("Do you want to deletepost");
+    if (confirm) {
+      dispatch(removePost(id))
+      setValueTarget(id)
+      alert("Delete successful")
+      dispatch(fetchAllPosts());
+      console.log("id", id);
+    }
   }
   useEffect(() => {
   }, [valueTarget])
   return (
     <>
-      {/* <Helmet>
-        <title> Dashboard: Products | Minimal UI </title>
-      </Helmet>
-
-      <Helmet>
-        <title> Dashboard: Blog | VZS </title>
-      </Helmet> */}
-      {/* <div class="formbold-main-wrapper">
-          <Grid container spacing={3}>
-            {posts.length > 0 ?
-              posts.filter((post) => post.userId === user?.id).map((post, index) => (
-                <BlogPostCard key={post.id} post={post} index={index} />
-              )) : <h1>Bạn chưa có bài đăng nào gần đây</h1>}
-          </Grid>
-      </div> */}
-
       <div className="container mx-auto my-16 p-5">
 
         <div class="formbold-main-wrapper">
           {/* <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-zow5z4-MuiGrid-root"> */}
 
           <Grid container spacing={4}>
-            {posts.length > 0 ?
-              posts.filter((post) => post.userId === user?.id).map((post, index) => (
+            {
+              myposts.length > 0 ? myposts.map((post, index) => (
                 <div class="group border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2.5" >
                   <a class="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl" href="#">
                     <img class="peer absolute top-0 right-0 h-full w-full object-cover" src={post.img[0]?.url} alt="product image" />
@@ -72,15 +73,14 @@ const MyPost = () => {
                     </a>
                     <div class="mt-2 mb-5 flex items-center justify-between">
                       <p>
-                        <span class="text-3xl font-bold text-white">$499</span>
-                        <span class="text-sm text-white line-through">$699</span>
+                        <span class="text-3xl font-bold text-white">{formatCurrency(post?.product[0]?.price).replace(/,/g, ".")}</span>
                       </p>
                     </div>
                     <button onClick={(event) => handleDelete(event, post?.id)} class="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300">
                       Delete</button>
                   </div>
                 </div>
-              )) : <h1>Bạn chưa có bài đăng nào gần đây</h1>}
+              )) : (<h1>Bạn chưa có bài đăng nào gần đây</h1>)}
           </Grid>
 
           {/* </div> */}

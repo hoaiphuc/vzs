@@ -52,11 +52,6 @@ function BlogDetail(props) {
       <section className="productt">
         <div className="product__photo">
           <div className="photo-container">
-           
-              {/* <img
-                src={!currentImage ? post.img[0]?.url : currentImage}
-                alt="green apple slice"
-              /> */}
                <CardMedia
                       component="img"
                       style={{ height: 500, margin: 0 }}
