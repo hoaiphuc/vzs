@@ -9,6 +9,7 @@ import { addNewPost } from "../../common/feartures/postSlice";
 import { uploadImgPost, useAuth } from "../firebase";
 import { place } from "../../formSource";
 import { selectAllCategory } from "../../common/feartures/categorySlice";
+import { color } from "@mui/system";
 
 const Post = ({ inputs, title, cates }) => {
   const [file, setFile] = useState([]);
@@ -23,6 +24,7 @@ const Post = ({ inputs, title, cates }) => {
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState([]);
   const [isCreated, setIsCreated] = useState(false);
+  const [errorInput, setErrorInput] = useState('');
   const [isOpenCreateCategoryPopup, setIsOpenCreateCategoryPopup] = useState(false);
 
   const handleOpenPopup = () => {
@@ -77,29 +79,24 @@ const Post = ({ inputs, title, cates }) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    const isCreated = await uploadImgPost(
-      file,
-      setLoading,
-      setPhotoURL,
-      setIsCreated
-    );
-    setIsCreated(isCreated);
-    // if (isCreated && photoURL.length > 0) {
-    //   const data = {
-    //     imgIds: photoURL,
-    //     categoryId: selectedOption,
-    //     description: description,
-    //     productName: productName,
-    //     userId: "dsadsadasdsadasd",
-    //     price: price,
-    //     title: titleInput
-    //   }
-    //   dispatch(addNewPost(data)).then(result => {
-    //     if (result) {
-    //       alert("Đã đăng bài thành công, ấn ok để tiếp tục");
-    //     }
-    //   })
-    // }
+    const validAddressPattern = /^S\d{2,}$/; // pattern for S followed by at least two digits
+    const isAddressValid = validAddressPattern.test(address);
+    console.log("isAddressValid")
+    if (!isAddressValid) {
+      setErrorInput('Address should be S___(S123)');
+      setIsCreated(false);
+      console.log("'Address should be S___(S123)'")
+    } else {
+      const isCreated = await uploadImgPost(
+        file,
+        setLoading,
+        setPhotoURL,
+        setIsCreated
+      );
+      setIsCreated(isCreated);
+      setErrorInput('');
+    }
+
   };
   useEffect(() => {
     if (isCreated) {
@@ -110,11 +107,12 @@ const Post = ({ inputs, title, cates }) => {
         productName: productName,
         userId: user.id,
         price: price,
-        title: titleInput,
+        title: titleInput
       };
       dispatch(addNewPost(data)).then((result) => {
         if (result) {
           setIsCreated(false);
+          setErrorInput('')
           alert("Đã đăng bài thành công, ấn ok để tiếp tục");
         }
       });
@@ -125,26 +123,6 @@ const Post = ({ inputs, title, cates }) => {
     title: titleInput,
     address: address,
   };
-
-  // const handleInputChange = (event) => {
-  //   const { name, value } = event.target;
-  //   switch (name) {
-  //     case "price":
-  //       setPrice(value);
-  //       break;
-  //     case "title":
-  //       setTitleInput(value);
-  //       break;
-  //     case "address":
-  //       setAddress(value);
-  //       break;
-  //     case "productName":
-  //       setProductName(value);
-  //       break;
-  //     default:
-  //       break;
-  //   }
-  // };
 
   const handleInputProductName = (event) => {
     setProductName(event.target.value);
@@ -162,295 +140,100 @@ const Post = ({ inputs, title, cates }) => {
     setPrice(event.target.value);
   };
 
-  // return (
-  //   <div className="max-w-[1200px] mx-auto p-4">
-  //     <div className="post">
-  //       <div className="Container">
-  //         <div className="top">
-  //           <h1>{title}</h1>
-  //         </div>
-  //         <div className="bottom">
-  //           <div className="left">
-  //             <div className="image">
-  //               {imageDemo.length > 0 ? (
-  //                 Array.from(imageDemo)
-  //                   .slice(0, 6)
-  //                   .map((f) => (
-  //                     <img key={f.name} src={URL.createObjectURL(f)} alt="" />
-  //                   ))
-  //               ) : (
-  //                 <img
-  //                   src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-  //                   alt=""
-  //                 />
-  //               )}
-  //             </div>
-  //           </div>
-  //           <div className="right">
-  //             <form onSubmit={handleFormSubmit}>
-  //               <div className="formInput">
-  //                 <label htmlFor="file">
-  //                   Image: <DriveFolderUploadOutlinedIcon className="icon" />
-  //                 </label>
-  //                 <input
-  //                   type="file"
-  //                   id="file"
-  //                   onChange={handleFileChange}
-  //                   style={{ display: "none" }}
-  //                   multiple
-  //                 />
-  //               </div>
-
-  //               <div className="selectCate">
-  //                 <select value={selectedOption} onChange={handleSelectChange}>
-  //                   {optionList}
-  //                 </select>
-  //               </div>
-
-  //               {inputs.map((input) => (
-  //                 <div className="formInput" key={input.id}>
-  //                   <label>{input.label}</label>
-  //                   <input
-  //                     name={input.name}
-  //                     type={input.type}
-  //                     value={inputValues[input.name]}
-  //                     onChange={handleInputChange}
-  //                   />
-  //                 </div>
-  //               ))}
-  //               <div className="formplace">
-  //                 <div className="formplace1">
-  //                   <div className="formplace1">
-  //                     <label htmlFor="places">Your place:</label>
-  //                     <select
-  //                       id="places"
-  //                       name="places"
-  //                       value={places}
-  //                       onChange={handleSelectChangev1}
-  //                     >
-  //                       <option value="">--Select place--</option>
-  //                       {place.map((places, index) => (
-  //                         <option key={index} value={places.name}>
-  //                           {places.name}
-  //                         </option>
-  //                       ))}
-  //                     </select>
-  //                   </div>
-
-  //                   {places && (
-  //                     <div className="formplace1">
-  //                       <label htmlFor="state">Your State:</label>
-  //                       <select
-  //                         id="state"
-  //                         name="state"
-  //                         value={state}
-  //                         onChange={handleSelectChangev1}
-  //                       >
-  //                         <option value="">--Select State--</option>
-  //                         {currentPlace.states.map((state, index) => (
-  //                           <option key={index} value={state.name}>
-  //                             {state.name}
-  //                           </option>
-  //                         ))}
-  //                       </select>
-
-  //                       {state && (
-  //                         <div className="formplace1">
-  //                           <label htmlFor="block">Your Building :</label>
-  //                           <select
-  //                             id="block"
-  //                             name="block"
-  //                             value={block}
-  //                             onChange={handleSelectChangev1}
-  //                           >
-  //                             <option value="">--Select Block--</option>
-  //                             {currentBlock.map((block, index) => (
-  //                               <option key={index} value={block}>
-  //                                 {block}
-  //                               </option>
-  //                             ))}
-  //                           </select>
-  //                         </div>
-  //                       )}
-  //                     </div>
-  //                   )}
-  //                 </div>
-  //               </div>
-  //               <div className="formInput1">
-  //                 <label>Mô tả sản phẩm</label>
-  //                 <textarea
-  //                   type="text"
-  //                   value={description}
-  //                   onChange={handleDescriptionChange}
-  //                 />
-  //               </div>
-  //               <button disabled={loading} type="submit">
-  //                 Post
-  //               </button>
-  //             </form>
-  //           </div>
-  //         </div>
-  //       </div>
-  //       {/* </Container> */}
-  //     </div>
-  //   </div>
-  // );
   return (
     <div class="formbold-main-wrapper">
       <div className="formbold-div-wrapper">
         <div class="formbold-form-wrapper">
-          <div class="formbold-steps">THÊM BÀI ĐĂNG MỚI</div>
-
-          <div class="formbold-form-step">
-            <div class="formbold-input-flex">
-              <div>
-                <label for="firstname" class="formbold-form-label">
-                  {" "}
-                  Tên sản phẩm{" "}
-                </label>
-                <input
-                  type="text"
-                  value={productName}
-                  name="productName"
-                  placeholder="Tên sản phẩm ...."
-                  id="productName"
-                  class="formbold-form-input"
-                  onChange={handleInputProductName}
-                />
-              </div>
-              <div>
-                <label for="lastname" class="formbold-form-label">
-                  {" "}
-                  Tiêu đề sản phẩm{" "}
-                </label>
-                <input
-                  type="text"
-                  value={titleInput}
-                  name="title"
-                  placeholder="Tiêu đề sản phẩm ...."
-                  id="title"
-                  class="formbold-form-input"
-                  onChange={handleInputTitle}
-                />
-              </div>
-            </div>
-
-            <div class="formbold-input-flex">
-              <div>
-                <label for="dob" class="formbold-form-label">
-                  {" "}
-                  Giá sản phẩm{" "}
-                </label>
-                <input
-                  type="text"
-                  value={price}
-                  name="price"
-                  placeholder="Giá sản phẩm ...."
-                  id="price"
-                  class="formbold-form-input"
-                  onChange={handleInputPrice}
-                />
-              </div>
-              <div>
-                <label for="email" class="formbold-form-label">
-                  {" "}
-                  Thể loại sản phẩm{" "}
-                </label>
-                <div className="selectCategories">
-                  <select
-                    name="sl"
-                    value={selectedOption}
-                    onChange={handleSelectChange}
-                  >
-                    {optionList}
-                  </select>
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <label for="address" class="formbold-form-label">
-                {" "}
-                Mã số tòa{" "}
-              </label>
-              <input
-                type="text"
-                name="address"
-                value={address}
-                id="address"
-                placeholder="Mã tòa ...."
-                class="formbold-form-input"
-                onChange={handleInputAddress}
-              />
-            </div>
-          </div>
-          {/* <div className="selectCategories">
-            <div className="selectCategories">
-              <div className="selectCategories">
-                <label htmlFor="places" class="formbold-form-label">
-                  Your place:
-                </label>
-                <select
-                  id="places"
-                  name="places"
-                  value={places}
-                  onChange={handleSelectChangev1}
-                >
-                  <option value="" class="formbold-form-label">
-                    --Select place--
-                  </option>
-                  {place.map((places, index) => (
-                    <option key={index} value={places.name}>
-                      {places.name}
-                    </option>
-                  ))}
-                </select>
-              </div>
-
-              {places && (
-                <div className="formplace1">
-                  <label htmlFor="state" class="formbold-form-label">
-                    Your State:
-                  </label>
-                  <select
-                    id="state"
-                    name="state"
-                    value={state}
-                    onChange={handleSelectChangev1}
-                  >
-                    <option value="">--Select State--</option>
-                    {currentPlace.states.map((state, index) => (
-                      <option key={index} value={state.name}>
-                        {state.name}
-                      </option>
-                    ))}
-                  </select>
-
-                  {state && (
-                    <div className="formplace1">
-                      <label htmlFor="block" class="formbold-form-label">
-                        Your Building :
-                      </label>
-                      <select
-                        id="block"
-                        name="block"
-                        value={block}
-                        onChange={handleSelectChangev1}
-                      >
-                        <option value="">--Select Block--</option>
-                        {currentBlock.map((block, index) => (
-                          <option key={index} value={block}>
-                            {block}
-                          </option>
-                        ))}
-                      </select>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          </div> */}
           <form onSubmit={handleFormSubmit}>
+            <div class="formbold-steps">THÊM BÀI ĐĂNG MỚI</div>
+            <div class="formbold-form-step">
+              <h1 style={{ color: "red" }}>{errorInput}</h1>
+              <div class="formbold-input-flex">
+                <div>
+                  <label for="firstname" class="formbold-form-label">
+                    {" "}
+                    Tên sản phẩm{" "}
+                  </label>
+                  <input
+                    type="text"
+                    value={productName}
+                    name="productName"
+                    placeholder="Tên sản phẩm ...."
+                    id="productName"
+                    required
+                    class="formbold-form-input"
+                    onChange={handleInputProductName}
+                  />
+                </div>
+                <div>
+                  <label for="lastname" class="formbold-form-label">
+                    {" "}
+                    Tiêu đề sản phẩm{" "}
+                  </label>
+                  <input
+                    type="text"
+                    value={titleInput}
+                    name="title"
+                    required
+                    placeholder="Tiêu đề sản phẩm ...."
+                    id="title"
+                    class="formbold-form-input"
+                    onChange={handleInputTitle}
+                  />
+                </div>
+              </div>
+
+              <div class="formbold-input-flex">
+                <div>
+                  <label for="dob" class="formbold-form-label">
+                    {" "}
+                    Giá sản phẩm{" "}
+                  </label>
+                  <input
+                    type="number"
+                    value={price}
+                    name="price"
+                    required
+                    placeholder="Giá sản phẩm ...."
+                    id="price"
+                    class="formbold-form-input"
+                    onChange={handleInputPrice}
+                  />
+                </div>
+                <div>
+                  <label for="email" class="formbold-form-label">
+                    {" "}
+                    Thể loại sản phẩm{" "}
+                  </label>
+                  <div className="selectCategories">
+                    <select
+                      name="sl"
+                      value={selectedOption}
+                      onChange={handleSelectChange}
+                    >
+                      {optionList}
+                    </select>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <label for="address" class="formbold-form-label">
+                  {" "}
+                  Mã số tòa{" "}
+                </label>
+                <input
+                  type="text"
+                  name="address"
+                  value={address}
+                  id="address"
+                  required
+                  placeholder="Mã tòa ...."
+                  class="formbold-form-input"
+                  onChange={handleInputAddress}
+                />
+              </div>
+            </div>
             <div className="">
               <label htmlFor="file">
                 Upload image: <DriveFolderUploadOutlinedIcon className="icon" />
@@ -502,6 +285,7 @@ const Post = ({ inputs, title, cates }) => {
                   Mô tả sản phẩm{" "}
                 </label>
                 <textarea
+                  required
                   rows="6"
                   name="description"
                   value={description}
