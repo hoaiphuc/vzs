@@ -9,6 +9,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { ClassSharp } from "@mui/icons-material";
+import { Autocomplete, TextField } from "@mui/material";
 
 export default function HeaderClient() {
   const [photoURL, setPhotoURL] = useState('');
@@ -16,9 +17,15 @@ export default function HeaderClient() {
 
   const user = JSON.parse(localStorage.getItem("user"));
 
+  const options = ['Option 1', 'Option 2'];
+
+  const [value, setValue] = useState(options[0]);
+
   const [activeLink, setActiveLink] = useState('/');
 
   const current_User = useSelector(currentuser);
+
+  const [inputValue, setInputValue] = useState('');
 
   const currentUser = useAuth();
 
@@ -61,7 +68,7 @@ export default function HeaderClient() {
       <Navbar isBordered variant="sticky">
         <Navbar.Brand>
 
-          <Link to="/" isActive={activeLink === '/' ? true : false} onClick={(event) => handleClick(event, '/')} style={{width:"20%", margin:"0 5% 0 0"}}><AcmeLogo /></Link>
+          <Link to="/" isActive={activeLink === '/' ? true : false} onClick={(event) => handleClick(event, '/')} style={{ width: "20%", margin: "0 5% 0 0" }}><AcmeLogo /></Link>
 
           <Navbar.Content hideIn="xs" variant="highlight">
             <Navbar.Link isActive={activeLink === '/' ? true : false} onClick={(event) => handleClick(event, '/')}>
@@ -72,6 +79,24 @@ export default function HeaderClient() {
             </Navbar.Link>
           </Navbar.Content>
         </Navbar.Brand>
+        <div>
+          <Autocomplete
+            className="completeTextbox"
+            value={value}
+            onChange={(event, newValue) => {
+              setValue(newValue);
+            }}
+            inputValue={inputValue}
+            onInputChange={(event, newInputValue) => {
+              setInputValue(newInputValue);
+            }}
+            id="controllable-states-demo"
+            options={options}
+            sx={{ width: 200 }}
+            renderInput={(params) => <TextField {...params} label="Controllable" className="textField"/>}
+          />
+        </div>
+
         <Navbar.Content
           css={{
             "@xsMax": {

@@ -20,7 +20,7 @@ function MainPageSlider() {
     {
 			'img': 'https://thuelens.com/wp-content/uploads/2020/08/iStock-517188688.jpg',
 			'link': '',
-			'caption': 'Three things cannot be long hidden: The Sun, The Moon, and The Truth.',
+			'caption': 'Bạn có thể đăng bán tất cả mọi thứ tại VINSEHAND',
 			'captionPosition': 'center',
 			'useFilling': true,
 			'fillingColor': '#000000',
