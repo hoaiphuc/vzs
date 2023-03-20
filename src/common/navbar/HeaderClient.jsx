@@ -8,9 +8,9 @@ import { currentuser, logout } from "../feartures/authSlice.js";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
-import { ClassSharp } from "@mui/icons-material";
-import { Autocomplete, TextField } from "@mui/material";
-
+import { ClassSharp, Highlight } from "@mui/icons-material";
+import { Autocomplete, TextField ,Button, InputAdornment } from "@mui/material";
+import "./HeaderClient.css";
 export default function HeaderClient() {
   const [photoURL, setPhotoURL] = useState('');
   // const user = typeof localStorage.getItem("user") === 'string' ? JSON.parse(localStorage.getItem("user")) : null;
@@ -92,7 +92,12 @@ export default function HeaderClient() {
             }}
             id="controllable-states-demo"
             options={options}
-            sx={{ width: 200 }}
+            sx={{ width: 230 , boxShadow: "2px 5px 25px -5px #878383"
+            ,inputBorderRadius :10 ,
+            inputFontSize : 10
+            ,inputHeightRatio : 10,
+            borderRadius: 10
+                    }}
             renderInput={(params) => <TextField {...params} label="Controllable" className="textField"/>}
           />
         </div>
