@@ -5,7 +5,7 @@ import logo from "../../assets/img/logo.png"
 const Footer = () => {
   return (
     <>
-      <footer>
+      <footer style={{margin:"5% 0 0 0"}}>
         <div className='container grid2'>
           <div className='box'>
             {/* <h1>VZS</h1> */}

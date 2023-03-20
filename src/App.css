@@ -56,13 +56,6 @@ li {
   text-align-last: right;
 }
 
-input,
-button {
-  border: none;
-  outline: none;
-  background-color: none;
-}
-
 .row {
   width: 50%;
 }
@@ -79,43 +72,6 @@ button {
 
 .boxShadow {
   box-shadow: rgb(43 52 69 / 10%) 0px 4px 16px;
-}
-
-/*---------category----------*/
-.contentWidth {
-  width: 77%;
-}
-
-.category {
-  box-shadow: rgb(43 52 69 / 10%) 0px 4px 16px;
-  background-color: #fff;
-  width: 20%;
-  height: 510px;
-  padding: 15px 0;
-  border-radius: 5px;
-  margin-top: 5px;
-}
-
-.category img {
-  width: 30px;
-  height: 30px;
-  margin-top: 10px;
-  object-fit: contain;
-}
-
-.category span {
-  margin: 10px 20px;
-  text-transform: capitalize;
-}
-
-.category .box {
-  transition: 0.5s;
-  padding: 0 20px;
-}
-
-.category .box:hover {
-  background-color: #ffe1e6;
-  cursor: pointer;
 }
 
 /*---------category----------*/
@@ -179,22 +135,6 @@ button {
   color: #e94560;
 }
 
-.price button {
-  background: none;
-  color: #e94560;
-  font-size: 20px;
-  transition: 0.5s;
-  border: 1px solid rgb(3 0 71 / 9%);
-  width: 35px;
-  height: 35px;
-  border-radius: 5px;
-}
-
-.price button:hover {
-  cursor: pointer;
-  background-color: #e94560;
-  color: #fff;
-}
 
 .product-like {
   position: absolute;
@@ -221,45 +161,6 @@ button {
 .product:hover .product-like {
   opacity: 1;
 }
-
-/*---------product-----------*/
-/*----- control btn -------*/
-.control-btn .next,
-.control-btn .prev {
-  position: absolute;
-  top: 40%;
-  width: 50px;
-  height: 50px;
-  line-height: 60px;
-  background: #0f3460;
-  border-radius: 50%;
-  transform: 0.5s;
-  z-index: 5;
-}
-
-.control-btn .prev {
-  left: -20px;
-}
-
-.control-btn .next {
-  right: -20px;
-}
-
-.control-btn .prev i,
-.control-btn .next i {
-  font-size: 20px;
-  transition: 0.5s;
-  color: #fff;
-}
-
-.control-btn .prev:hover,
-.control-btn .next:hover {
-  background: #e94560;
-  color: white;
-  cursor: pointer;
-}
-
-/*----- control btn -------*/
 /*----- heading -------*/
 .heading .heading-left i {
   font-size: 30px;
@@ -302,11 +203,5 @@ h3 {
   letter-spacing: 1.2px;
   color: #a6a6a6;
 }
-
-img {
-  max-width: 100%;
-  filter: drop-shadow(1px 1px 3px #a6a6a6);
-}
-
 
 

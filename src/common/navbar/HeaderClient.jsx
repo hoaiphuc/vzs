@@ -61,7 +61,7 @@ export default function HeaderClient() {
       <Navbar isBordered variant="sticky">
         <Navbar.Brand>
 
-          <AcmeLogo />
+          <Link to="/" isActive={activeLink === '/' ? true : false} onClick={(event) => handleClick(event, '/')} style={{width:"20%", margin:"0 5% 0 0"}}><AcmeLogo /></Link>
 
           <Navbar.Content hideIn="xs" variant="highlight">
             <Navbar.Link isActive={activeLink === '/' ? true : false} onClick={(event) => handleClick(event, '/')}>
