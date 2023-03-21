@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 // import "./BlogPost.css";
 import GetPost from "../../../common/axios/getPostsAxios";
-import { Card, CardMedia, CardContent, CardActions } from "@mui/material";
+import { Card, CardMedia, CardContent, CardActions, Pagination } from "@mui/material";
 import { Typography } from "@mui/material";
 import CardHeader from "@mui/material/CardHeader";
 import Grid from "@mui/material/Grid";
@@ -23,6 +23,7 @@ import { Link } from "react-router-dom";
 import { Button } from "reactstrap";
 import { fetchCategories } from "../../../common/feartures/categorySlice";
 import { Loading, Spacer } from "@nextui-org/react";
+import { Stack } from "react-bootstrap";
 
 const defaultImage = "https://via.placeholder.com/300x300";
 
@@ -44,7 +45,7 @@ const BlogPost = (props) => {
   // );
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
-  
+
   const [favoriteProducts, setFavoriteProducts] = useState([]);
 
   const handleFavoriteClick = (productId) => {
@@ -59,7 +60,7 @@ const BlogPost = (props) => {
   };
 
 
-  
+
   useEffect(() => {
     dispatch(fetchAllPosts());
     dispatch(fetchCategories());
@@ -70,12 +71,12 @@ const BlogPost = (props) => {
   // const user = JSON.parse(localStorage.getItem('user'))
 
   if (!posts) {
-    return <div style={{display: 'flex', textAlign: 'center', justifyContent: 'center', padding: '300px'}}><Loading size="xl" />
-    <Spacer /></div>;
+    return <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', padding: '300px' }}><Loading size="xl" />
+      <Spacer /></div>;
   }
   return (
     <div className="">
-      <Container maxWidth="" sx={{marginTop: '50px'}}>
+      <Container maxWidth="" sx={{ marginTop: '50px' }}>
         <Grid
           container
           spacing={2}
@@ -135,7 +136,7 @@ const BlogPost = (props) => {
                   </Link>
 
                   <CardContent>
-                    <Typography variant="body2" color="text.secondary" style={{fontWeight:"Bold", fontSize:"20px"}}>
+                    <Typography variant="body2" color="text.secondary" style={{ fontWeight: "Bold", fontSize: "20px" }}>
                       {post.description.length < 25
                         ? post.description
                         : post.description.slice(0, 25) + "..."}
@@ -181,6 +182,10 @@ const BlogPost = (props) => {
           onPageChange={handlePageClick}
         />
       </div> */}
+        <Stack spacing={2} className="paginationBlog" >
+
+          <Pagination count={10} variant="outlined" color="secondary" />
+        </Stack>
       </Container>
     </div>
   );
