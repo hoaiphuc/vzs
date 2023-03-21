@@ -1,0 +1,8 @@
+.MuiOutlinedInput-root{
+
+    border-radius: 25px !important; 
+    
+}
+.css-h9311g-MuiAutocomplete-root .MuiOutlinedInput-root{
+    padding: 0 0 0 9px !important;
+}
