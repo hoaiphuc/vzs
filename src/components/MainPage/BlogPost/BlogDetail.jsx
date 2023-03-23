@@ -71,7 +71,7 @@ function BlogDetail(props) {
             <CardMedia
               id="myImg"
               component="img"
-              style={{ height: 500, margin: 0 }}
+              style={{ height: 500, margin: 0,  }}
               image={
                 !currentImage ? post.img[0]?.url : currentImage || defaultImage
               }
@@ -80,7 +80,7 @@ function BlogDetail(props) {
             />
 
             {modalOpen && (
-              <div id="myModal" class="modall">
+              <div id="myModal" class="modall" onClick={() => setModalOpen(false)}>
                 <span class="closee" onClick={() => setModalOpen(false)}>
                   &times;
                 </span>
