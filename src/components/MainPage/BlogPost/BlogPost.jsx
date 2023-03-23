@@ -27,25 +27,8 @@ import { Stack } from "react-bootstrap";
 
 const defaultImage = "https://via.placeholder.com/300x300";
 
-const BlogPost = ({posts}) => {
-  // const [posts] = GetPost();
-  // return (
-  //   <>
-  //       {posts.map(post => (
-  //         <div className="blog-post" key={post.id}>
-  //           <img src={post.img} alt={post.title} />
-  //           <div className="blog-post-content">
-  //             <h2>{post.title}</h2>
-  //             <p className="blog-post-details">Price: {post.price} | Posted on {post.date} by {post.author}</p>
-  //             <p>{post.content}</p>
-  //           </div>
-  //         </div>
-  //       ))}
-  //   </>
-  // );
-  // const dispatch = useDispatch();
-  // const posts = useSelector(selectAllPosts);
-
+const BlogPost = ({posts, category}) => {
+  console.log("category: ", category)
   const [favoriteProducts, setFavoriteProducts] = useState([]);
 
   const handleFavoriteClick = (productId) => {
@@ -59,16 +42,9 @@ const BlogPost = ({posts}) => {
     setFavoriteProducts(updatedFavorites);
   };
 
-
-
-  // useEffect(() => {
-  //   dispatch(fetchAllPosts());
-  //   dispatch(fetchCategories());
-  // }, [dispatch]);
   const handlePageClick = (posts) => {
     console.log(posts.selected);
   };
-  // const user = JSON.parse(localStorage.getItem('user'))
 
   if (!posts) {
     return <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', padding: '300px' }}><Loading size="xl" />
@@ -77,6 +53,7 @@ const BlogPost = ({posts}) => {
   return (
     <div className="">
       <Container maxWidth="" sx={{ marginTop: '50px' }}>
+        <h1 style={{textAlign:"center", color:"", fontFamily:"initial", fontSize:"30px", marginBottom:"30px"}}>BÀI ĐĂNG GẦN ĐÂY</h1>
         <Grid
           container
           spacing={2}
@@ -111,7 +88,7 @@ const BlogPost = ({posts}) => {
                       <IconButton aria-label="settings" children="Add to cart">
                         <MoreVertIcon />
                       </IconButton>
-                    }
+                    } 
                     title={
                       post.title.length < 15
                         ? post.title

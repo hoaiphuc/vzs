@@ -1,15 +1,14 @@
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { category } from "../../formSource";
 import "./post.css";
-import Select from "react-select";
-import { Button, Card, Container, Row, Col } from "reactstrap";
 import { addNewPost } from "../../common/feartures/postSlice";
 import { uploadImgPost, useAuth } from "../firebase";
 import { place } from "../../formSource";
 import { selectAllCategory } from "../../common/feartures/categorySlice";
-import { color } from "@mui/system";
+import { Alert, Snackbar } from "@mui/material";
+import { showLoading } from "../../utils/helpers";
+import AddPhotoAlternateSharpIcon from '@mui/icons-material/AddPhotoAlternateSharp';
+
 
 const Post = ({ inputs, title, cates }) => {
   const [file, setFile] = useState([]);
@@ -26,6 +25,7 @@ const Post = ({ inputs, title, cates }) => {
   const [isCreated, setIsCreated] = useState(false);
   const [errorInput, setErrorInput] = useState('');
   const [isOpenCreateCategoryPopup, setIsOpenCreateCategoryPopup] = useState(false);
+  const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
 
   const handleOpenPopup = () => {
     setIsOpenCreateCategoryPopup(true);
@@ -87,6 +87,7 @@ const Post = ({ inputs, title, cates }) => {
       setIsCreated(false);
       console.log("'Address should be S___(S123)'")
     } else {
+      showLoading(true)
       const isCreated = await uploadImgPost(
         file,
         setLoading,
@@ -112,8 +113,9 @@ const Post = ({ inputs, title, cates }) => {
       dispatch(addNewPost(data)).then((result) => {
         if (result) {
           setIsCreated(false);
-          setErrorInput('')
-          alert("Đã đăng bài thành công, ấn ok để tiếp tục");
+          setErrorInput('');
+          setIsOpenSnackbar(true);
+          showLoading(false)
         }
       });
     }
@@ -140,6 +142,9 @@ const Post = ({ inputs, title, cates }) => {
     setPrice(event.target.value);
   };
 
+  const handleClose = () => {
+    setIsOpenSnackbar(false);
+  }
   return (
     <div class="formbold-main-wrapper">
       <div className="formbold-div-wrapper">
@@ -236,7 +241,7 @@ const Post = ({ inputs, title, cates }) => {
             </div>
             <div className="">
               <label htmlFor="file">
-                Upload image: <DriveFolderUploadOutlinedIcon className="icon" />
+                Chọn ảnh: <AddPhotoAlternateSharpIcon fontSize="large" />
               </label>
               <input
                 type="file"
@@ -296,10 +301,18 @@ const Post = ({ inputs, title, cates }) => {
                 ></textarea>
               </div>
             </div>
-            <button className="post--btn" disabled={loading} type="submit">
-              Post
-            </button>
+            <div style={{textAlign:"center"}}>
+              <button className="post--btn" disabled={loading} type="submit">
+                SAVE
+              </button>
+            </div>
+
           </form>
+          <Snackbar open={isOpenSnackbar} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              This is a success message!
+            </Alert>
+          </Snackbar>
         </div>
       </div>
     </div>

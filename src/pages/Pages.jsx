@@ -12,7 +12,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Pages = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const [postPerPage, setPostPerPage] = useState(2)
+  const [postPerPage, setPostPerPage] = useState(8)
+  const [category, setCategory] = useState()
 
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
@@ -24,18 +25,20 @@ const Pages = () => {
 
   // Get current page
   const indexOfLastPost = currentPage * postPerPage;
-  const indexOfFirstPost =  indexOfLastPost - postPerPage;
+  const indexOfFirstPost = indexOfLastPost - postPerPage;
   const currentPost = posts.slice(indexOfFirstPost, indexOfLastPost);
-
   // change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
+
+  //change category
+  const pickCategory = category => setCategory(category);
 
   return (
     <>
 
       <MainPageSlider />
-      <Category />
-      <BlogPost posts={currentPost} />
+      <Category pickCategory={pickCategory} />
+      <BlogPost posts={currentPost} category={category} />
       <Pagination postsPerPage={postPerPage} totalPosts={posts.length} paginate={paginate} />
     </>
   )
@@ -43,18 +46,18 @@ const Pages = () => {
 function MainPageSlider() {
   const slides = [
     {
-			'img': 'https://thuelens.com/wp-content/uploads/2020/08/iStock-517188688.jpg',
-			'link': '',
-			'caption': 'Bạn có thể đăng bán SEX TOY cùng DUY NGUYỄN tại VINSEHAND',
-			'captionPosition': 'center',
-			'useFilling': true,
-			'fillingColor': '#000000',
-			'fillingOpacity': 0.40
-		}
+      'img': 'https://thuelens.com/wp-content/uploads/2020/08/iStock-517188688.jpg',
+      'link': '',
+      'caption': 'Bạn có thể đăng bán SEX TOY cùng DUY NGUYỄN tại VINSEHAND',
+      'captionPosition': 'center',
+      'useFilling': true,
+      'fillingColor': '#000000',
+      'fillingOpacity': 0.40
+    }
   ];
 
   return (
-    <div className='container' style={{marginTop:"30px"}}>
+    <div className='container' style={{ marginTop: "30px" }}>
       <SwiperSlider
         showPrevNext
         roundCorners
