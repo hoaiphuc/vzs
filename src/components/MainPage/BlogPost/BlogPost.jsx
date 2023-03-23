@@ -27,7 +27,7 @@ import { Stack } from "react-bootstrap";
 
 const defaultImage = "https://via.placeholder.com/300x300";
 
-const BlogPost = (props) => {
+const BlogPost = ({posts}) => {
   // const [posts] = GetPost();
   // return (
   //   <>
@@ -43,8 +43,8 @@ const BlogPost = (props) => {
   //       ))}
   //   </>
   // );
-  const dispatch = useDispatch();
-  const posts = useSelector(selectAllPosts);
+  // const dispatch = useDispatch();
+  // const posts = useSelector(selectAllPosts);
 
   const [favoriteProducts, setFavoriteProducts] = useState([]);
 
@@ -61,10 +61,10 @@ const BlogPost = (props) => {
 
 
 
-  useEffect(() => {
-    dispatch(fetchAllPosts());
-    dispatch(fetchCategories());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchAllPosts());
+  //   dispatch(fetchCategories());
+  // }, [dispatch]);
   const handlePageClick = (posts) => {
     console.log(posts.selected);
   };
@@ -182,10 +182,10 @@ const BlogPost = (props) => {
           onPageChange={handlePageClick}
         />
       </div> */}
-        <Stack spacing={2} className="paginationBlog" >
+        {/* <Stack spacing={2} className="paginationBlog" >
 
           <Pagination count={10} variant="outlined" color="secondary" />
-        </Stack>
+        </Stack> */}
       </Container>
     </div>
   );
