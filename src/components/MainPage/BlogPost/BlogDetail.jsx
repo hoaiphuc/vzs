@@ -5,6 +5,7 @@ import { Col, Row } from "reactstrap";
 import { uuidv4 } from "@firebase/util";
 import ZaloPopup from "./ZaloPopup";
 import "./BlogDetail.css";
+import "./ClickModal";
 import { Loading, Spacer } from "@nextui-org/react";
 import { CardMedia } from "@mui/material";
 
@@ -14,6 +15,9 @@ function BlogDetail(props) {
   const [urlList, setUrlList] = useState([]);
   const [currentImage, setCurrentImage] = useState();
   const [phone, setPhone] = useState("0334416510");
+
+  const [modalOpen, setModalOpen] = useState(false);
+
   // setCurrentImage(post.img[0].url)
   const defaultImage = "https://via.placeholder.com/300x300";
   function formatCurrency(amount) {
@@ -27,13 +31,14 @@ function BlogDetail(props) {
   // const handleLinkClick = (props) => {
   //   window.location.href = "https://zalo.me/"+props; // Thay your-link bằng link của bạn
   // };
+
   const linkZalo = "https://zalo.me/" + phone;
   const handleClick = (image) => {
     setCurrentImage(image);
   };
 
   useEffect(() => {
-    fetch(`https://secondhandvinhome.herokuapp.com/api/post/${id}`)
+    fetch(`https://secondhandvinhome.herokuapp.com/api/post/getbyid/${id}`)
       .then((response) => response.json())
       .then((data) => {
         setPost(data.response);
@@ -42,23 +47,57 @@ function BlogDetail(props) {
   }, [id]);
 
   if (!post) {
-    return <div style={{display: 'flex', textAlign: 'center', justifyContent: 'center', padding: '300px'}}><Loading size="xl" />
-    <Spacer /></div>;
+    return (
+      <div
+        style={{
+          display: "flex",
+          textAlign: "center",
+          justifyContent: "center",
+          padding: "300px",
+        }}
+      >
+        <Loading size="xl" />
+        <Spacer />
+      </div>
+    );
   }
 
   return (
-    <div style={{height: "100%" }}>
+    <div style={{ height: "100%" }}>
       <link rel="stylesheet" type="text/css" href="BlogDetail.css" />
       <section className="productt">
         <div className="product__photo">
           <div className="photo-container">
-               <CardMedia
-                      component="img"
-                      style={{ height: 500, margin: 0 }}
-                      image={!currentImage ? post.img[0]?.url : currentImage || defaultImage}
-                      alt="Paella dish"
-                    />
-            
+            <CardMedia
+              id="myImg"
+              component="img"
+              style={{ height: 500, margin: 0 }}
+              image={
+                !currentImage ? post.img[0]?.url : currentImage || defaultImage
+              }
+              alt="Paella dish"
+              onClick={() => setModalOpen(true)}
+            />
+
+            {modalOpen && (
+              <div id="myModal" class="modall">
+                <span class="closee" onClick={() => setModalOpen(false)}>
+                  &times;
+                </span>
+
+                <img
+                  class="modall-content"
+                  src={
+                    !currentImage
+                      ? post.img[0]?.url
+                      : currentImage || defaultImage
+                  }
+                />
+
+                <div id="caption"></div>
+              </div>
+            )}
+
             <div className="photo-album">
               <ul>
                 {post.img.map((img) => (
@@ -106,7 +145,5 @@ function BlogDetail(props) {
     </div>
   );
 }
-
-
 
 export default BlogDetail;
