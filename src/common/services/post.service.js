@@ -39,3 +39,23 @@ export const deletePost = async (postId) => {
     return null;
   }
 };
+export const postSold = async (postId, sold) => {
+  try {
+    console.log("postiddđ: ", postId)
+    const response = await axios.put(`${BASE_URL}/post/sold?id=${postId}`, {sold: sold});
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+export const updateFavoritePost = async (postId) => {
+  try {
+    const response = await axios.post(`${BASE_URL}/post/interestedpost`);
+    return response.data;
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+

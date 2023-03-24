@@ -11,7 +11,6 @@ export const getBuildings = async () => {
       );
     console.log('response: ', response);
     localStorage.setItem('buildings', JSON.stringify(response.data.building))
-
     return response.data.building;
   } catch (error) {
     throw new Error('Failed to fetch buidings');

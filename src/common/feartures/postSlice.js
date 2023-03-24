@@ -1,6 +1,6 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
-import { getAllPosts, createPost, deletePost, getPostByUserId } from '../../common/services/post.service';
+import { getAllPosts, createPost, deletePost, getPostByUserId, postSold, updateFavoritePost } from '../../common/services/post.service';
 
 export const fetchAllPosts = createAsyncThunk('blog/fetchAllPosts', async () => {
   const response = await getAllPosts();
@@ -19,6 +19,16 @@ export const addNewPost = createAsyncThunk('blog/addNewPost', async (postData) =
 
 export const removePost = createAsyncThunk('blog/deletePost', async (id) => {
   const response = await deletePost(id);
+  return response;
+});
+
+export const updatePostSold = createAsyncThunk('blog/updatePostSold', async (postId, sold) => {
+  const response = await postSold(postId, sold);
+  return response;
+});
+
+export const pushFavorite = createAsyncThunk('blog/updateFavoritePost', async (postId) => {
+  const response = await updateFavoritePost(postId);
   return response;
 });
 
@@ -67,8 +77,18 @@ const blogSlice = createSlice({
       .addCase(removePost.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.error.message;
+      })
+      .addCase(updatePostSold.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updatePostSold.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.posts = state.posts.filter((post) => post.id !== action.payload);
+      })
+      .addCase(updatePostSold.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.error.message;
       });
-
   },
 });
 
