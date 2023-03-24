@@ -17,6 +17,7 @@ import Container from "@mui/material/Container";
 import { useDispatch, useSelector } from "react-redux";
 import {
   fetchAllPosts,
+  pushFavorite,
   selectAllPosts,
 } from "../../../common/feartures/postSlice";
 import { Link } from "react-router-dom";
@@ -26,18 +27,20 @@ import { Loading, Spacer } from "@nextui-org/react";
 import { Stack } from "react-bootstrap";
 
 const defaultImage = "https://via.placeholder.com/300x300";
-
 const BlogPost = ({posts, category}) => {
+  const dispatch = useDispatch();
   console.log("category: ", category)
   const [favoriteProducts, setFavoriteProducts] = useState([]);
 
-  const handleFavoriteClick = (productId) => {
+  const handleFavoriteClick = (event, productId) => {
+    event.preventDefault();
     const updatedFavorites = [...favoriteProducts];
     const index = updatedFavorites.indexOf(productId);
     if (index > -1) {
       updatedFavorites.splice(index, 1);
     } else {
       updatedFavorites.push(productId);
+      dispatch(pushFavorite(productId));
     }
     setFavoriteProducts(updatedFavorites);
   };
@@ -127,7 +130,7 @@ const BlogPost = ({posts, category}) => {
                   </CardContent>
                   <CardActions disableSpacing>
                     <IconButton
-                      onClick={() => handleFavoriteClick(post.id)}
+                      onClick={(event) => handleFavoriteClick(event, post.id)}
                       aria-label="add to favorites"
                     >
                       {favoriteProducts.includes(post.id) ? (

@@ -33,6 +33,7 @@ import {
   fetchPostByUserId,
   removePost,
   selectAllPosts,
+  updatePostSold,
 } from "../../common/feartures/postSlice";
 import { currentuser } from "../../common/feartures/authSlice";
 import { color } from "@mui/system";
@@ -40,7 +41,6 @@ import { fetchBuildings } from "../../common/feartures/buildingSlice";
 
 const MyPost = () => {
   const [listPost, setListPost] = useState([]);
-  const [valueTarget, setValueTarget] = useState();
   const [open, setOpen] = useState(null);
 
   const user = JSON.parse(localStorage.getItem("user"));
@@ -49,7 +49,7 @@ const MyPost = () => {
   const list = [];
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
-  
+  const [deletePostId, setDeletePostId] = useState()
   const myposts = posts.filter((post) => post.userId === user?.id);
   console.log("mypost", myposts)
   function formatCurrency(amount) {
@@ -60,31 +60,37 @@ const MyPost = () => {
     });
     return formattedAmount;
   }
-  const handleOpenMenu = (event) => {
+  const handleOpenMenu = (event, id) => {
+    setDeletePostId(id)
     setOpen(event.currentTarget);
   };
 
   const handleCloseMenu = () => {
     setOpen(null);
   };
-
   useEffect(() => {
     dispatch(fetchAllPosts());
     dispatch(fetchPostByUserId(user?.id));
     dispatch(fetchCategories());
     dispatch(fetchBuildings());
   }, [dispatch]);
-  const handleDelete = (event, id) => {
-    const confirm = window.confirm("Do you want to deletepost");
+  const handleDelete = (event) => {
+    const confirm = window.confirm("Bạn có chắc muốn xóa bài đăng");
     if (confirm) {
-      dispatch(removePost(id));
-      setValueTarget(id);
-      alert("Delete successful");
-      dispatch(fetchAllPosts());
-      console.log("id", id);
+      dispatch(removePost(deletePostId));
+      alert("Xóa bài đăng");
+      dispatch(fetchPostByUserId(user?.id));
     }
   };
-  useEffect(() => {}, [valueTarget]);
+  const handleUpdateSold = (event) => {
+    const confirm = window.confirm("Bạn có muốn cập nhật bài đăng thành đã bán");
+    if (confirm) {
+      dispatch(updatePostSold(deletePostId, true));
+      alert("Cập nhật thành công");
+      dispatch(fetchPostByUserId(user?.id));
+    }
+  }
+  useEffect(() => {}, [mypost]);
   return (
     <>
       <div className="container mx-auto my-16 p-5">
@@ -128,7 +134,7 @@ const MyPost = () => {
                       <IconButton
                         size="large"
                         color="info"
-                        onClick={handleOpenMenu}
+                        onClick={(event)=> handleOpenMenu(event, post?.id)}
                       >
                         <Iconify icon={"eva:more-vertical-fill"} />
                       </IconButton>
@@ -158,11 +164,19 @@ const MyPost = () => {
                           <Iconify icon={"eva:edit-fill"} sx={{ mr: 2 }} />
                           Edit
                         </MenuItem>
-
+                        <MenuItem sx={{ color: "error.main" }}>
+                           <Iconify icon={'eva:edit-fill'} sx={{ mr: 2 }} />
+                          <button
+                            onClick={(event) => handleUpdateSold(event)}
+                            // class="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
+                          >
+                            Đã bán
+                          </button>
+                        </MenuItem>
                         <MenuItem sx={{ color: "error.main" }}>
                            <Iconify icon={'eva:trash-2-outline'} sx={{ mr: 2 }} />
                           <button
-                            onClick={(event) => handleDelete(event, post?.id)}
+                            onClick={(event) => handleDelete(event)}
                             // class="hover:border-white/40 flex items-center justify-center rounded-md border border-transparent bg-blue-600 px-5 py-2.5 text-center text-sm font-medium text-white focus:outline-none focus:ring-4 focus:ring-blue-300"
                           >
                             Delete
