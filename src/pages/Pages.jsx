@@ -29,7 +29,7 @@ const Pages = () => {
     dispatch(fetchCategories());
     dispatch(fetchBuildings());
   }, [dispatch]);
-
+  console.log("All post: ", posts)
   // Get current page
   const indexOfLastPost = currentPage * postPerPage;
   const indexOfFirstPost = indexOfLastPost - postPerPage;

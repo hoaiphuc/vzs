@@ -46,6 +46,11 @@ const BlogPost = ({posts, category}) => {
     console.log(posts.selected);
   };
 
+  const handleClick = (id) => {
+    window.location.href=`/blogdetail/${id}`
+    document.getElementById('root').scrollIntoView();
+  }
+
   if (!posts) {
     return <div style={{ display: 'flex', textAlign: 'center', justifyContent: 'center', padding: '300px' }}><Loading size="xl" />
       <Spacer /></div>;
@@ -53,7 +58,7 @@ const BlogPost = ({posts, category}) => {
   return (
     <div className="">
       <Container maxWidth="" sx={{ marginTop: '50px' }}>
-        <h1 style={{textAlign:"center", color:"", fontFamily:"initial", fontSize:"30px", marginBottom:"30px"}}>BÀI ĐĂNG GẦN ĐÂY</h1>
+        <h1 id="baidangganday" style={{textAlign:"center", color:"", fontFamily:"initial", fontSize:"30px", marginBottom:"30px"}}>BÀI ĐĂNG GẦN ĐÂY</h1>
         <Grid
           container
           spacing={2}
@@ -103,14 +108,15 @@ const BlogPost = ({posts, category}) => {
                     }}
                   />
 
-                  <Link to={`/blogdetail/${post.id}`}>
+                 
                     <CardMedia
                       component="img"
                       style={{ height: 200, margin: 0 }}
                       image={post.img[0]?.url || defaultImage}
-                      alt="Paella dish"
+                      alt="post"
+                      onClick={()=> handleClick(post.id)}
                     />
-                  </Link>
+                
 
                   <CardContent>
                     <Typography variant="body2" color="text.secondary" style={{ fontWeight: "Bold", fontSize: "20px" }}>

@@ -12,7 +12,7 @@ const Pagination = ({postsPerPage, totalPosts, paginate}) => {
     const handleClick = (pageNumber) => {
         paginate(pageNumber);
         setCurrentPage(pageNumber);
-        
+        document.getElementById('baidangganday').scrollIntoView();
     }
 
     console.log("Length page number: ", pageNumbers.length)
@@ -23,7 +23,7 @@ const Pagination = ({postsPerPage, totalPosts, paginate}) => {
                     <button
                         className='page-link'
                         onClick={() => handleClick(currentPage - 1)}
-                        disabled={currentPage === 1}
+                        
                     >
                         Previous
                     </button>
@@ -41,7 +41,7 @@ const Pagination = ({postsPerPage, totalPosts, paginate}) => {
                     <button
                         className='page-link'
                         onClick={() => handleClick(currentPage + 1)}
-                        disabled={currentPage === pageNumbers.length}
+                       
                     >
                         Next
                     </button>

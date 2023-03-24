@@ -63,7 +63,7 @@
   .photo-main:active img {
     z-index: 2;
     transform: scale(1.4);
-  
+    
   }
   
   .photo-album {
