@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react"
+import React, { use, useEffect, useState } from "react"
 import BlogPost from "../components/MainPage/BlogPost/BlogPost"
 import Pagination from "../components/MainPage/BlogPost/Pagination";
 import { Category } from "../components/MainPage/category/Category"
@@ -9,18 +9,25 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchAllPosts, selectAllPosts } from "../common/feartures/postSlice";
 import { fetchCategories } from "../common/feartures/categorySlice";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { fetchBuildings, selectAllBuilding } from "../common/feartures/buildingSlice";
 
 const Pages = () => {
   const [currentPage, setCurrentPage] = useState(1)
+
   const [postPerPage, setPostPerPage] = useState(8)
+
   const [category, setCategory] = useState()
 
   const dispatch = useDispatch();
+
   const posts = useSelector(selectAllPosts);
+
+  const building = useSelector(selectAllBuilding);
 
   useEffect(() => {
     dispatch(fetchAllPosts());
     dispatch(fetchCategories());
+    dispatch(fetchBuildings());
   }, [dispatch]);
 
   // Get current page
@@ -48,7 +55,7 @@ function MainPageSlider() {
     {
       'img': 'https://thuelens.com/wp-content/uploads/2020/08/iStock-517188688.jpg',
       'link': '',
-      'caption': 'Bạn có thể đăng bán SEX TOY cùng DUY NGUYỄN tại VINSEHAND',
+      'caption': 'Bạn có thể đăng bán tất cả mọi thứ tại VINSEHAND',
       'captionPosition': 'center',
       'useFilling': true,
       'fillingColor': '#000000',

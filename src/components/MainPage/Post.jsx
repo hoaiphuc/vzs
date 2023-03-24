@@ -13,6 +13,8 @@ import AddPhotoAlternateSharpIcon from '@mui/icons-material/AddPhotoAlternateSha
 const Post = ({ inputs, title, cates }) => {
   const [file, setFile] = useState([]);
   const [selectedOption, setSelectedOption] = useState();
+  const [selectedBuildingOption, setSelectedBuildingOption] = useState();
+
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [productName, setProductName] = useState("");
@@ -48,20 +50,35 @@ const Post = ({ inputs, title, cates }) => {
   };
 
   const currentPlace = place.find((c) => c.name === places);
+
   const currentStates = currentPlace?.states || [];
-  const currentBlock =
-    currentStates.find((s) => s.name === state)?.cities || [];
+
+  const currentBlock = currentStates.find((s) => s.name === state)?.cities || [];
+
   const user = JSON.parse(localStorage.getItem("user"));
+
   const categories = JSON.parse(localStorage.getItem("categories"));
-  const optionList = categories.map((option) => (
+
+  const buildings = JSON.parse(localStorage.getItem("buildings"));
+
+  const optionList = categories?.map((option) => (
     <option key={option.id} value={option.id}>
       {option.categoryName}
     </option>
   ));
-
+  const optionBuidingList = buildings.map((option) => (
+    <option key={option.id} value={option.id}>
+      {option.id}
+    </option>
+  ));
+    
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
+  const handleSelectBuildingChange = (event) => {
+    setSelectedBuildingOption(event.target.value);
+  };
+
 
   const handleFileChange = (event) => {
     const files = event.target.files;
@@ -227,16 +244,15 @@ const Post = ({ inputs, title, cates }) => {
                   {" "}
                   Mã số tòa{" "}
                 </label>
-                <input
-                  type="text"
-                  name="address"
-                  value={address}
-                  id="address"
-                  required
-                  placeholder="Mã tòa ...."
-                  class="formbold-form-input"
-                  onChange={handleInputAddress}
-                />
+                <div className="selectCategories">
+                    <select
+                      name="sl"
+                      value={selectedBuildingOption}
+                      onChange={handleSelectBuildingChange}
+                    >
+                      {optionBuidingList}
+                    </select>
+                  </div>
               </div>
             </div>
             <div className="">
@@ -301,7 +317,7 @@ const Post = ({ inputs, title, cates }) => {
                 ></textarea>
               </div>
             </div>
-            <div style={{textAlign:"center"}}>
+            <div style={{ textAlign: "center" }}>
               <button className="post--btn" disabled={loading} type="submit">
                 SAVE
               </button>

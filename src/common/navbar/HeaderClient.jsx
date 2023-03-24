@@ -22,7 +22,7 @@ export default function HeaderClient() {
   const user = JSON.parse(localStorage.getItem("user"));
 
 
-  const optionList = categories.map((option) => (
+  const optionList = categories?.map((option) => (
     option.categoryName
   ));
     console.log("optionList: ", optionList)
@@ -96,7 +96,7 @@ export default function HeaderClient() {
               setInputValue(newInputValue);
             }}
             id="controllable-states-demo"
-            options={optionList}
+            options={optionList? optionList : ''}
             sx={{
               width: 230, boxShadow: "2px 5px 25px -5px #878383"
               , inputBorderRadius: 10,

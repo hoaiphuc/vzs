@@ -30,11 +30,13 @@ import {
 
 import {
   fetchAllPosts,
+  fetchPostByUserId,
   removePost,
   selectAllPosts,
 } from "../../common/feartures/postSlice";
 import { currentuser } from "../../common/feartures/authSlice";
 import { color } from "@mui/system";
+import { fetchBuildings } from "../../common/feartures/buildingSlice";
 
 const MyPost = () => {
   const [listPost, setListPost] = useState([]);
@@ -42,10 +44,12 @@ const MyPost = () => {
   const [open, setOpen] = useState(null);
 
   const user = JSON.parse(localStorage.getItem("user"));
+  const mypost =  JSON.parse(localStorage.getItem("MyPost"));
   console.log("currentUser: ", user?.id);
   const list = [];
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
+  
   const myposts = posts.filter((post) => post.userId === user?.id);
   console.log("mypost", myposts)
   function formatCurrency(amount) {
@@ -66,8 +70,9 @@ const MyPost = () => {
 
   useEffect(() => {
     dispatch(fetchAllPosts());
-    console.log("postlist: ", posts);
+    dispatch(fetchPostByUserId(user?.id));
     dispatch(fetchCategories());
+    dispatch(fetchBuildings());
   }, [dispatch]);
   const handleDelete = (event, id) => {
     const confirm = window.confirm("Do you want to deletepost");
