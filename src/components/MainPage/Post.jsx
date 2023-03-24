@@ -40,7 +40,6 @@ const Post = ({ inputs, title, cates }) => {
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
     setOpen(false);
-    setIsOpenSnackbar(false);
   };
 
   const style = {
@@ -128,7 +127,6 @@ const Post = ({ inputs, title, cates }) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    // showLoading(true);
     const isCreated = await uploadImgPost(
       file,
       setLoading,
@@ -151,7 +149,6 @@ const Post = ({ inputs, title, cates }) => {
       dispatch(addNewPost(data)).then((result) => {
         if (result) {
           setIsCreated(false);
-          setErrorInput("");
           setIsOpenSnackbar(true);
           handleClose();
         } else {
