@@ -181,7 +181,6 @@ const Post = ({ inputs, title, cates }) => {
     setPrice(event.target.value);
   };
   return (
-    <Loading style={{ zIndex: "99999999" }}>
       <div className="post">
         <div className="Container">
           <div className="bottom">
@@ -393,7 +392,6 @@ const Post = ({ inputs, title, cates }) => {
                 </Alert>
               </Snackbar>
       </div>
-    </Loading>
   );
 };
 export default Post;
