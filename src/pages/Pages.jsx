@@ -12,7 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Pages = () => {
   const [currentPage, setCurrentPage] = useState(1)
-  const [postPerPage, setPostPerPage] = useState(2)
+  const [postPerPage, setPostPerPage] = useState(4)
 
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);

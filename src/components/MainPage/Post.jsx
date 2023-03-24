@@ -10,6 +10,11 @@ import { uploadImgPost, useAuth } from "../firebase";
 import { place } from "../../formSource";
 import { selectAllCategory } from "../../common/feartures/categorySlice";
 import { color } from "@mui/system";
+import Box from "@mui/material/Box";
+import Typography from "@mui/material/Typography";
+import Modal from "@mui/material/Modal";
+import * as React from "react";
+import { redDark } from "@nextui-org/react";
 
 const Post = ({ inputs, title, cates }) => {
   const [file, setFile] = useState([]);
@@ -24,8 +29,25 @@ const Post = ({ inputs, title, cates }) => {
   const [loading, setLoading] = useState(false);
   const [photoURL, setPhotoURL] = useState([]);
   const [isCreated, setIsCreated] = useState(false);
-  const [errorInput, setErrorInput] = useState('');
-  const [isOpenCreateCategoryPopup, setIsOpenCreateCategoryPopup] = useState(false);
+  const [errorInput, setErrorInput] = useState("");
+  const [isOpenCreateCategoryPopup, setIsOpenCreateCategoryPopup] =
+    useState(false);
+
+  const [open, setOpen] = React.useState(false);
+  const handleOpen = () => setOpen(true);
+  const handleClose = () => setOpen(false);
+
+  const style = {
+    position: "absolute",
+    top: "50%",
+    left: "50%",
+    transform: "translate(-50%, -50%)",
+    width: 600,
+    // color: redDark ,
+    border: "2px solid #000",
+    boxShadow: 24,
+    p: 4,
+  };
 
   const handleOpenPopup = () => {
     setIsOpenCreateCategoryPopup(true);
@@ -81,11 +103,11 @@ const Post = ({ inputs, title, cates }) => {
     event.preventDefault();
     const validAddressPattern = /^S\d{2,}$/; // pattern for S followed by at least two digits
     const isAddressValid = validAddressPattern.test(address);
-    console.log("isAddressValid")
+    console.log("isAddressValid");
     if (!isAddressValid) {
-      setErrorInput('Address should be S___(S123)');
+      setErrorInput("Address should be S___(S123)");
       setIsCreated(false);
-      console.log("'Address should be S___(S123)'")
+      console.log("'Address should be S___(S123)'");
     } else {
       const isCreated = await uploadImgPost(
         file,
@@ -94,9 +116,8 @@ const Post = ({ inputs, title, cates }) => {
         setIsCreated
       );
       setIsCreated(isCreated);
-      setErrorInput('');
+      setErrorInput("");
     }
-
   };
   useEffect(() => {
     if (isCreated) {
@@ -107,12 +128,12 @@ const Post = ({ inputs, title, cates }) => {
         productName: productName,
         userId: user.id,
         price: price,
-        title: titleInput
+        title: titleInput,
       };
       dispatch(addNewPost(data)).then((result) => {
         if (result) {
           setIsCreated(false);
-          setErrorInput('')
+          setErrorInput("");
           alert("Đã đăng bài thành công, ấn ok để tiếp tục");
         }
       });
@@ -141,9 +162,43 @@ const Post = ({ inputs, title, cates }) => {
   };
 
   return (
-    <div class="formbold-main-wrapper">
+    <div className="post">
+    <div className="Container">
+      <div className="bottom">
+        <div className="left">
+          <img
+            src={
+              "https://i.imgur.com/eimQ7XE.png"
+            }
+            alt=""
+          />
+        </div>
+        <div className="right">
+          <form>
+            <div className="formInput">
+              <div>
+                <h1>
+                 BẤM VÀO ĐỂ ĐĂNG BÀI
+                </h1>
+              <div className="button-open">
+                <Button onClick={handleOpen}>Click here</Button>
+              </div>
+            </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <Modal
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          {/* <div class="formbold-main-wrapper">
       <div className="formbold-div-wrapper">
-        <div class="formbold-form-wrapper">
+        <div class="formbold-form-wrapper"> */}
           <form onSubmit={handleFormSubmit}>
             <div class="formbold-steps">THÊM BÀI ĐĂNG MỚI</div>
             <div class="formbold-form-step">
@@ -257,8 +312,8 @@ const Post = ({ inputs, title, cates }) => {
                         height: "50px",
                         width: "50px",
                         borderRadius: "10px",
-                        marginLeft: '0',
-                        marginRight: '5px'
+                        marginLeft: "0",
+                        marginRight: "5px",
                       }}
                       key={f.name}
                       src={URL.createObjectURL(f)}
@@ -271,7 +326,7 @@ const Post = ({ inputs, title, cates }) => {
                     height: "50px",
                     width: "50px",
                     borderRadius: "10px",
-                    marginLeft: '0'
+                    marginLeft: "0",
                   }}
                   src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
                   alt=""
@@ -300,8 +355,12 @@ const Post = ({ inputs, title, cates }) => {
               Post
             </button>
           </form>
-        </div>
+          {/* </div>
       </div>
+    </div> */}
+        </Box>
+      </Modal>
+    </div>
     </div>
   );
 };

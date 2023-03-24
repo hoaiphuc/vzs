@@ -1,8 +1,10 @@
 .post {
-  height: 1000px;
-  background: #e2f9ed;
+  height: 800px;
+  /* background: #e2f9ed; */
   width: 100%;
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  display: flex;
+  justify-content: center;
 }
 
 .post .inputPost {
@@ -29,9 +31,11 @@
 .post .Container .bottom {
   box-shadow: 10px 10px 10px 1px rgba(26, 20, 20, 0.47);
   padding: 10px;
-  /* margin: 20px; */
+  margin: 20px;
   display: flex;
-  background-image: linear-gradient(to right, #EAE2FB, rgb(245, 226, 204));
+  /* background-image: linear-gradient(to right, #EAE2FB, rgb(245, 226, 204)); */
+  background-image: linear-gradient(to right, #dcf7ab, rgb(245, 226, 204));
+
 
 }
 
@@ -43,6 +47,13 @@
 .post .Container .bottom {
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
+  height: 500px;
+  /* margin-left: 25%; */
+  width: 1850px;
+  margin-top: 25px;
+  height: 700px;
+  display: flex;
+
 }
 
 .post .Container .top h1,
@@ -83,6 +94,8 @@
 .post .Container .bottom .left {
   flex: 2;
   text-align: center;
+  padding: 25px;
+
 }
 
 .post .Container .top .left .image,
@@ -94,8 +107,8 @@
 
 .post .Container .top .left img,
 .post .Container .bottom .left img {
-  width: 100px;
-  height: 100px;
+  width: 650px;
+  height: 600px;
   border-radius: 10%;
   display: flex;
   flex-wrap: wrap;
@@ -108,6 +121,8 @@
 .post .Container .top .right,
 .post .Container .bottom .right {
   flex: 2;
+  display: flex;
+  /* justify-content: center; */
 }
 
 .post .Container .top .right form,
@@ -128,7 +143,10 @@
 
 .post .Container .top .right form .formInput,
 .post .Container .bottom .right form .formInput {
-  width: 40%;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  margin: auto;
 
 }
 
@@ -239,7 +257,10 @@
 body {
   font-family: "Inter", sans-serif;
 }
+.css-17yl0gw {
+  background-image: linear-gradient(45deg, #fcf3c3 0%, #fcf3c3 50%, #fcf3c3 100%);
 
+}
 .formbold-main-wrapper {
   display: flex;
   align-items: center;
@@ -469,4 +490,13 @@ body {
 }
 .post--btn:active{
   transform: scale(0.9);
+}
+.container-post{
+  width: 100%;
+  height: 45em;
+}
+.button-open{
+  display: flex;
+  justify-content: center;
+  margin-top: 15%;
 }

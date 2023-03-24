@@ -96,9 +96,10 @@ export default function HeaderClient() {
             ,inputBorderRadius :10 ,
             inputFontSize : 10
             ,inputHeightRatio : 10,
-            borderRadius: 10
+            borderRadius: 10,
+            
                     }}
-            renderInput={(params) => <TextField {...params} label="Controllable" className="textField"/>}
+            renderInput={(params) => <TextField {...params} label="Category" className="textField"/>}
           />
         </div>
 
