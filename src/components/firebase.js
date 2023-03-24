@@ -4,6 +4,7 @@ import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
 import { getAuth, GoogleAuthProvider, onAuthStateChanged, updateProfile } from "firebase/auth";
 import { useEffect, useState } from "react";
 import { v4 } from "uuid";
+
 const firebaseConfig = {
   apiKey: "AIzaSyBsBwRW5o-iUjokOv_lJ970jLsPkiBwB6M",
   authDomain: "secondhandvh-44c3e.firebaseapp.com",

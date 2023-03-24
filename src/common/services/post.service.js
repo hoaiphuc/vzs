@@ -13,7 +13,7 @@ export const getAllPosts = async () => {
 export const getPostByUserId = async (userId) => {
   try {
     const response = await axios.get(`${BASE_URL}/post/getbyuserid/${userId}`);
-    localStorage.setItem('MyPost', JSON.stringify(response))
+    localStorage.setItem('MyPost', JSON.stringify(response.data.response))
     return response;
   } catch (error) {
     throw new Error(error);

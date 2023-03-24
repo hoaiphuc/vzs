@@ -92,8 +92,8 @@ const MyPost = () => {
           {/* <div class="MuiGrid-root MuiGrid-container MuiGrid-spacing-xs-3 css-zow5z4-MuiGrid-root"> */}
 
           <Grid container spacing={4}>
-            {myposts.length > 0 ?
-              myposts.map((post, index) => (
+            {mypost?.length > 0 ?
+              mypost?.map((post, index) => (
                 <div class="group border-gray-100/30 flex w-full max-w-xs flex-col self-center overflow-hidden rounded-lg border bg-gray-700 shadow-md m-2.5">
                   <a
                     class="relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl"
