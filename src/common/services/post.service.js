@@ -51,7 +51,7 @@ export const postSold = async (postId, sold) => {
 };
 export const updateFavoritePost = async (postId) => {
   try {
-    const response = await axios.put(`${BASE_URL}/post/interestedpost`);
+    const response = await axios.post(`${BASE_URL}/post/interestedpost`);
     return response.data;
   } catch (error) {
     console.error(error);
