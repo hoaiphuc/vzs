@@ -96,7 +96,7 @@ const Post = ({ inputs, title, cates }) => {
   ));
 
   const [selectedOption, setSelectedOption] = useState(
-    optionList ? optionList[0]?.categoryName : ""
+    optionList ? optionList[0] : ""
   );
 
   const optionBuidingList = buildings?.map((option) => (
