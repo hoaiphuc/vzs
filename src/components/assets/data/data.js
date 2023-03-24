@@ -49,11 +49,11 @@ export const category = [
     title: "contraceptive",
     cover: "../images/category/ca4.png",
   },
-  {
-    id: 5,
-    title: "feminine hygiene",
-    cover: "../images/category/ca5.png",
-  },
+  // {
+  //   id: 5,
+  //   title: "feminine hygiene",
+  //   cover: "../images/category/ca5.png",
+  // },
   {
     id: 6,
     title: "health & protein",

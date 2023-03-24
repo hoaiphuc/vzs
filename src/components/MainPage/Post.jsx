@@ -149,8 +149,8 @@ const Post = ({ inputs, title, cates }) => {
       dispatch(addNewPost(data)).then((result) => {
         if (result) {
           setIsCreated(false);
-          setIsOpenSnackbar(true);
           handleClose();
+          setIsOpenSnackbar(true);
         } else {
           alert("Create post fail")
         }
