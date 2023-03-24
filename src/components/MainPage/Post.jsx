@@ -12,8 +12,8 @@ import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import * as React from "react";
 import { redDark } from "@nextui-org/react";
-import AddPhotoAlternateSharpIcon from '@mui/icons-material/AddPhotoAlternateSharp';
-
+import AddPhotoAlternateSharpIcon from "@mui/icons-material/AddPhotoAlternateSharp";
+import Loading from "../loading/Loading";
 
 const Post = ({ inputs, title, cates }) => {
   const [file, setFile] = useState([]);
@@ -39,7 +39,7 @@ const Post = ({ inputs, title, cates }) => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => {
-    setOpen(false)
+    setOpen(false);
     setIsOpenSnackbar(false);
   };
 
@@ -80,7 +80,8 @@ const Post = ({ inputs, title, cates }) => {
 
   const currentStates = currentPlace?.states || [];
 
-  const currentBlock = currentStates.find((s) => s.name === state)?.cities || [];
+  const currentBlock =
+    currentStates.find((s) => s.name === state)?.cities || [];
 
   const user = JSON.parse(localStorage.getItem("user"));
 
@@ -94,7 +95,9 @@ const Post = ({ inputs, title, cates }) => {
     </option>
   ));
 
-  const [selectedOption, setSelectedOption] = useState(optionList ? optionList[0] : "");
+  const [selectedOption, setSelectedOption] = useState(
+    optionList ? optionList[0] : ""
+  );
 
   const optionBuidingList = buildings?.map((option) => (
     <option key={option.id} value={option.id}>
@@ -108,7 +111,6 @@ const Post = ({ inputs, title, cates }) => {
   const handleSelectBuildingChange = (event) => {
     setSelectedBuildingOption(event.target.value);
   };
-
 
   const handleFileChange = (event) => {
     const files = event.target.files;
@@ -126,7 +128,7 @@ const Post = ({ inputs, title, cates }) => {
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
-    showLoading(true)
+    showLoading(true);
     const isCreated = await uploadImgPost(
       file,
       setLoading,
@@ -149,9 +151,10 @@ const Post = ({ inputs, title, cates }) => {
       dispatch(addNewPost(data)).then((result) => {
         if (result) {
           setIsCreated(false);
-          setErrorInput("");;
+          setErrorInput("");
           setIsOpenSnackbar(true);
-          showLoading(false)
+          handleClose();
+          showLoading(false);
         }
       });
     }
@@ -178,213 +181,219 @@ const Post = ({ inputs, title, cates }) => {
     setPrice(event.target.value);
   };
   return (
-    <div className="post">
-      <div className="Container">
-        <div className="bottom">
-          <div className="left">
-            <img
-              src={
-                "https://i.imgur.com/eimQ7XE.png"
-              }
-              alt=""
-            />
-          </div>
-          <div className="right">
-            <form>
-              <div className="formInput">
-                <div>
-                  <h1>
-                    BẤM VÀO ĐỂ ĐĂNG BÀI
-                  </h1>
-                  <div className="button-open">
-                    <Button onClick={handleOpen}>Click here</Button>
+    <Loading style={{ zIndex: "99999999" }}>
+      <div className="post">
+        <div className="Container">
+          <div className="bottom">
+            <div className="left">
+              <img src={"https://i.imgur.com/eimQ7XE.png"} alt="" />
+            </div>
+            <div className="right">
+              <form>
+                <div className="formInput">
+                  <div>
+                    <h1>BẤM VÀO ĐỂ ĐĂNG BÀI</h1>
+                    <div className="button-open">
+                      <Button onClick={handleOpen}>Click here</Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </form>
+              </form>
+            </div>
           </div>
-        </div>
-
-        <Modal
-          open={open}
-          onClose={handleClose}
-          aria-labelledby="modal-modal-title"
-          aria-describedby="modal-modal-description"
-        >
-          <Box sx={style}>
-            {/* <div class="formbold-main-wrapper">
+          <Modal
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="modal-modal-title"
+            aria-describedby="modal-modal-description"
+          >
+            <Box sx={style}>
+              {/* <div class="formbold-main-wrapper">
       <div className="formbold-div-wrapper">
         <div class="formbold-form-wrapper"> */}
-            <form onSubmit={handleFormSubmit}>
-              <div class="formbold-steps">THÊM BÀI ĐĂNG MỚI</div>
-              <div class="formbold-form-step">
-                <h1 style={{ color: "red" }}>{errorInput}</h1>
-                <div class="formbold-input-flex">
-                  <div>
-                    <label for="firstname" class="formbold-form-label">
-                      {" "}
-                      Tên sản phẩm{" "}
-                    </label>
-                    <input
-                      type="text"
-                      value={productName}
-                      name="productName"
-                      placeholder="Tên sản phẩm ...."
-                      id="productName"
-                      required
-                      class="formbold-form-input"
-                      onChange={handleInputProductName}
-                    />
+              <form onSubmit={handleFormSubmit}>
+                <div class="formbold-steps">THÊM BÀI ĐĂNG MỚI</div>
+                <div class="formbold-form-step">
+                  <h1 style={{ color: "red" }}>{errorInput}</h1>
+                  <div class="formbold-input-flex">
+                    <div>
+                      <label for="firstname" class="formbold-form-label">
+                        {" "}
+                        Tên sản phẩm{" "}
+                      </label>
+                      <input
+                        type="text"
+                        value={productName}
+                        name="productName"
+                        placeholder="Tên sản phẩm ...."
+                        id="productName"
+                        required
+                        class="formbold-form-input"
+                        onChange={handleInputProductName}
+                      />
+                    </div>
+                    <div>
+                      <label for="lastname" class="formbold-form-label">
+                        {" "}
+                        Tiêu đề sản phẩm{" "}
+                      </label>
+                      <input
+                        type="text"
+                        value={titleInput}
+                        name="title"
+                        required
+                        placeholder="Tiêu đề sản phẩm ...."
+                        id="title"
+                        class="formbold-form-input"
+                        onChange={handleInputTitle}
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <label for="lastname" class="formbold-form-label">
-                      {" "}
-                      Tiêu đề sản phẩm{" "}
-                    </label>
-                    <input
-                      type="text"
-                      value={titleInput}
-                      name="title"
-                      required
-                      placeholder="Tiêu đề sản phẩm ...."
-                      id="title"
-                      class="formbold-form-input"
-                      onChange={handleInputTitle}
-                    />
-                  </div>
-                </div>
 
-                <div class="formbold-input-flex">
-                  <div>
-                    <label for="dob" class="formbold-form-label">
-                      {" "}
-                      Giá sản phẩm{" "}
-                    </label>
-                    <input
-                      type="number"
-                      value={price}
-                      name="price"
-                      required
-                      placeholder="Giá sản phẩm ...."
-                      id="price"
-                      class="formbold-form-input"
-                      onChange={handleInputPrice}
-                    />
+                  <div class="formbold-input-flex">
+                    <div>
+                      <label for="dob" class="formbold-form-label">
+                        {" "}
+                        Giá sản phẩm{" "}
+                      </label>
+                      <input
+                        type="number"
+                        value={price}
+                        name="price"
+                        required
+                        placeholder="Giá sản phẩm ...."
+                        id="price"
+                        class="formbold-form-input"
+                        onChange={handleInputPrice}
+                      />
+                    </div>
+                    <div>
+                      <label for="email" class="formbold-form-label">
+                        {" "}
+                        Thể loại sản phẩm{" "}
+                      </label>
+                      <div className="selectCategories">
+                        <select
+                          name="sl"
+                          value={selectedOption}
+                          onChange={handleSelectChange}
+                        >
+                          {optionList}
+                        </select>
+                      </div>
+                    </div>
                   </div>
+
                   <div>
-                    <label for="email" class="formbold-form-label">
+                    <label for="address" class="formbold-form-label">
                       {" "}
-                      Thể loại sản phẩm{" "}
+                      Mã số tòa{" "}
                     </label>
                     <div className="selectCategories">
                       <select
                         name="sl"
-                        value={selectedOption}
-                        onChange={handleSelectChange}
+                        value={selectedBuildingOption}
+                        onChange={handleSelectBuildingChange}
                       >
-                        {optionList}
+                        {optionBuidingList}
                       </select>
                     </div>
                   </div>
                 </div>
-
-                <div>
-                  <label for="address" class="formbold-form-label">
-                    {" "}
-                    Mã số tòa{" "}
+                <div className="">
+                  <label htmlFor="file">
+                    Chọn ảnh: <AddPhotoAlternateSharpIcon fontSize="large" />
                   </label>
-                  <div className="selectCategories">
-                    <select
-                      name="sl"
-                      value={selectedBuildingOption}
-                      onChange={handleSelectBuildingChange}
-                    >
-                      {optionBuidingList}
-                    </select>
+                  <input
+                    type="file"
+                    id="file"
+                    onChange={handleFileChange}
+                    style={{ display: "none" }}
+                    multiple
+                  />
+                </div>
+
+                <div className="" style={{ display: "flex" }}>
+                  {imageDemo.length > 0 ? (
+                    Array.from(imageDemo)
+                      .slice(0, 6)
+                      .map((f) => (
+                        <img
+                          style={{
+                            height: "50px",
+                            width: "50px",
+                            borderRadius: "10px",
+                            marginLeft: "0",
+                            marginRight: "5px",
+                          }}
+                          key={f.name}
+                          src={URL.createObjectURL(f)}
+                          alt=""
+                        />
+                      ))
+                  ) : (
+                    <img
+                      style={{
+                        height: "50px",
+                        width: "50px",
+                        borderRadius: "10px",
+                        marginLeft: "0",
+                      }}
+                      src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
+                      alt=""
+                    />
+                  )}
+                </div>
+                <div class="formbold-form-step">
+                  <div>
+                    <label for="message" class="formbold-form-label">
+                      {" "}
+                      Mô tả sản phẩm{" "}
+                    </label>
+                    <textarea
+                      required
+                      rows="6"
+                      name="description"
+                      value={description}
+                      id="description"
+                      placeholder="Vui lòng nhập mô  tả ............"
+                      class="formbold-form-input"
+                      onChange={handleDescriptionChange}
+                    ></textarea>
                   </div>
                 </div>
-              </div>
-              <div className="">
-                <label htmlFor="file">
-                  Chọn ảnh: <AddPhotoAlternateSharpIcon fontSize="large" />
-                </label>
-                <input
-                  type="file"
-                  id="file"
-                  onChange={handleFileChange}
-                  style={{ display: "none" }}
-                  multiple
-                />
-              </div>
-
-              <div className="" style={{ display: "flex" }}>
-                {imageDemo.length > 0 ? (
-                  Array.from(imageDemo)
-                    .slice(0, 6)
-                    .map((f) => (
-                      <img
-                        style={{
-                          height: "50px",
-                          width: "50px",
-                          borderRadius: "10px",
-                          marginLeft: "0",
-                          marginRight: "5px",
-                        }}
-                        key={f.name}
-                        src={URL.createObjectURL(f)}
-                        alt=""
-                      />
-                    ))
-                ) : (
-                  <img
-                    style={{
-                      height: "50px",
-                      width: "50px",
-                      borderRadius: "10px",
-                      marginLeft: "0",
-                    }}
-                    src="https://icon-library.com/images/no-image-icon/no-image-icon-0.jpg"
-                    alt=""
-                  />
-                )}
-              </div>
-              <div class="formbold-form-step">
-                <div>
-                  <label for="message" class="formbold-form-label">
-                    {" "}
-                    Mô tả sản phẩm{" "}
-                  </label>
-                  <textarea
-                    required
-                    rows="6"
-                    name="description"
-                    value={description}
-                    id="description"
-                    placeholder="Vui lòng nhập mô  tả ............"
-                    class="formbold-form-input"
-                    onChange={handleDescriptionChange}
-                  ></textarea>
+                <div style={{ textAlign: "center" }}>
+                  <button
+                    className="post--btn"
+                    disabled={loading}
+                    type="submit"
+                  >
+                    SAVE
+                  </button>
                 </div>
-              </div>
-              <div style={{ textAlign: "center" }}>
-                <button className="post--btn" disabled={loading} type="submit">
-                  SAVE
-                </button>
-              </div>
-
-            </form>
-            <Snackbar open={isOpenSnackbar} autoHideDuration={6000} onClose={handleClose}>
-              <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-                This is a success message!
-              </Alert>
-            </Snackbar>
-            {/* </div>
+              </form>
+             
+              {/* </div>
       </div>
     </div> */}
-          </Box>
-        </Modal>
+            </Box>
+          </Modal>
+        </div>
+        <Snackbar
+                open={isOpenSnackbar}
+                autoHideDuration={6000}
+                onClose={handleClose}
+              >
+                <Alert
+                  onClose={handleClose}
+                  severity="success"
+                  sx={{ width: "100%" }}
+                >
+                  This is a success message!
+                </Alert>
+              </Snackbar>
       </div>
-    </div>
+    </Loading>
   );
 };
 export default Post;

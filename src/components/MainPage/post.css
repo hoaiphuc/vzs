@@ -107,8 +107,8 @@
 
 .post .Container .top .left img,
 .post .Container .bottom .left img {
-  width: 650px;
-  height: 600px;
+  width: 700px;
+  height: 700px;
   border-radius: 10%;
   display: flex;
   flex-wrap: wrap;
