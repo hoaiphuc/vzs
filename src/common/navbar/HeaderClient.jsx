@@ -9,17 +9,24 @@ import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { ClassSharp, Highlight } from "@mui/icons-material";
-import { Autocomplete, TextField ,Button, InputAdornment } from "@mui/material";
+import { Autocomplete, TextField, Button, InputAdornment } from "@mui/material";
 import "./HeaderClient.css";
+import Notification from "../../components/MainPage/notification/Notification.js";
+import { MDBNotification } from "mdbreact";
 export default function HeaderClient() {
   const [photoURL, setPhotoURL] = useState('');
   // const user = typeof localStorage.getItem("user") === 'string' ? JSON.parse(localStorage.getItem("user")) : null;
 
+  const categories = JSON.parse(localStorage.getItem("categories"));
+
   const user = JSON.parse(localStorage.getItem("user"));
 
-  const options = ['Option 1', 'Option 2'];
 
-  const [value, setValue] = useState(options[0]);
+  const optionList = categories?.map((option) => (
+    option.categoryName
+  ));
+    console.log("optionList: ", optionList)
+  const [value, setValue] = useState(optionList ? optionList[0] : '');
 
   const [activeLink, setActiveLink] = useState('/');
 
@@ -32,7 +39,7 @@ export default function HeaderClient() {
   const dispatch = useDispatch();
 
   const navigate = useNavigate();
-
+ 
   useEffect(() => {
   }, [current_User])
   useEffect(() => {
@@ -40,7 +47,6 @@ export default function HeaderClient() {
       setPhotoURL(currentUser.photoURL)
     }
   }, [currentUser, user])
-
   const handleLogout = async () => {
     try {
       await dispatch(logout());
@@ -67,7 +73,6 @@ export default function HeaderClient() {
     <Layout>
       <Navbar isBordered variant="sticky">
         <Navbar.Brand>
-
           <Link to="/" isActive={activeLink === '/' ? true : false} onClick={(event) => handleClick(event, '/')} style={{ width: "20%", margin: "0 5% 0 0" }}><AcmeLogo /></Link>
 
           <Navbar.Content hideIn="xs" variant="highlight">
@@ -91,15 +96,15 @@ export default function HeaderClient() {
               setInputValue(newInputValue);
             }}
             id="controllable-states-demo"
-            options={options}
-            sx={{ width: 230 , boxShadow: "2px 5px 25px -5px #878383"
-            ,inputBorderRadius :10 ,
-            inputFontSize : 10
-            ,inputHeightRatio : 10,
-            borderRadius: 10,
-            
-                    }}
-            renderInput={(params) => <TextField {...params} label="Category" className="textField"/>}
+            options={optionList? optionList : ''}
+            sx={{
+              width: 230, boxShadow: "2px 5px 25px -5px #878383"
+              , inputBorderRadius: 10,
+              inputFontSize: 10
+              , inputHeightRatio: 10,
+              borderRadius: 10
+            }}
+            renderInput={(params) => <TextField {...params} label="Controllable" className="textField" />}
           />
         </div>
 

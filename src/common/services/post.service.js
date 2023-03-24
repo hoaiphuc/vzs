@@ -10,6 +10,15 @@ export const getAllPosts = async () => {
     throw new Error(error);
   }
 };
+export const getPostByUserId = async (userId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/post/getbyuserid/${userId}`);
+    localStorage.setItem('MyPost', JSON.stringify(response))
+    return response;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 
 export const createPost = async (postData) => {
   try {

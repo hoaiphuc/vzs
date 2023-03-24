@@ -29,7 +29,7 @@ function SamplePrevArrow(props) {
   )
 }
 
-export const Category = () => {
+export const Category = ({ pickCategory }) => {
   var settings = {
     dots: false,
     infinite: true,
@@ -54,9 +54,9 @@ export const Category = () => {
         <div className='container'>
           <Slider {...settings}>
             {category.map((item) => (
-              <div className='boxs' key={item.id} styled={{width: "100%", display: "inline-block;"}}>
-                <div className='box boxItems'>
-                  <img className="imgCate" style={{width:"100px"}} src={item.cover} alt='' />
+              <div className='boxs' key={item.id} styled={{ width: "100%", display: "inline-block;" }}>
+                <div className='box boxItems' onClick={() => pickCategory(item.id)}>
+                  <img className="imgCate" style={{ width: "100px" }} src={item.cover} alt='' />
                   <p>{item.title}</p>
                 </div>
               </div>

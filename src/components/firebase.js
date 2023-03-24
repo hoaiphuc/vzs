@@ -46,8 +46,6 @@ export async function upload(file, currentUser, setLoading) {
 
   setLoading(false)
   
-  alert('Uploaded file! ')
-
   window.location.reload(false);
 
 }
@@ -70,14 +68,12 @@ export async function uploadImgPost(files, setLoading, setPhotoURL, setIsCreated
       setLoading(false);
       setPhotoURL(urlList);
       setIsCreated(true);
-      alert("Uploaded files!");
       return true;
     }
   } catch (error) {
     console.error(error);
     setLoading(false);
     setIsCreated(false);
-    alert("Failed to upload files");
     return false;
   }
 }

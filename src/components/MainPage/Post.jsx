@@ -1,24 +1,25 @@
-import DriveFolderUploadOutlinedIcon from "@mui/icons-material/DriveFolderUploadOutlined";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { category } from "../../formSource";
 import "./post.css";
-import Select from "react-select";
-import { Button, Card, Container, Row, Col } from "reactstrap";
 import { addNewPost } from "../../common/feartures/postSlice";
 import { uploadImgPost, useAuth } from "../firebase";
 import { place } from "../../formSource";
 import { selectAllCategory } from "../../common/feartures/categorySlice";
-import { color } from "@mui/system";
+import { Alert, Snackbar } from "@mui/material";
+import { showLoading } from "../../utils/helpers";
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
 import * as React from "react";
 import { redDark } from "@nextui-org/react";
+import AddPhotoAlternateSharpIcon from '@mui/icons-material/AddPhotoAlternateSharp';
+
 
 const Post = ({ inputs, title, cates }) => {
   const [file, setFile] = useState([]);
   const [selectedOption, setSelectedOption] = useState();
+  const [selectedBuildingOption, setSelectedBuildingOption] = useState();
+
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState("");
   const [productName, setProductName] = useState("");
@@ -48,6 +49,7 @@ const Post = ({ inputs, title, cates }) => {
     boxShadow: 24,
     p: 4,
   };
+  const [isOpenSnackbar, setIsOpenSnackbar] = useState(false);
 
   const handleOpenPopup = () => {
     setIsOpenCreateCategoryPopup(true);
@@ -70,20 +72,35 @@ const Post = ({ inputs, title, cates }) => {
   };
 
   const currentPlace = place.find((c) => c.name === places);
+
   const currentStates = currentPlace?.states || [];
-  const currentBlock =
-    currentStates.find((s) => s.name === state)?.cities || [];
+
+  const currentBlock = currentStates.find((s) => s.name === state)?.cities || [];
+
   const user = JSON.parse(localStorage.getItem("user"));
+
   const categories = JSON.parse(localStorage.getItem("categories"));
-  const optionList = categories.map((option) => (
+
+  const buildings = JSON.parse(localStorage.getItem("buildings"));
+
+  const optionList = categories?.map((option) => (
     <option key={option.id} value={option.id}>
       {option.categoryName}
     </option>
   ));
-
+  const optionBuidingList = buildings.map((option) => (
+    <option key={option.id} value={option.id}>
+      {option.id}
+    </option>
+  ));
+    
   const handleSelectChange = (event) => {
     setSelectedOption(event.target.value);
   };
+  const handleSelectBuildingChange = (event) => {
+    setSelectedBuildingOption(event.target.value);
+  };
+
 
   const handleFileChange = (event) => {
     const files = event.target.files;
@@ -109,6 +126,7 @@ const Post = ({ inputs, title, cates }) => {
       setIsCreated(false);
       console.log("'Address should be S___(S123)'");
     } else {
+      showLoading(true)
       const isCreated = await uploadImgPost(
         file,
         setLoading,
@@ -133,8 +151,9 @@ const Post = ({ inputs, title, cates }) => {
       dispatch(addNewPost(data)).then((result) => {
         if (result) {
           setIsCreated(false);
-          setErrorInput("");
-          alert("Đã đăng bài thành công, ấn ok để tiếp tục");
+          setErrorInput("");;
+          setIsOpenSnackbar(true);
+          showLoading(false)
         }
       });
     }
@@ -161,6 +180,9 @@ const Post = ({ inputs, title, cates }) => {
     setPrice(event.target.value);
   };
 
+  const handleClose = () => {
+    setIsOpenSnackbar(false);
+  }
   return (
     <div className="post">
     <div className="Container">
@@ -277,21 +299,20 @@ const Post = ({ inputs, title, cates }) => {
                   {" "}
                   Mã số tòa{" "}
                 </label>
-                <input
-                  type="text"
-                  name="address"
-                  value={address}
-                  id="address"
-                  required
-                  placeholder="Mã tòa ...."
-                  class="formbold-form-input"
-                  onChange={handleInputAddress}
-                />
+                <div className="selectCategories">
+                    <select
+                      name="sl"
+                      value={selectedBuildingOption}
+                      onChange={handleSelectBuildingChange}
+                    >
+                      {optionBuidingList}
+                    </select>
+                  </div>
               </div>
             </div>
             <div className="">
               <label htmlFor="file">
-                Upload image: <DriveFolderUploadOutlinedIcon className="icon" />
+                Chọn ảnh: <AddPhotoAlternateSharpIcon fontSize="large" />
               </label>
               <input
                 type="file"
@@ -351,11 +372,19 @@ const Post = ({ inputs, title, cates }) => {
                 ></textarea>
               </div>
             </div>
-            <button className="post--btn" disabled={loading} type="submit">
-              Post
-            </button>
+            <div style={{ textAlign: "center" }}>
+              <button className="post--btn" disabled={loading} type="submit">
+                SAVE
+              </button>
+            </div>
+
           </form>
-          {/* </div>
+            <Snackbar open={isOpenSnackbar} autoHideDuration={6000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+              This is a success message!
+            </Alert>
+          </Snackbar>
+        {/* </div>
       </div>
     </div> */}
         </Box>

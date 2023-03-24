@@ -5,6 +5,7 @@ import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCategories } from "../../common/feartures/categorySlice";
 import BlogPostCard from "./BlogPostCard";
+import AddIcon from '@mui/icons-material/Add';
 import Iconify from "../iconify/Iconify";
 
 import {
@@ -29,11 +30,13 @@ import {
 
 import {
   fetchAllPosts,
+  fetchPostByUserId,
   removePost,
   selectAllPosts,
 } from "../../common/feartures/postSlice";
 import { currentuser } from "../../common/feartures/authSlice";
 import { color } from "@mui/system";
+import { fetchBuildings } from "../../common/feartures/buildingSlice";
 
 const MyPost = () => {
   const [listPost, setListPost] = useState([]);
@@ -41,12 +44,14 @@ const MyPost = () => {
   const [open, setOpen] = useState(null);
 
   const user = JSON.parse(localStorage.getItem("user"));
+  const mypost =  JSON.parse(localStorage.getItem("MyPost"));
   console.log("currentUser: ", user?.id);
   const list = [];
   const dispatch = useDispatch();
   const posts = useSelector(selectAllPosts);
+  
   const myposts = posts.filter((post) => post.userId === user?.id);
-
+  console.log("mypost", myposts)
   function formatCurrency(amount) {
     const amu = parseInt(amount);
     const formattedAmount = amu.toLocaleString("en-US", {
@@ -65,8 +70,9 @@ const MyPost = () => {
 
   useEffect(() => {
     dispatch(fetchAllPosts());
-    console.log("postlist: ", posts);
+    dispatch(fetchPostByUserId(user?.id));
     dispatch(fetchCategories());
+    dispatch(fetchBuildings());
   }, [dispatch]);
   const handleDelete = (event, id) => {
     const confirm = window.confirm("Do you want to deletepost");
@@ -187,7 +193,7 @@ const MyPost = () => {
                   </div>
                 </div>
               )) : (<h1>Bạn chưa có bài đăng nào gần đây</h1>)}
-              <div><a href="/post"><img style={{justifyContent:"center", width:"200px"}}src="https://emojigraph.org/media/twitter/plus_2795.png"/></a></div>
+              <div style={{width:"100px"}}><a href="/post"><AddIcon ></AddIcon></a></div>
           </Grid>
 
           {/* </div> */}

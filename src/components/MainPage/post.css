@@ -468,9 +468,6 @@ body {
   height: 52px;
   width: 260px;
 }
-.selectCategories select option{
-  text-align: center;
-}
 
 .post--btn{
   margin-top: 10px;
