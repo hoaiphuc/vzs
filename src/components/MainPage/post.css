@@ -51,7 +51,7 @@
   /* margin-left: 25%; */
   width: 1850px;
   margin-top: 25px;
-  height: 700px;
+  height: 850px;
   display: flex;
 
 }
@@ -107,8 +107,8 @@
 
 .post .Container .top .left img,
 .post .Container .bottom .left img {
-  width: 700px;
-  height: 700px;
+  width: 800px;
+  height: 800px;
   border-radius: 10%;
   display: flex;
   flex-wrap: wrap;
