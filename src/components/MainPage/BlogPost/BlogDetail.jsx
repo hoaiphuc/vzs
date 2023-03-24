@@ -124,7 +124,7 @@ function BlogDetail(props) {
           <div className="variant">
             <h3>Số tòa</h3>
             <ul>
-              <strong>S302</strong>
+              <strong>S210</strong>
             </ul>
           </div>
           <div className="description">

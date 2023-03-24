@@ -2,11 +2,9 @@ import React, { use, useEffect, useState } from "react"
 import BlogPost from "../components/MainPage/BlogPost/BlogPost"
 import Pagination from "../components/MainPage/BlogPost/Pagination";
 import { Category } from "../components/MainPage/category/Category"
-import cliffImg from '../assets/img/cliff_1.jpg';
-import cliff2Img from '../assets/img/cliff_2.jpg';
 import SwiperSlider from "../components/MainPage/SwiperSlider.tsx";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchAllPosts, selectAllPosts } from "../common/feartures/postSlice";
+import { fetchAllPosts, fetchPostByCategory, selectAllPosts } from "../common/feartures/postSlice";
 import { fetchCategories } from "../common/feartures/categorySlice";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { fetchBuildings, selectAllBuilding } from "../common/feartures/buildingSlice";
@@ -32,17 +30,22 @@ const Pages = () => {
   console.log("All post: ", posts)
   // Get current page
   const indexOfLastPost = currentPage * postPerPage;
+
   const indexOfFirstPost = indexOfLastPost - postPerPage;
+
   const currentPost = posts.slice(indexOfFirstPost, indexOfLastPost);
+
   // change page
   const paginate = pageNumber => setCurrentPage(pageNumber);
 
   //change category
   const pickCategory = category => setCategory(category);
 
+  useEffect(() => {
+    dispatch(fetchPostByCategory(category))
+  }, [category])
   return (
     <>
-
       <MainPageSlider />
       <Category pickCategory={pickCategory} />
       <BlogPost posts={currentPost} category={category} />

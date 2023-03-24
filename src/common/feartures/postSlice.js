@@ -1,9 +1,16 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
 import { createSelector } from 'reselect';
-import { getAllPosts, createPost, deletePost, getPostByUserId, postSold, updateFavoritePost } from '../../common/services/post.service';
+import { getAllPosts, createPost, deletePost, getPostByUserId, postSold, updateFavoritePost, getPostByCategory } from '../../common/services/post.service';
 
 export const fetchAllPosts = createAsyncThunk('blog/fetchAllPosts', async () => {
   const response = await getAllPosts();
+  return response;
+});
+
+export const fetchPostByCategory = createAsyncThunk('blog/fetchPostByCategory', async (categoryId) => {
+  const response = await getPostByCategory(categoryId);
+  console.log("response getpost by category: ", response)
+
   return response;
 });
 

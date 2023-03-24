@@ -10,6 +10,14 @@ export const getAllPosts = async () => {
     throw new Error(error);
   }
 };
+export const getPostByCategory = async (categoryId) => {
+  try {
+    const response = await axios.get(`${BASE_URL}/post/getbycategory/${categoryId}`);
+    return response;
+  } catch (error) {
+    throw new Error(error);
+  }
+};
 export const getPostByUserId = async (userId) => {
   try {
     const response = await axios.get(`${BASE_URL}/post/getbyuserid/${userId}`);

@@ -30,8 +30,8 @@ export const order = [
 ]
 export const category = [
   {
-    id: 1,
-    title: "face & skin care",
+    id: "0cbddbc1-4b81-454a-9b3b-745511908ce9",
+    title: "Đồ điện tử",
     cover: "../images/category/ca1.png",
   },
   // {
@@ -45,8 +45,8 @@ export const category = [
   //   cover: "../images/category/ca3.png",
   // },
   {
-    id: 2,
-    title: "contraceptive",
+    id: "22d1af30-fd1c-481a-85ae-78e17786c5b2",
+    title: "Đồ gia dụng",
     cover: "../images/category/ca4.png",
   },
   // {
@@ -60,37 +60,35 @@ export const category = [
   //   cover: "../images/category/ca6.png",
   // },
   {
-    id: 4,
-    title: "health & wellness",
+    id: "3ad2128c-250b-468e-841f-b382e6fc320c",
+    title: "Giải trí",
     cover: "../images/category/ca7.png",
   },
   {
-    id: 5,
-    title: "medicine & first aid",
+    id: "4271152b-0334-4557-925d-211166463bf7",
+    title: "Đồ thời trang",
     cover: "../images/category/ca8.png",
   },
   {
-    id: 6,
-    title: "oral care",
+    id: "499ec392-b2ce-4be2-abe5-6b21c56ac9de",
+    title: "Quần áo",
     cover: "../images/category/ca9.png",
   },
   {
-    id: 7,
-    title: "pregnacy",
+    id: "71634611-cb8f-4ded-b012-c81c3ca02967",
+    title: "Đồ ngủ",
     cover: "../images/category/ca10.png",
   },
-  // {
-  //   id: 8,
-  //   title: "sexual well-being",
-  //   cover: "../images/category/ca11.png",
-  // },
   {
-    id: 9,
-    title: "Household",
+    id: "72e01821-b00f-4171-9a10-2fe39bff2b70",
+    title: "Đồ thể thao",
     cover: "../images/category/ca12.jpg",
   },
-
-  
+  {
+    id: "d7777827-cb10-44be-bdb0-96526c628178",
+    title: "Điện thoại",
+    cover: "../images/category/ca12.jpg",
+  }  
 ]
 export const product = [
   {
