@@ -6,13 +6,13 @@ import { useEffect, useState } from "react";
 import { v4 } from "uuid";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBsBwRW5o-iUjokOv_lJ970jLsPkiBwB6M",
-  authDomain: "secondhandvh-44c3e.firebaseapp.com",
-  projectId: "secondhandvh-44c3e",
-  storageBucket: "secondhandvh-44c3e.appspot.com",
-  messagingSenderId: "798402416096",
-  appId: "1:798402416096:web:28167507165a50b17bef85",
-  measurementId: "G-6EC489LJ21"
+  apiKey : "AIzaSyAVNIh-RA2rgMZh3zGvQsO2DIepWfVIGJ8" , 
+  authDomain : "supfamof-c8c84.firebaseapp.com" , 
+  projectId : "supfamof-c8c84" , 
+  storageBucket : "supfamof-c8c84.appspot.com" , 
+  messagingSenderId : "799879175588" , 
+  appId : "1:799879175588:web:26e0facc264f8bd6caf531" , 
+  measurementId : "G-LLT7X3RFYH" 
 };
 
 // Initialize Firebase

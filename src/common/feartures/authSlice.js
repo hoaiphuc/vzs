@@ -28,6 +28,7 @@ export const loginGoogle = createAsyncThunk(
       try {
         const result = await signInWithPopup(auth, provider);
         const Token = result.user.accessToken; 
+        console.log("access token: ", Token)
         const access_token = await authService.loginGoogle(Token);
         const data = authService.getCurrentUser(access_token)
         return { data };
